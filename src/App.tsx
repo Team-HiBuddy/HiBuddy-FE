@@ -1,5 +1,11 @@
+import { Outlet } from "react-router-dom";
+
 function App() {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+  return (
+    <div className="max-w-xl mx-auto h-screen border border-sky-500">
+      <Outlet />
+    </div>
+  );
 }
 
 export default App;
