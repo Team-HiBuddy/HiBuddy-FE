@@ -6,4 +6,11 @@ import svgr from "vite-plugin-svgr";
 export default defineConfig({
   plugins: [react(), svgr()],
   base: "/login",
+  resolve: {
+    alias: {
+      "@components": "/src/components",
+      "@assets": "/src/assets",
+      "@pages": "/src/pages",
+    },
+  },
 });
