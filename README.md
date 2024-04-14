@@ -9,7 +9,6 @@
 - react-router-dom
 - tailwindcss
 - MUI
-- emotion
 - TanStack Query
 - MSW
 - Vitest
