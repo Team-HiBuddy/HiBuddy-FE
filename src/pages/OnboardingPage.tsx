@@ -1,5 +1,6 @@
 import { Autocomplete, Button, TextField } from "@mui/material";
-import { ChangeEvent, SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useState } from "react";
+import useNickname from "../hooks/useNickname";
 interface AutocompleteOption {
   label: string;
 }
@@ -19,13 +20,11 @@ const Departments: AutocompleteOption[] = [
 ];
 
 function OnboardingPage() {
-  const [nickname, setNickname] = useState<string>("");
+  const { nickname, isValidName, helperText, handleNicknameChange, handleNicknameBlur } =
+    useNickname();
+
   const [country, setCountry] = useState<AutocompleteOption | null>(null);
   const [department, setDepartment] = useState<AutocompleteOption | null>(null);
-
-  const handleNicknameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setNickname(e.target.value);
-  };
 
   const handleCountryChange = (e: SyntheticEvent, value: AutocompleteOption | null) => {
     setCountry(value);
@@ -40,11 +39,14 @@ function OnboardingPage() {
       <h1 className="text-6xl text-inhaDeepBlue font-bold mt-24">HiBuddy</h1>
       <form className="flex flex-col gap-y-8 w-3/5">
         <TextField
-          label="nickname"
           variant="standard"
           fullWidth
+          autoFocus
           value={nickname}
           onChange={handleNicknameChange}
+          onBlur={handleNicknameBlur}
+          helperText={helperText}
+          error={!isValidName}
         />
         <Autocomplete
           fullWidth
@@ -67,7 +69,7 @@ function OnboardingPage() {
           fullWidth
           size="large"
           color="secondary"
-          disabled={country === null || department === null}
+          disabled={!isValidName || country === null || department === null}
         >
           CONTINUE
         </Button>
