@@ -35,7 +35,7 @@ function OnboardingPage() {
   };
 
   return (
-    <div className="flex flex-col items-center gap-y-20 h-full">
+    <div className="flex flex-col items-center gap-y-20 h-screen">
       <h1 className="text-6xl text-inhaDeepBlue font-bold mt-24">HiBuddy</h1>
       <form className="flex flex-col gap-y-8 w-3/5">
         <TextField
