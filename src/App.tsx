@@ -19,8 +19,10 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div className="max-w-xl mx-auto h-screen border border-sky-500">
-        <Outlet />
+      <div className="bg-gray-200">
+        <div className="max-w-xl mx-auto bg-white">
+          <Outlet />
+        </div>
       </div>
     </ThemeProvider>
   );
