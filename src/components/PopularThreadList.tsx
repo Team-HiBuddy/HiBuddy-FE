@@ -3,7 +3,7 @@ import PopularThread from "./PopularThread";
 const threads = [
   { title: "어쩌구 저쩌구 이러쿵 저러쿵 어쩌구 저쩌구 이러쿵 저러쿵", likes: 12, comments: 10 },
   { title: "이거 실화냐?", likes: 11, comments: 9 },
-  { title: "어쩌구 저쩌구 이러쿵 저러쿵 어쩌구 저쩌구 이러쿵 저러쿵", likes: 9, comments: 8 },
+  { title: "어쩌구 저쩌구 이러쿵 저러쿵 어쩌구 저쩌구 이러쿵", likes: 9, comments: 8 },
 ];
 
 function PopularThreadList() {
@@ -13,7 +13,7 @@ function PopularThreadList() {
       <div>
         <ul className="flex flex-col gap-2 border rounded border-inhaSkyBlue p-3">
           {threads.map((thread) => (
-            <PopularThread {...thread} />
+            <PopularThread key={thread.title} {...thread} />
           ))}
         </ul>
       </div>
