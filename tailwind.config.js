@@ -7,6 +7,7 @@ export default {
         inhaDeepBlue: "#005BAC",
         inhaSkyBlue: "#00AFEC",
         kakao: "#FEE500",
+        red: "#FC5555",
       },
     },
   },
