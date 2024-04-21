@@ -3,7 +3,7 @@ import GoogleSVG from "@assets/google.svg?react";
 
 function LoginPage() {
   return (
-    <div className="flex flex-col items-center h-screen">
+    <main className="flex flex-col items-center h-screen">
       <div className="flex flex-col items-center gap-y-4 mt-60">
         <h1 className="text-6xl text-inhaDeepBlue font-bold">HiBuddy</h1>
         <p className="text-xl font-semibold text-center">Community for international students</p>
@@ -18,7 +18,7 @@ function LoginPage() {
           <div className="flex-1 font-bold">Continue with Google</div>
         </button>
       </div>
-    </div>
+    </main>
   );
 }
 
