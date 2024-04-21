@@ -9,7 +9,7 @@ function BottomNavigationBar() {
   const [value, setValue] = useState(0);
 
   return (
-    <div className="sticky bottom-0 w-full border-t border-inhaSkyBlue py-2 px-6 bg-white">
+    <footer className="sticky bottom-0 w-full border-t-2 border-inhaSkyBlue py-2 px-6 bg-white">
       <BottomNavigation
         showLabels
         value={value}
@@ -22,7 +22,7 @@ function BottomNavigationBar() {
         <BottomNavigationAction label="Chat" icon={<ChatSVG />} />
         <BottomNavigationAction label="InhaBot" icon={<GptSVG />} />
       </BottomNavigation>
-    </div>
+    </footer>
   );
 }
 
