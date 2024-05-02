@@ -4,8 +4,11 @@ import ChatSVG from "@assets/chat.svg?react";
 import GptSVG from "@assets/gpt.svg?react";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function BottomNavigationBar() {
+  const navigate = useNavigate();
+
   const [value, setValue] = useState(0);
 
   return (
@@ -15,6 +18,14 @@ function BottomNavigationBar() {
         value={value}
         onChange={(event, newValue) => {
           setValue(newValue);
+
+          switch (newValue) {
+            case 0:
+              navigate("/main");
+              return;
+            case 1:
+              navigate("/threads");
+          }
         }}
       >
         <BottomNavigationAction label="Home" icon={<HomeSVG />} />
