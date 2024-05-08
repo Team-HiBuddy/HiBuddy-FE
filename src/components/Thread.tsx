@@ -4,6 +4,8 @@ import Star from "@assets/star.svg?react";
 import StarOutline from "@assets/star-outline.svg?react";
 import ThumbsUpSVG from "@assets/thumbs-up.svg?react";
 import CommentSVG from "@assets/comment.svg?react";
+import { ROUTER_PATH } from "../router";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   id: number;
@@ -16,9 +18,18 @@ interface Props {
   comments: number;
 }
 
-function Thread({ name, date, title, contents, isStarred, likes, comments }: Props) {
+function Thread({ id, name, date, title, contents, isStarred, likes, comments }: Props) {
+  const navigate = useNavigate();
+
+  const goToThreadView = () => {
+    navigate(ROUTER_PATH.THREAD_VIEW.replace(":postId", id.toString()));
+  };
+
   return (
-    <div className="flex flex-col gap-y-2 p-2 rounded-xl cursor-pointer hover:bg-gray-200">
+    <div
+      className="flex flex-col gap-y-2 p-2 rounded-xl cursor-pointer hover:bg-gray-200"
+      onClick={goToThreadView}
+    >
       <div className="flex justify-between">
         <div className="flex items-center gap-x-2">
           <AccountCircleSVG />
