@@ -8,11 +8,11 @@ import Layout from "@pages/Layout";
 import ThreadViewPage from "@pages/ThreadViewPage";
 
 export const ROUTER_PATH = {
-  LOGIN: "login",
-  ONBOARDING: "onboarding",
-  MAIN: "main",
-  THREAD_LIST: "threads",
-  THREAD_VIEW: "thread/:postId",
+  LOGIN: "/login",
+  ONBOARDING: "/onboarding",
+  MAIN: "/main",
+  THREAD_LIST: "/threads",
+  THREAD_VIEW: "/thread/:postId",
 };
 
 export const router = createBrowserRouter([
