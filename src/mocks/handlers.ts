@@ -1,27 +1,13 @@
-import { http, graphql, HttpResponse } from "msw";
+import { HIBUDDY_BASE_URL } from "@constants/api";
+import { http, HttpResponse } from "msw";
 
 export const handlers = [
-  http.get("https://api.example.com/user", () => {
-    return HttpResponse.json({
-      firstName: "John",
-      lastName: "Maverick",
-    });
-  }),
-
-  graphql.query("ListMovies", () => {
-    return HttpResponse.json({
-      data: {
-        movies: [
-          {
-            title: "The Lord of The Rings",
-          },
-          {
-            title: "The Matrix",
-          },
-          {
-            title: "Star Wars: The Empire Strikes Back",
-          },
-        ],
+  http.get(`${HIBUDDY_BASE_URL}/auth/kakao/login`, async () => {
+    return new HttpResponse("OK", {
+      status: 200,
+      headers: {
+        authorization:
+          "30DKVAAsOX9ccZbtQycmvt5p3PEWVeLFpbQM1LYWDSscuqfUdo0_-dARI1QKPXSZAAABj2CxyI9Udd9ffL_GXA",
       },
     });
   }),
