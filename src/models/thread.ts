@@ -1,3 +1,5 @@
+import { ResponseBody } from "./api";
+
 export interface Thread {
   id: number;
   name: string;
@@ -18,3 +20,14 @@ export interface Comment {
   createDate: Date;
   likesCount: number;
 }
+
+export interface GetPopularThreadsResponse extends ResponseBody {
+  result: {
+    postId: number;
+    title: string;
+    likeNum: number;
+    commentNum: number;
+  }[];
+}
+
+export type PopularThreadContents = Pick<Thread, "id" | "title" | "likesCount" | "commentsCount">;
