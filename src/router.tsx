@@ -10,14 +10,13 @@ import ThreadViewPage from "@pages/ThreadViewPage";
 export const ROUTER_PATH = {
   LOGIN: "/login",
   ONBOARDING: "/onboarding",
-  MAIN: "/main",
+  MAIN: "/",
   THREAD_LIST: "/threads",
   THREAD_VIEW: "/thread/:postId",
 };
 
 export const router = createBrowserRouter([
   {
-    path: "/",
     element: <App />,
     children: [
       {
