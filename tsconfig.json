@@ -28,7 +28,8 @@
       "@pages/*": ["pages/*"],
       "@utils/*": ["utils/*"],
       "@hooks/*": ["hooks/*"],
-      "@constants/*": ["constants/*"]
+      "@constants/*": ["constants/*"],
+      "@apis/*": ["apis/*"]
     }
   },
   "include": ["src", "vitest.setup.ts"],
