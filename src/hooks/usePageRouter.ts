@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ROUTER_PATH } from "router";
+import { ROUTER_PATH } from "../router";
 
 function usePageRouter() {
   const navigate = useNavigate();
@@ -10,6 +10,10 @@ function usePageRouter() {
 
   const goToLoginPage = () => {
     navigate(ROUTER_PATH.LOGIN);
+  };
+
+  const goToThreadListPage = () => {
+    navigate(ROUTER_PATH.THREAD_LIST);
   };
 
   const goToThreadViewPage = (postId: number) => {
@@ -23,6 +27,7 @@ function usePageRouter() {
   return {
     goToMainPage,
     goToLoginPage,
+    goToThreadListPage,
     goToThreadViewPage,
     goBack,
   };
