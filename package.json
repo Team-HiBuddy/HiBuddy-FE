@@ -38,5 +38,10 @@
     "vite": "^5.2.0",
     "vite-plugin-svgr": "^4.2.0",
     "vitest": "^1.5.0"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

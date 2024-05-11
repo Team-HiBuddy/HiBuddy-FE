@@ -1,28 +1,23 @@
-import { http, graphql, HttpResponse } from "msw";
+import { HIBUDDY_BASE_URL } from "@constants/api";
+import { delay, http, HttpResponse } from "msw";
+import popularThreads from "./data/popularThreads.json";
 
 export const handlers = [
-  http.get("https://api.example.com/user", () => {
-    return HttpResponse.json({
-      firstName: "John",
-      lastName: "Maverick",
+  http.get(`${HIBUDDY_BASE_URL}/auth/kakao/login`, async () => {
+    await delay(3000);
+
+    return new HttpResponse("OK", {
+      status: 200,
+      headers: {
+        authorization:
+          "30DKVAAsOX9ccZbtQycmvt5p3PEWVeLFpbQM1LYWDSscuqfUdo0_-dARI1QKPXSZAAABj2CxyI9Udd9ffL_GXA",
+      },
     });
   }),
 
-  graphql.query("ListMovies", () => {
-    return HttpResponse.json({
-      data: {
-        movies: [
-          {
-            title: "The Lord of The Rings",
-          },
-          {
-            title: "The Matrix",
-          },
-          {
-            title: "Star Wars: The Empire Strikes Back",
-          },
-        ],
-      },
-    });
+  http.get(`${HIBUDDY_BASE_URL}/posts/ranking`, async () => {
+    await delay(2000);
+
+    return HttpResponse.json(popularThreads);
   }),
 ];
