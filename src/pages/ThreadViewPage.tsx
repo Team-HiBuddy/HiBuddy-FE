@@ -46,9 +46,9 @@ const thread: Thread = {
 
 function ThreadViewPage() {
   return (
-    <main className="px-4 py-2">
+    <div className="px-4 py-2">
       <ThreadView thread={thread} />
-    </main>
+    </div>
   );
 }
 

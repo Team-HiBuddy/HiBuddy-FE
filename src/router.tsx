@@ -6,18 +6,19 @@ import MainPage from "@pages/MainPage";
 import ThreadListPage from "@pages/ThreadListPage";
 import Layout from "@pages/Layout";
 import ThreadViewPage from "@pages/ThreadViewPage";
+import KakaoCallbackPage from "@pages/KakaoCallbackPage";
 
 export const ROUTER_PATH = {
+  MAIN: "/",
   LOGIN: "/login",
   ONBOARDING: "/onboarding",
-  MAIN: "/main",
   THREAD_LIST: "/threads",
   THREAD_VIEW: "/thread/:postId",
+  KAKAO_CALLBACK: "/auth/kakao/callback",
 };
 
 export const router = createBrowserRouter([
   {
-    path: "/",
     element: <App />,
     children: [
       {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: ROUTER_PATH.ONBOARDING,
         element: <OnboardingPage />,
+      },
+      {
+        path: ROUTER_PATH.KAKAO_CALLBACK,
+        element: <KakaoCallbackPage />,
       },
       {
         element: <Layout />,

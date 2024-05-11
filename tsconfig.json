@@ -26,7 +26,11 @@
       "@components/*": ["components/*"],
       "@assets/*": ["assets/*"],
       "@pages/*": ["pages/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@hooks/*": ["hooks/*"],
+      "@constants/*": ["constants/*"],
+      "@apis/*": ["apis/*"],
+      "@models/*": ["models/*"]
     }
   },
   "include": ["src", "vitest.setup.ts"],

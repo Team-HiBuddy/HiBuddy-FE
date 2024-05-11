@@ -1,4 +1,6 @@
 import { ThemeProvider, createTheme } from "@mui/material";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "@hooks/query/queryClient";
 import { Outlet } from "react-router-dom";
 
 const theme = createTheme({
@@ -23,11 +25,13 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div className="bg-gray-200">
-        <div className="max-w-xl mx-auto bg-white">
-          <Outlet />
+      <QueryClientProvider client={queryClient}>
+        <div className="bg-gray-200">
+          <div className="max-w-xl mx-auto bg-white">
+            <Outlet />
+          </div>
         </div>
-      </div>
+      </QueryClientProvider>
     </ThemeProvider>
   );
 }
