@@ -31,3 +31,9 @@ export interface GetPopularThreadsResponse extends ResponseBody {
 }
 
 export type PopularThreadContents = Pick<Thread, "id" | "title" | "likesCount" | "commentsCount">;
+
+export interface PostThreadImagesResponse extends ResponseBody {
+  result: {
+    imageIds: number[];
+  };
+}
