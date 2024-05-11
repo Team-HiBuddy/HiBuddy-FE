@@ -3,6 +3,7 @@ import { delay, http, HttpResponse } from "msw";
 import popularThreads from "./data/popularThreads.json";
 import successfulResponse from "./data/successfulResponse.json";
 import failedResponse from "./data/failedResponse.json";
+import postThreadResponse from "./data/postThreadResponse.json";
 
 export const handlers = [
   http.get(`${HIBUDDY_BASE_URL}/auth/kakao/login`, async () => {
@@ -40,5 +41,15 @@ export const handlers = [
     };
 
     return HttpResponse.json(data);
+  }),
+
+  http.post(`${HIBUDDY_BASE_URL}/thread/posts`, async () => {
+    await delay(1000);
+
+    return new HttpResponse(JSON.stringify(postThreadResponse), {
+      headers: {
+        location: "/v1/thread/posts/123",
+      },
+    });
   }),
 ];
