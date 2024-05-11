@@ -6,18 +6,19 @@ import MainPage from "@pages/MainPage";
 import ThreadListPage from "@pages/ThreadListPage";
 import Layout from "@pages/Layout";
 import ThreadViewPage from "@pages/ThreadViewPage";
+import PostThreadPage from "@pages/PostThreadPage";
 
 export const ROUTER_PATH = {
   LOGIN: "/login",
   ONBOARDING: "/onboarding",
-  MAIN: "/main",
+  MAIN: "/",
   THREAD_LIST: "/threads",
   THREAD_VIEW: "/thread/:postId",
+  POST_THREAD: "/post",
 };
 
 export const router = createBrowserRouter([
   {
-    path: "/",
     element: <App />,
     children: [
       {
@@ -43,6 +44,7 @@ export const router = createBrowserRouter([
             path: ROUTER_PATH.THREAD_VIEW,
             element: <ThreadViewPage />,
           },
+          { path: ROUTER_PATH.POST_THREAD, element: <PostThreadPage /> },
         ],
       },
     ],
