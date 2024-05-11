@@ -1,4 +1,9 @@
-import { GetPopularThreadsResponse, PostThreadImagesResponse } from "models/thread";
+import {
+  GetPopularThreadsResponse,
+  PostThreadImagesResponse,
+  PostThreadRequest,
+  PostThreadResponse,
+} from "models/thread";
 import { http } from "./axios";
 
 export const getPopularThreads = () => {
@@ -17,4 +22,8 @@ export const postThreadImages = (images: FileList) => {
       "Content-Type": "multipart/form-data",
     },
   });
+};
+
+export const postThread = (thread: PostThreadRequest) => {
+  return http.post<PostThreadResponse>("/thread/posts", thread);
 };

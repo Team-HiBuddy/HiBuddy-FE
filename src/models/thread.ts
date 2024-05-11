@@ -37,3 +37,15 @@ export interface PostThreadImagesResponse extends ResponseBody {
     imageIds: number[];
   };
 }
+
+export interface PostThreadRequest {
+  title: string;
+  content: string;
+  imageIds: number[];
+}
+
+export interface PostThreadResponse extends ResponseBody {
+  result: {
+    postId: number;
+  };
+}

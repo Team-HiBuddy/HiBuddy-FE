@@ -4,15 +4,35 @@ import { Button, TextField } from "@mui/material";
 import { ChangeEvent, useEffect, useState } from "react";
 import usePageRouter from "@hooks/usePageRouter";
 import useThreadImageUpload from "@hooks/query/useThreadImageUpload";
+import useThreadPost from "@hooks/query/useThreadPost";
+import usePreventLeave from "@hooks/usePreventLeave";
+import useThreadText from "@hooks/useThreadText";
 
 function PostThreadPage() {
-  const { goBack } = usePageRouter();
+  const { goBack, goToThreadViewPage } = usePageRouter();
+  const { enablePrevent, disablePrevent } = usePreventLeave();
   const {
     mutate: uploadImages,
     data: uploadResponse,
-    isPending,
-    isSuccess,
+    isPending: isImagePending,
+    isSuccess: isImageSuccess,
   } = useThreadImageUpload();
+  const {
+    mutate: postThread,
+    data: postResponse,
+    isPending: isPostPending,
+    isSuccess: isPostSuccess,
+  } = useThreadPost();
+  const {
+    titleRef,
+    contentsRef,
+    validateTitle,
+    validateContents,
+    isValidContents,
+    isValidTitle,
+    titleHelperText,
+    contentsHelperText,
+  } = useThreadText();
 
   const [images, setImages] = useState<string[]>([]);
   const [imageIds, setImageIds] = useState<number[]>([]);
@@ -40,11 +60,33 @@ function PostThreadPage() {
     uploadImages(files);
   };
 
+  const handlePostButton = () => {
+    if (!titleRef.current || !contentsRef.current) return;
+
+    postThread({ title: titleRef.current.value, content: contentsRef.current.value, imageIds });
+  };
+
   useEffect(() => {
-    if (!isSuccess) return;
+    enablePrevent();
+
+    return () => {
+      disablePrevent();
+    };
+  });
+
+  useEffect(() => {});
+
+  useEffect(() => {
+    if (!isImageSuccess) return;
 
     setImageIds((prev) => [...prev, ...uploadResponse.result.imageIds]);
-  }, [isSuccess, uploadResponse?.result.imageIds]);
+  }, [isImageSuccess, uploadResponse?.result.imageIds]);
+
+  useEffect(() => {
+    if (!isPostSuccess) return;
+
+    goToThreadViewPage(postResponse.result.postId);
+  }, [isPostSuccess, postResponse?.result.postId, goToThreadViewPage]);
 
   return (
     <main className="h-screen">
@@ -53,22 +95,46 @@ function PostThreadPage() {
           <PlusSVG className="scale-150 rotate-45 cursor-pointer" onClick={goBack} />
           <p className="text-lg font-semibold">Create a Post</p>
         </div>
-        <Button variant="contained">POST</Button>
+        <Button
+          variant="contained"
+          disabled={isPostPending || !isValidTitle || !isValidContents}
+          onClick={handlePostButton}
+        >
+          POST
+        </Button>
       </div>
       <div className="flex flex-col gap-8 px-8 py-4">
-        <TextField variant="standard" placeholder="Add a title..." autoFocus />
-        <TextField variant="outlined" multiline rows={10} placeholder="Add your text..." />
+        <TextField
+          variant="standard"
+          placeholder="Add a title..."
+          helperText={titleHelperText}
+          autoFocus
+          error={!isValidTitle}
+          inputRef={titleRef}
+          onBlur={validateTitle}
+        />
+        <TextField
+          variant="outlined"
+          multiline
+          rows={10}
+          placeholder="Add your text..."
+          helperText={contentsHelperText}
+          error={!isValidContents}
+          inputRef={contentsRef}
+          onBlur={validateContents}
+        />
         <div className="flex flex-col gap-y-2 p-2">
           <Button
+            className="w-44"
             component="label"
             role="image-upload"
             variant="contained"
             color="secondary"
             tabIndex={-1}
             startIcon={<AddPhotoSVG />}
-            disabled={isPending}
+            disabled={isImagePending}
           >
-            {isPending ? "Uploading..." : "Upload Image"}
+            {isImagePending ? "Uploading..." : "Upload Image"}
             <input
               className="hidden"
               id="image-upload"
