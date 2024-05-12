@@ -16,8 +16,8 @@ function PostThreadPage() {
   const {
     mutate: uploadImages,
     data: uploadResponse,
-    isPending: isImagePending,
-    isSuccess: isImageSuccess,
+    isPending: isUploadImagePending,
+    isSuccess: isUploadImageSuccess,
   } = useThreadImageUpload();
   const {
     mutate: postThread,
@@ -95,10 +95,10 @@ function PostThreadPage() {
   });
 
   useEffect(() => {
-    if (!isImageSuccess) return;
+    if (!isUploadImageSuccess) return;
 
     setImageIds((prev) => [...prev, ...uploadResponse.result.imageIds]);
-  }, [isImageSuccess]);
+  }, [isUploadImageSuccess]);
 
   useEffect(() => {
     if (!isPostSuccess) return;
@@ -115,7 +115,13 @@ function PostThreadPage() {
         </div>
         <Button
           variant="contained"
-          disabled={isPostPending || !isValidTitle || !isValidContents}
+          disabled={
+            isPostPending ||
+            isUploadImagePending ||
+            isDeleteImagePending ||
+            !isValidTitle ||
+            !isValidContents
+          }
           onClick={handlePostButton}
         >
           POST
@@ -149,8 +155,10 @@ function PostThreadPage() {
             variant="contained"
             color="secondary"
             tabIndex={-1}
-            startIcon={isImagePending || isDeleteImagePending ? <SpinnerSVG /> : <AddPhotoSVG />}
-            disabled={isImagePending || isDeleteImagePending}
+            startIcon={
+              isUploadImagePending || isDeleteImagePending ? <SpinnerSVG /> : <AddPhotoSVG />
+            }
+            disabled={isUploadImagePending || isDeleteImagePending}
           >
             Upload Image
             <input
@@ -169,7 +177,7 @@ function PostThreadPage() {
           {images.map((image, idx) => (
             <li key={image} className="relative">
               <img className="w-40 h-40" src={image} />
-              {!isImagePending && !isDeleteImagePending && (
+              {!isUploadImagePending && !isDeleteImagePending && (
                 <PlusSVG
                   className="absolute top-0 right-0 w-7 h-7 rotate-45 cursor-pointer"
                   onClick={() => {
