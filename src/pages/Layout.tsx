@@ -1,5 +1,5 @@
-import BottomNavigationBar from "@components/BottomNavigationBar";
-import Header from "@components/Header";
+import BottomNavigationBar from "@components/layout/BottomNavigationBar";
+import Header from "@components/layout/Header";
 import { Outlet } from "react-router-dom";
 
 function Layout() {

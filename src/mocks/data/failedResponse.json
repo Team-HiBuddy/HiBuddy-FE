@@ -1,0 +1,6 @@
+{
+  "isSuccess": false,
+  "code": "string",
+  "message": "실패했습니다.",
+  "result": {}
+}

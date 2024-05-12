@@ -7,6 +7,7 @@ import ThreadListPage from "@pages/ThreadListPage";
 import Layout from "@pages/Layout";
 import ThreadViewPage from "@pages/ThreadViewPage";
 import KakaoCallbackPage from "@pages/KakaoCallbackPage";
+import PostThreadPage from "@pages/PostThreadPage";
 
 export const ROUTER_PATH = {
   MAIN: "/",
@@ -15,6 +16,7 @@ export const ROUTER_PATH = {
   THREAD_LIST: "/threads",
   THREAD_VIEW: "/thread/:postId",
   KAKAO_CALLBACK: "/auth/kakao/callback",
+  POST_THREAD: "/post",
 };
 
 export const router = createBrowserRouter([
@@ -48,6 +50,7 @@ export const router = createBrowserRouter([
             path: ROUTER_PATH.THREAD_VIEW,
             element: <ThreadViewPage />,
           },
+          { path: ROUTER_PATH.POST_THREAD, element: <PostThreadPage /> },
         ],
       },
     ],
