@@ -26,13 +26,14 @@ export const handlers = [
 
   http.post(`${HIBUDDY_BASE_URL}/images/upload`, async ({ request }) => {
     await delay(3000);
-
     const data = successfulResponse;
 
     const formData = await request.formData();
     const files = formData.getAll("fileList");
 
-    if (files.length < 1) return HttpResponse.json(failedResponse);
+    if (files.length < 1) {
+      return HttpResponse.json(failedResponse);
+    }
 
     const imageIds = Array.from(files).map((_, idx) => Date.now() + idx);
 
@@ -51,5 +52,11 @@ export const handlers = [
         location: "/v1/thread/posts/123",
       },
     });
+  }),
+
+  http.delete(`${HIBUDDY_BASE_URL}/image/delete/:imageId`, async () => {
+    await delay(1000);
+
+    return HttpResponse.json(successfulResponse);
   }),
 ];
