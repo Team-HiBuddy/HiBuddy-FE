@@ -1,12 +1,14 @@
 import PlusSVG from "@assets/plus.svg?react";
 import AddPhotoSVG from "@assets/add-photo.svg?react";
+import SpinnerSVG from "@assets/spinner.svg?react";
 import { Button, TextField } from "@mui/material";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import usePageRouter from "@hooks/usePageRouter";
 import useThreadImageUpload from "@hooks/query/useThreadImageUpload";
 import useThreadPost from "@hooks/query/useThreadPost";
 import usePreventLeave from "@hooks/usePreventLeave";
 import useThreadText from "@hooks/useThreadText";
+import useThreadImageDelete from "@hooks/query/useThreadImageDelete";
 
 function PostThreadPage() {
   const { goBack, goToThreadViewPage } = usePageRouter();
@@ -33,9 +35,18 @@ function PostThreadPage() {
     titleHelperText,
     contentsHelperText,
   } = useThreadText();
+  const { mutate: deleteImage, isPending: isDeleteImagePending } = useThreadImageDelete();
 
   const [images, setImages] = useState<string[]>([]);
   const [imageIds, setImageIds] = useState<number[]>([]);
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const resetFileInput = () => {
+    if (!fileInputRef.current) return;
+
+    fileInputRef.current.value = "";
+  };
 
   const handelUploadImage = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -66,6 +77,15 @@ function PostThreadPage() {
     postThread({ title: titleRef.current.value, content: contentsRef.current.value, imageIds });
   };
 
+  const handleDeleteImageButton = (deleteIdx: number) => {
+    deleteImage(imageIds[deleteIdx]);
+
+    resetFileInput();
+
+    setImages((prev) => prev.filter((_, idx) => idx != deleteIdx));
+    setImageIds((prev) => prev.filter((_, idx) => idx != deleteIdx));
+  };
+
   useEffect(() => {
     enablePrevent();
 
@@ -74,19 +94,17 @@ function PostThreadPage() {
     };
   });
 
-  useEffect(() => {});
-
   useEffect(() => {
     if (!isImageSuccess) return;
 
     setImageIds((prev) => [...prev, ...uploadResponse.result.imageIds]);
-  }, [isImageSuccess, uploadResponse?.result.imageIds]);
+  }, [isImageSuccess]);
 
   useEffect(() => {
     if (!isPostSuccess) return;
 
     goToThreadViewPage(postResponse.result.postId);
-  }, [isPostSuccess, postResponse?.result.postId, goToThreadViewPage]);
+  }, [isPostSuccess]);
 
   return (
     <main className="h-screen">
@@ -131,26 +149,37 @@ function PostThreadPage() {
             variant="contained"
             color="secondary"
             tabIndex={-1}
-            startIcon={<AddPhotoSVG />}
-            disabled={isImagePending}
+            startIcon={isImagePending || isDeleteImagePending ? <SpinnerSVG /> : <AddPhotoSVG />}
+            disabled={isImagePending || isDeleteImagePending}
           >
-            {isImagePending ? "Uploading..." : "Upload Image"}
+            Upload Image
             <input
               className="hidden"
               id="image-upload"
               type="file"
               accept="image/png, image/jpeg"
               multiple
+              ref={fileInputRef}
               onChange={handelUploadImage}
             />
           </Button>
           <p className="text-gray-500">* You can attach up to three images.</p>
         </div>
-        <div className="flex flex-wrap gap-1">
-          {images.map((image) => (
-            <img className="w-40 h-40" key={image} src={image} />
+        <ul className="flex flex-wrap gap-1">
+          {images.map((image, idx) => (
+            <li key={image} className="relative">
+              <img className="w-40 h-40" src={image} />
+              {!isImagePending && !isDeleteImagePending && (
+                <PlusSVG
+                  className="absolute top-0 right-0 w-7 h-7 rotate-45 cursor-pointer"
+                  onClick={() => {
+                    handleDeleteImageButton(idx);
+                  }}
+                />
+              )}
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </main>
   );

@@ -5,6 +5,7 @@ import {
   PostThreadResponse,
 } from "models/thread";
 import { http } from "./axios";
+import { ResponseBody } from "@models/api";
 
 export const getPopularThreads = () => {
   return http.get<GetPopularThreadsResponse>("/posts/ranking");
@@ -26,4 +27,8 @@ export const postThreadImages = (images: FileList) => {
 
 export const postThread = (thread: PostThreadRequest) => {
   return http.post<PostThreadResponse>("/thread/posts", thread);
+};
+
+export const deleteThreadImage = (imageId: number) => {
+  return http.delete<ResponseBody>(`/image/delete/${imageId}`);
 };
