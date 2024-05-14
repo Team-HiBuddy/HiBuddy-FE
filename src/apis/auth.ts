@@ -1,20 +1,12 @@
 import { http } from "@apis/axios";
-import { KAKAO_ACCESS_TOKEN_LOCAL_STORAGE_KEY } from "@constants/api";
-import { AxiosResponse } from "axios";
 
 export const issueLoginToken = async (authCode: string) =>
   await http.get(`/auth/kakao/login?code=${authCode}`);
 
-export const getAccessToken = () => localStorage.getItem(KAKAO_ACCESS_TOKEN_LOCAL_STORAGE_KEY);
+export const setAccessToken = (token: string) => {
+  http.defaults.headers.common["authorization"] = token;
+};
 
-export const saveAccessToken = (response: AxiosResponse) => {
-  const jwt = response.headers["Authorization"];
-
-  if (!jwt) {
-    console.error("cat't find JWT.");
-
-    return;
-  }
-
-  localStorage.setItem(KAKAO_ACCESS_TOKEN_LOCAL_STORAGE_KEY, jwt.toString());
+export const removeAccessToken = () => {
+  delete http.defaults.headers.common["authorization"];
 };
