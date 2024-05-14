@@ -1,6 +1,6 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 import { HIBUDDY_BASE_URL } from "@constants/api";
-import { setAccessToken } from "./auth";
+import { REISSUE_TOKEN_URL, reissueToken, removeAccessToken, setAccessToken } from "./auth";
 
 const axiosInstance = axios.create({
   baseURL: HIBUDDY_BASE_URL,
@@ -24,7 +24,17 @@ http.interceptors.response.use(
 
     return response.data;
   },
-  (error) => {
+  async (error: AxiosError) => {
+    const { config, response } = error;
+
+    if (config && response?.status === 401 && config?.url !== REISSUE_TOKEN_URL) {
+      removeAccessToken();
+
+      await reissueToken();
+
+      return http.request(config);
+    }
+
     return Promise.reject(error);
   }
 );
