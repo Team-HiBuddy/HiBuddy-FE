@@ -4,7 +4,10 @@ import { KAKAO_LOGIN_PARAMS } from "@constants/api";
 
 function LoginPage() {
   const handleKaKaoLoginButton = () => {
-    window.location.href = `https://kauth.kakao.com/oauth/authorize?${KAKAO_LOGIN_PARAMS.toString()}`;
+    window.location.href =
+      process.env.NODE_ENV === "development"
+        ? `/auth/kakao/callback?code=dev`
+        : `https://kauth.kakao.com/oauth/authorize?${KAKAO_LOGIN_PARAMS.toString()}`;
   };
 
   return (
