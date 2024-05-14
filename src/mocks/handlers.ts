@@ -6,14 +6,13 @@ import failedResponse from "./data/failedResponse.json";
 import postThreadResponse from "./data/postThreadResponse.json";
 
 export const handlers = [
-  http.get(`${HIBUDDY_BASE_URL}/auth/kakao/login`, async () => {
+  http.post(`${HIBUDDY_BASE_URL}/auth/kakao/login`, async () => {
     await delay(3000);
 
     return new HttpResponse("OK", {
       status: 200,
       headers: {
-        authorization:
-          "Bearer 30DKVAAsOX9ccZbtQycmvt5p3PEWVeLFpbQM1LYWDSscuqfUdo0_-dARI1QKPXSZAAABj2CxyI9Udd9ffL_GXA",
+        authorization: "Bearer FAKE_JWT",
       },
     });
   }),
@@ -58,5 +57,16 @@ export const handlers = [
     await delay(1000);
 
     return HttpResponse.json(successfulResponse);
+  }),
+
+  http.post(`${HIBUDDY_BASE_URL}/auth/kakao/reissue`, async () => {
+    await delay(1000);
+
+    return new HttpResponse("OK", {
+      status: 200,
+      headers: {
+        authorization: "Bearer REISSUED_JWT",
+      },
+    });
   }),
 ];
