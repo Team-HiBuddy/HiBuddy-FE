@@ -10,9 +10,20 @@ export const handlers = [
     await delay(3000);
 
     return new HttpResponse("OK", {
-      status: 200,
+      status: 201,
       headers: {
-        authorization: "Bearer FAKE_JWT",
+        authorization: "Bearer FAKE_KAKAO_JWT",
+      },
+    });
+  }),
+
+  http.post(`${HIBUDDY_BASE_URL}/auth/google/login`, async () => {
+    await delay(3000);
+
+    return new HttpResponse("OK", {
+      status: 201,
+      headers: {
+        authorization: "Bearer FAKE_GOOGLE_JWT",
       },
     });
   }),
@@ -65,7 +76,18 @@ export const handlers = [
     return new HttpResponse("OK", {
       status: 200,
       headers: {
-        authorization: "Bearer REISSUED_JWT",
+        authorization: "Bearer REISSUED_KAKAO_JWT",
+      },
+    });
+  }),
+
+  http.post(`${HIBUDDY_BASE_URL}/auth/google/reissue`, async () => {
+    await delay(1000);
+
+    return new HttpResponse("OK", {
+      status: 200,
+      headers: {
+        authorization: "Bearer REISSUED_GOOGLE_JWT",
       },
     });
   }),
