@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 function OAuthCallbackPage() {
   const location = useLocation();
 
-  const { goToMainPage, goToLoginPage } = usePageRouter();
+  const { goToOnboardingPage, goToLoginPage } = usePageRouter();
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -23,8 +23,7 @@ function OAuthCallbackPage() {
     if (code) {
       issueLoginToken(code)
         .then(() => {
-          alert("로그인 성공!");
-          goToMainPage();
+          goToOnboardingPage();
         })
         .catch(() => {
           alert("Failed to Login");

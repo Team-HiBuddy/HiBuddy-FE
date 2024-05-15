@@ -1,6 +1,9 @@
 import { Autocomplete, Button, TextField } from "@mui/material";
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import useNickname from "../hooks/useNickname";
+import useOnboarding from "@hooks/query/useOnboarding";
+import usePageRouter from "@hooks/usePageRouter";
+
 interface AutocompleteOption {
   label: string;
 }
@@ -23,6 +26,10 @@ function OnboardingPage() {
   const { nickname, isValidName, helperText, handleNicknameChange, handleNicknameBlur } =
     useNickname();
 
+  const { mutate: postData, isPending, isSuccess } = useOnboarding();
+
+  const { goToMainPage } = usePageRouter();
+
   const [country, setCountry] = useState<AutocompleteOption | null>(null);
   const [department, setDepartment] = useState<AutocompleteOption | null>(null);
 
@@ -33,6 +40,18 @@ function OnboardingPage() {
   const handleDepartmentChange = (e: SyntheticEvent, value: AutocompleteOption | null) => {
     setDepartment(value);
   };
+
+  const handleContinueButton = () => {
+    if (!country || !department) return;
+
+    postData({ nickname: nickname, country: country.label, department: department.label });
+  };
+
+  useEffect(() => {
+    if (!isSuccess) return;
+
+    goToMainPage();
+  }, [isSuccess]);
 
   return (
     <div className="flex flex-col items-center gap-y-20 h-screen">
@@ -69,7 +88,8 @@ function OnboardingPage() {
           fullWidth
           size="large"
           color="secondary"
-          disabled={!isValidName || country === null || department === null}
+          disabled={!isValidName || country === null || department === null || isPending}
+          onClick={handleContinueButton}
         >
           CONTINUE
         </Button>

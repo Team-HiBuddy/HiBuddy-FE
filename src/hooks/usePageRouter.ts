@@ -28,6 +28,10 @@ function usePageRouter() {
     navigate(ROUTER_PATH.POST_THREAD);
   };
 
+  const goToOnboardingPage = () => {
+    navigate(ROUTER_PATH.ONBOARDING);
+  };
+
   return {
     goBack,
     goToMainPage,
@@ -35,6 +39,7 @@ function usePageRouter() {
     goToThreadListPage,
     goToThreadViewPage,
     goToPostThreadPage,
+    goToOnboardingPage,
   };
 }
 

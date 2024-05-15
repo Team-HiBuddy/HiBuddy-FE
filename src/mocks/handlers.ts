@@ -91,4 +91,10 @@ export const handlers = [
       },
     });
   }),
+
+  http.post(`${HIBUDDY_BASE_URL}/onboarding`, async () => {
+    await delay(1000);
+
+    return HttpResponse.json(successfulResponse);
+  }),
 ];
