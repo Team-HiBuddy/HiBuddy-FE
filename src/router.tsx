@@ -6,9 +6,10 @@ import MainPage from "@pages/MainPage";
 import ThreadListPage from "@pages/ThreadListPage";
 import Layout from "@pages/Layout";
 import ThreadViewPage from "@pages/ThreadViewPage";
-import KakaoCallbackPage from "@pages/KakaoCallbackPage";
+import OAuthCallbackPage from "@pages/OAuthCallbackPage";
 import PostThreadPage from "@pages/PostThreadPage";
 import { isLogin } from "@apis/auth";
+import { enableMocking } from "./main";
 
 export const ROUTER_PATH = {
   MAIN: "/",
@@ -17,17 +18,8 @@ export const ROUTER_PATH = {
   THREAD_LIST: "/threads",
   THREAD_VIEW: "/thread/:postId",
   KAKAO_CALLBACK: "/auth/kakao/callback",
+  GOOGLE_CALLBACK: "/auth/google/callback",
   POST_THREAD: "/post",
-};
-
-const enableMocking = async () => {
-  if (process.env.NODE_ENV !== "development") {
-    return;
-  }
-
-  const { worker } = await import("./mocks/browser.ts");
-
-  return worker.start();
 };
 
 const verifyingAuthLoader = async () => {
@@ -54,8 +46,9 @@ export const router = createBrowserRouter([
       },
       {
         path: ROUTER_PATH.KAKAO_CALLBACK,
-        element: <KakaoCallbackPage />,
+        element: <OAuthCallbackPage />,
       },
+      { path: ROUTER_PATH.GOOGLE_CALLBACK, element: <OAuthCallbackPage /> },
       {
         element: <Layout />,
         loader: verifyingAuthLoader,

@@ -3,7 +3,7 @@ import { issueLoginToken } from "@apis/auth";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-function KakaoCallbackPage() {
+function OAuthCallbackPage() {
   const location = useLocation();
 
   const { goToMainPage, goToLoginPage } = usePageRouter();
@@ -36,4 +36,4 @@ function KakaoCallbackPage() {
   return <div>Redirecting...</div>;
 }
 
-export default KakaoCallbackPage;
+export default OAuthCallbackPage;

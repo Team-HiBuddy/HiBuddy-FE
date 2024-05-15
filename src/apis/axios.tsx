@@ -27,7 +27,11 @@ http.interceptors.response.use(
   async (error: AxiosError) => {
     const { config, response } = error;
 
-    if (config && response?.status === 401 && config?.url !== REISSUE_TOKEN_URL) {
+    if (
+      config?.url &&
+      response?.status === 401 &&
+      !Object.values(REISSUE_TOKEN_URL).includes(config.url)
+    ) {
       removeAccessToken();
 
       await reissueToken();

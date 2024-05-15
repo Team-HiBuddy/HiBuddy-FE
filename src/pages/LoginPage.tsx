@@ -1,12 +1,24 @@
 import KakaoSVG from "@assets/kakao.svg?react";
 import GoogleSVG from "@assets/google.svg?react";
 import { KAKAO_LOGIN_PARAMS } from "@constants/api";
+import { setOAuthProvider } from "@apis/auth";
 
 function LoginPage() {
   const handleKaKaoLoginButton = () => {
+    setOAuthProvider("kakao");
+
     window.location.href =
       process.env.NODE_ENV === "development"
-        ? `/auth/kakao/callback?code=dev`
+        ? `/auth/kakao/callback?code=kakaoAuthCode`
+        : `https://kauth.kakao.com/oauth/authorize?${KAKAO_LOGIN_PARAMS.toString()}`;
+  };
+
+  const handleGoogleLoginButton = () => {
+    setOAuthProvider("google");
+
+    window.location.href =
+      process.env.NODE_ENV === "development"
+        ? `/auth/google/callback?code=googleAuthCode`
         : `https://kauth.kakao.com/oauth/authorize?${KAKAO_LOGIN_PARAMS.toString()}`;
   };
 
@@ -24,7 +36,10 @@ function LoginPage() {
           <KakaoSVG />
           <div className="flex-1 font-bold">Continue with Kakao</div>
         </button>
-        <button className="flex items-center border border-black rounded-md h-14 px-6">
+        <button
+          className="flex items-center border border-black rounded-md h-14 px-6"
+          onClick={handleGoogleLoginButton}
+        >
           <GoogleSVG />
           <div className="flex-1 font-bold">Continue with Google</div>
         </button>
