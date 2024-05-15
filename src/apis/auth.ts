@@ -15,4 +15,12 @@ export const removeAccessToken = () => {
   http.defaults.headers.common["authorization"] = null;
 };
 
-export const isLogin = () => Boolean(http.defaults.headers.common["authorization"]);
+export const isLogin = async () => {
+  if (http.defaults.headers.common["authorization"]) {
+    return true;
+  }
+
+  await reissueToken();
+
+  return Boolean(http.defaults.headers.common["authorization"]);
+};
