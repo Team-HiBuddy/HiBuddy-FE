@@ -23,10 +23,12 @@ function PostThreadPage() {
   } = useImageUpload();
 
   const {
-    mutate: postThread,
-    data: postResponse,
-    isPending: isPostPending,
-    isSuccess: isPostSuccess,
+    postResult: {
+      mutate: postThread,
+      data: postResponse,
+      isPending: isPostPending,
+      isSuccess: isPostSuccess,
+    },
   } = useThreadPost();
 
   const {

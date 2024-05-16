@@ -32,3 +32,7 @@ export const postThread = (thread: PostThreadRequest) => {
 export const cancelImageUpload = (imageId: number) => {
   return http.delete<ResponseBody>(`/images/${imageId}/cancel`);
 };
+
+export const deletePost = (postId: number) => {
+  return http.delete<ResponseBody>(`thread/posts/${postId}`);
+};
