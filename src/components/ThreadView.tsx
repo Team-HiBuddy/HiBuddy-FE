@@ -1,6 +1,6 @@
 import AccountCircleSVG from "@assets/account-circle.svg?react";
-import Star from "@assets/star.svg?react";
-import StarOutline from "@assets/star-outline.svg?react";
+import BookmarkSVG from "@assets/bookmark.svg?react";
+import BookmarkOutlineSVG from "@assets/bookmark-outline.svg?react";
 import ThumbsUpSVG from "@assets/thumbs-up.svg?react";
 import CommentSVG from "@assets/comment.svg?react";
 import { getTimeDiff } from "@utils/date";
@@ -24,9 +24,9 @@ function ThreadView({ thread }: Props) {
           <p className="text-gray-400">{`· ${getTimeDiff(createDate)}`}</p>
         </div>
         {isStarred ? (
-          <Star className="cursor-pointer" />
+          <BookmarkSVG className="cursor-pointer" />
         ) : (
-          <StarOutline className="cursor-pointer" />
+          <BookmarkOutlineSVG className="cursor-pointer" />
         )}
       </div>
       <h3 className="text-lg font-semibold">{title}</h3>

@@ -1,7 +1,7 @@
 import AccountCircleSVG from "@assets/account-circle.svg?react";
+import BookmarkSVG from "@assets/bookmark.svg?react";
+import BookmarkOutlineSVG from "@assets/bookmark-outline.svg?react";
 import { getTimeDiff } from "@utils/date";
-import Star from "@assets/star.svg?react";
-import StarOutline from "@assets/star-outline.svg?react";
 import ThumbsUpSVG from "@assets/thumbs-up.svg?react";
 import CommentSVG from "@assets/comment.svg?react";
 import { ROUTER_PATH } from "../router";
@@ -36,7 +36,7 @@ function Thread({ id, name, date, title, contents, isStarred, likes, comments }:
           <p>{name}</p>
           <p className="text-gray-400">{`· ${getTimeDiff(date)}`}</p>
         </div>
-        {isStarred ? <Star /> : <StarOutline />}
+        {isStarred ? <BookmarkSVG /> : <BookmarkOutlineSVG />}
       </div>
       <h3 className="text-lg font-semibold">{title}</h3>
       <p className="line-clamp-4">{contents}</p>
