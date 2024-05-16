@@ -14,7 +14,7 @@ function OAuthCallbackPage() {
     const error = searchParams.get("error");
     const errorDescription = searchParams.get("error_description");
 
-    if (error) {
+    if (!code || error) {
       alert(errorDescription ?? "Failed to Login");
 
       goToLoginPage();
@@ -32,7 +32,7 @@ function OAuthCallbackPage() {
     }
   }, [location]);
 
-  return <div>Redirecting...</div>;
+  return <></>;
 }
 
 export default OAuthCallbackPage;

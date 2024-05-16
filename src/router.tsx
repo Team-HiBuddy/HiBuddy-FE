@@ -17,8 +17,8 @@ export const ROUTER_PATH = {
   ONBOARDING: "/onboarding",
   THREAD_LIST: "/threads",
   THREAD_VIEW: "/thread/:postId",
-  KAKAO_CALLBACK: "/auth/kakao/callback",
-  GOOGLE_CALLBACK: "/auth/google/callback",
+  KAKAO_CALLBACK: "/login/oauth2/code/kakao",
+  GOOGLE_CALLBACK: "/login/oauth2/code/google",
   POST_THREAD: "/post",
 };
 
