@@ -4,27 +4,31 @@ import SpinnerSVG from "@assets/spinner.svg?react";
 import { Button, TextField } from "@mui/material";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import usePageRouter from "@hooks/usePageRouter";
-import useThreadImageUpload from "@hooks/query/useThreadImageUpload";
+import useImageUpload from "@hooks/query/useImageUpload";
 import useThreadPost from "@hooks/query/useThreadPost";
 import usePreventLeave from "@hooks/usePreventLeave";
 import useThreadText from "@hooks/useThreadText";
-import useThreadImageDelete from "@hooks/query/useThreadImageDelete";
 
 function PostThreadPage() {
   const { goBack, goToThreadViewPage } = usePageRouter();
   const { enablePrevent, disablePrevent } = usePreventLeave();
   const {
-    mutate: uploadImages,
-    data: uploadResponse,
-    isPending: isUploadImagePending,
-    isSuccess: isUploadImageSuccess,
-  } = useThreadImageUpload();
+    uploadResult: {
+      mutate: uploadImages,
+      data: uploadResponse,
+      isPending: isUploadImagePending,
+      isSuccess: isUploadImageSuccess,
+    },
+    cancelResult: { mutate: cancelUploadImage, isPending: isCancelUploadImagePending },
+  } = useImageUpload();
+
   const {
     mutate: postThread,
     data: postResponse,
     isPending: isPostPending,
     isSuccess: isPostSuccess,
   } = useThreadPost();
+
   const {
     titleRef,
     contentsRef,
@@ -35,7 +39,6 @@ function PostThreadPage() {
     titleHelperText,
     contentsHelperText,
   } = useThreadText();
-  const { mutate: deleteImage, isPending: isDeleteImagePending } = useThreadImageDelete();
 
   const [images, setImages] = useState<string[]>([]);
   const [imageIds, setImageIds] = useState<number[]>([]);
@@ -78,7 +81,7 @@ function PostThreadPage() {
   };
 
   const handleDeleteImageButton = (deleteIdx: number) => {
-    deleteImage(imageIds[deleteIdx]);
+    cancelUploadImage(imageIds[deleteIdx]);
 
     resetFileInput();
 
@@ -118,7 +121,7 @@ function PostThreadPage() {
           disabled={
             isPostPending ||
             isUploadImagePending ||
-            isDeleteImagePending ||
+            isCancelUploadImagePending ||
             !isValidTitle ||
             !isValidContents
           }
@@ -156,9 +159,9 @@ function PostThreadPage() {
             color="secondary"
             tabIndex={-1}
             startIcon={
-              isUploadImagePending || isDeleteImagePending ? <SpinnerSVG /> : <AddPhotoSVG />
+              isUploadImagePending || isCancelUploadImagePending ? <SpinnerSVG /> : <AddPhotoSVG />
             }
-            disabled={isUploadImagePending || isDeleteImagePending}
+            disabled={isUploadImagePending || isCancelUploadImagePending}
           >
             Upload Image
             <input
@@ -177,7 +180,7 @@ function PostThreadPage() {
           {images.map((image, idx) => (
             <li key={image} className="relative">
               <img className="w-40 h-40" src={image} />
-              {!isUploadImagePending && !isDeleteImagePending && (
+              {!isUploadImagePending && !isCancelUploadImagePending && (
                 <PlusSVG
                   className="absolute top-0 right-0 w-7 h-7 rotate-45 cursor-pointer"
                   onClick={() => {

@@ -54,7 +54,7 @@ export const handlers = [
     });
   }),
 
-  http.delete(`${HIBUDDY_BASE_URL}/image/delete/:imageId`, async () => {
+  http.delete(`${HIBUDDY_BASE_URL}/images/:imageId/cancel`, async () => {
     await delay(1000);
 
     return HttpResponse.json(successfulResponse);
