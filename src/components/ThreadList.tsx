@@ -42,7 +42,7 @@ function ThreadList() {
       <ul className="flex flex-col gap-y-2 p-2">
         {threads.map((thread, idx) => (
           <li key={thread.id} className="flex flex-col gap-y-4 mb-2">
-            {idx > 0 && <div className="border w-full h-0"></div>}
+            {idx > 0 && <hr />}
             <Thread {...thread} />
           </li>
         ))}
