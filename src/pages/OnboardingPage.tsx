@@ -31,7 +31,7 @@ function OnboardingPage() {
   const { goToMainPage } = usePageRouter();
 
   const [country, setCountry] = useState<AutocompleteOption | null>(null);
-  const [department, setDepartment] = useState<AutocompleteOption | null>(null);
+  const [major, setDepartment] = useState<AutocompleteOption | null>(null);
 
   const handleCountryChange = (e: SyntheticEvent, value: AutocompleteOption | null) => {
     setCountry(value);
@@ -42,9 +42,9 @@ function OnboardingPage() {
   };
 
   const handleContinueButton = () => {
-    if (!country || !department) return;
+    if (!country || !major) return;
 
-    postData({ nickname: nickname, country: country.label, department: department.label });
+    postData({ nickname: nickname, country: country.label, major: major.label });
   };
 
   useEffect(() => {
@@ -77,7 +77,7 @@ function OnboardingPage() {
         <Autocomplete
           fullWidth
           options={Departments}
-          value={department}
+          value={major}
           onChange={handleDepartmentChange}
           renderInput={(params) => <TextField {...params} label="Department" />}
         />
@@ -88,7 +88,7 @@ function OnboardingPage() {
           fullWidth
           size="large"
           color="secondary"
-          disabled={!isValidName || country === null || department === null || isPending}
+          disabled={!isValidName || country === null || major === null || isPending}
           onClick={handleContinueButton}
         >
           CONTINUE
