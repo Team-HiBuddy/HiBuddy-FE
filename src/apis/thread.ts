@@ -6,6 +6,7 @@ import {
 } from "models/thread";
 import { http } from "./axios";
 import { ResponseBody } from "@models/api";
+import { PostOnboardingRequest } from "@models/user";
 
 export const getPopularThreads = () => {
   return http.get<GetPopularThreadsResponse>("/posts/ranking");
@@ -35,4 +36,8 @@ export const cancelImageUpload = (imageId: number) => {
 
 export const deletePost = (postId: number) => {
   return http.delete<ResponseBody>(`thread/posts/${postId}`);
+};
+
+export const postOnboarding = (data: PostOnboardingRequest) => {
+  return http.post<ResponseBody>("/onboarding", data);
 };

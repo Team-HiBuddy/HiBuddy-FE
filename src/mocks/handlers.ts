@@ -6,14 +6,24 @@ import failedResponse from "./data/failedResponse.json";
 import postThreadResponse from "./data/postThreadResponse.json";
 
 export const handlers = [
-  http.get(`${HIBUDDY_BASE_URL}/auth/kakao/login`, async () => {
+  http.post(`${HIBUDDY_BASE_URL}/auth/kakao/login`, async () => {
     await delay(3000);
 
     return new HttpResponse("OK", {
-      status: 200,
+      status: 201,
       headers: {
-        authorization:
-          "30DKVAAsOX9ccZbtQycmvt5p3PEWVeLFpbQM1LYWDSscuqfUdo0_-dARI1QKPXSZAAABj2CxyI9Udd9ffL_GXA",
+        authorization: "Bearer FAKE_KAKAO_JWT",
+      },
+    });
+  }),
+
+  http.post(`${HIBUDDY_BASE_URL}/auth/google/login`, async () => {
+    await delay(3000);
+
+    return new HttpResponse("OK", {
+      status: 201,
+      headers: {
+        authorization: "Bearer FAKE_GOOGLE_JWT",
       },
     });
   }),
@@ -55,6 +65,34 @@ export const handlers = [
   }),
 
   http.delete(`${HIBUDDY_BASE_URL}/images/:imageId/cancel`, async () => {
+    await delay(1000);
+
+    return HttpResponse.json(successfulResponse);
+  }),
+
+  http.post(`${HIBUDDY_BASE_URL}/auth/kakao/reissue`, async () => {
+    await delay(1000);
+
+    return new HttpResponse("OK", {
+      status: 200,
+      headers: {
+        authorization: "Bearer REISSUED_KAKAO_JWT",
+      },
+    });
+  }),
+
+  http.post(`${HIBUDDY_BASE_URL}/auth/google/reissue`, async () => {
+    await delay(1000);
+
+    return new HttpResponse("OK", {
+      status: 200,
+      headers: {
+        authorization: "Bearer REISSUED_GOOGLE_JWT",
+      },
+    });
+  }),
+
+  http.post(`${HIBUDDY_BASE_URL}/onboarding`, async () => {
     await delay(1000);
 
     return HttpResponse.json(successfulResponse);

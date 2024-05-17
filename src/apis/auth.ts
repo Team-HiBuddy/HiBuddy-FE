@@ -1,20 +1,75 @@
 import { http } from "@apis/axios";
-import { KAKAO_ACCESS_TOKEN_LOCAL_STORAGE_KEY } from "@constants/api";
-import { AxiosResponse } from "axios";
 
-export const issueLoginToken = async (authCode: string) =>
-  await http.get(`/auth/kakao/login?code=${authCode}`);
+export type OAuthProvider = "kakao" | "google";
 
-export const getAccessToken = () => localStorage.getItem(KAKAO_ACCESS_TOKEN_LOCAL_STORAGE_KEY);
+export const LOCAL_STORAGE_KEY_OAUTH_PROVIDER = "provider";
 
-export const saveAccessToken = (response: AxiosResponse) => {
-  const jwt = response.headers["Authorization"];
+export const REISSUE_TOKEN_URL = { KAKAO: "/auth/kakao/reissue", GOOGLE: "/auth/google/reissue" };
 
-  if (!jwt) {
-    console.error("cat't find JWT.");
+export const setOAuthProvider = (provider: OAuthProvider) => {
+  localStorage.setItem(LOCAL_STORAGE_KEY_OAUTH_PROVIDER, provider);
+};
 
-    return;
+export const getOauthProvider = (): OAuthProvider | null => {
+  try {
+    const item = localStorage.getItem(LOCAL_STORAGE_KEY_OAUTH_PROVIDER);
+
+    if (!item) {
+      throw new Error("No login history.");
+    }
+
+    const provider = item as OAuthProvider;
+
+    return provider;
+  } catch (error) {
+    console.error(error);
   }
 
-  localStorage.setItem(KAKAO_ACCESS_TOKEN_LOCAL_STORAGE_KEY, jwt.toString());
+  return null;
+};
+
+export const issueLoginToken = async (authCode: string) => {
+  const provider = getOauthProvider();
+
+  if (provider) {
+    return await http.post(`/auth/${provider}/login?code=${authCode}`);
+  }
+};
+
+export const reissueToken = async () => {
+  try {
+    const provider = getOauthProvider();
+
+    if (provider === "kakao") {
+      return await http.post(REISSUE_TOKEN_URL.KAKAO);
+    }
+
+    if (provider === "google") {
+      return await http.post(REISSUE_TOKEN_URL.GOOGLE);
+    }
+
+    throw new Error("Unable to reissue token.");
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const setAccessToken = (token: string) => {
+  http.defaults.headers.common["authorization"] = token;
+};
+
+export const removeAccessToken = () => {
+  http.defaults.headers.common["authorization"] = null;
+
+  localStorage.removeItem(LOCAL_STORAGE_KEY_OAUTH_PROVIDER);
+};
+
+export const isLogin = async () => {
+  if (http.defaults.headers.common["authorization"]) {
+    return true;
+  }
+
+  await reissueToken();
+
+  return Boolean(http.defaults.headers.common["authorization"]);
 };
