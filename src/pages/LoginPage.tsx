@@ -1,10 +1,29 @@
 import KakaoSVG from "@assets/kakao.svg?react";
 import GoogleSVG from "@assets/google.svg?react";
-import { KAKAO_LOGIN_PARAMS } from "@constants/api";
+import {
+  GOOGLE_AUTHORIZATION_CODE_ISSUANCE_URL,
+  KAKAO_AUTHORIZATION_CODE_ISSUANCE_URL,
+} from "@constants/api";
+import { setOAuthProvider } from "@apis/auth";
+import { ROUTER_PATH } from "../router";
 
 function LoginPage() {
   const handleKaKaoLoginButton = () => {
-    window.location.href = `https://kauth.kakao.com/oauth/authorize?${KAKAO_LOGIN_PARAMS.toString()}`;
+    setOAuthProvider("kakao");
+
+    window.location.href =
+      process.env.NODE_ENV === "development"
+        ? `${ROUTER_PATH.KAKAO_CALLBACK}?code=kakaoAuthCode`
+        : KAKAO_AUTHORIZATION_CODE_ISSUANCE_URL;
+  };
+
+  const handleGoogleLoginButton = () => {
+    setOAuthProvider("google");
+
+    window.location.href =
+      process.env.NODE_ENV === "development"
+        ? `${ROUTER_PATH.GOOGLE_CALLBACK}?code=googleAuthCode`
+        : GOOGLE_AUTHORIZATION_CODE_ISSUANCE_URL;
   };
 
   return (
@@ -21,7 +40,10 @@ function LoginPage() {
           <KakaoSVG />
           <div className="flex-1 font-bold">Continue with Kakao</div>
         </button>
-        <button className="flex items-center border border-black rounded-md h-14 px-6">
+        <button
+          className="flex items-center border border-black rounded-md h-14 px-6"
+          onClick={handleGoogleLoginButton}
+        >
           <GoogleSVG />
           <div className="flex-1 font-bold">Continue with Google</div>
         </button>

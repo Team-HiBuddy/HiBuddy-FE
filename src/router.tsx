@@ -1,13 +1,15 @@
 import App from "./App";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, redirect } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import OnboardingPage from "./pages/OnboardingPage";
 import MainPage from "@pages/MainPage";
 import ThreadListPage from "@pages/ThreadListPage";
 import Layout from "@pages/Layout";
 import ThreadViewPage from "@pages/ThreadViewPage";
-import KakaoCallbackPage from "@pages/KakaoCallbackPage";
+import OAuthCallbackPage from "@pages/OAuthCallbackPage";
 import PostThreadPage from "@pages/PostThreadPage";
+import { isLogin } from "@apis/auth";
+import { enableMocking } from "./main";
 
 export const ROUTER_PATH = {
   MAIN: "/",
@@ -15,8 +17,19 @@ export const ROUTER_PATH = {
   ONBOARDING: "/onboarding",
   THREAD_LIST: "/threads",
   THREAD_VIEW: "/thread/:postId",
-  KAKAO_CALLBACK: "/auth/kakao/callback",
+  KAKAO_CALLBACK: "/login/oauth2/code/kakao",
+  GOOGLE_CALLBACK: "/login/oauth2/code/google",
   POST_THREAD: "/post",
+};
+
+const verifyingAuthLoader = async () => {
+  await enableMocking();
+
+  if (await isLogin()) {
+    return null;
+  }
+
+  return redirect(ROUTER_PATH.LOGIN);
 };
 
 export const router = createBrowserRouter([
@@ -33,10 +46,12 @@ export const router = createBrowserRouter([
       },
       {
         path: ROUTER_PATH.KAKAO_CALLBACK,
-        element: <KakaoCallbackPage />,
+        element: <OAuthCallbackPage />,
       },
+      { path: ROUTER_PATH.GOOGLE_CALLBACK, element: <OAuthCallbackPage /> },
       {
         element: <Layout />,
+        loader: verifyingAuthLoader,
         children: [
           {
             path: ROUTER_PATH.MAIN,

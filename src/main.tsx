@@ -4,7 +4,7 @@ import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router.tsx";
 
-async function enableMocking() {
+export async function enableMocking() {
   if (process.env.NODE_ENV !== "development") {
     return;
   }

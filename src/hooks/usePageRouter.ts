@@ -4,6 +4,10 @@ import { ROUTER_PATH } from "../router";
 function usePageRouter() {
   const navigate = useNavigate();
 
+  const goBack = () => {
+    navigate(-1);
+  };
+
   const goToMainPage = () => {
     navigate(ROUTER_PATH.MAIN);
   };
@@ -20,16 +24,22 @@ function usePageRouter() {
     navigate(ROUTER_PATH.THREAD_VIEW.replace(":postId", postId.toString()));
   };
 
-  const goBack = () => {
-    navigate(-1);
+  const goToPostThreadPage = () => {
+    navigate(ROUTER_PATH.POST_THREAD);
+  };
+
+  const goToOnboardingPage = () => {
+    navigate(ROUTER_PATH.ONBOARDING);
   };
 
   return {
+    goBack,
     goToMainPage,
     goToLoginPage,
     goToThreadListPage,
     goToThreadViewPage,
-    goBack,
+    goToPostThreadPage,
+    goToOnboardingPage,
   };
 }
 

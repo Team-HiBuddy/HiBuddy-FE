@@ -3,10 +3,10 @@ import { issueLoginToken } from "@apis/auth";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-function KakaoCallbackPage() {
+function OAuthCallbackPage() {
   const location = useLocation();
 
-  const { goToMainPage, goToLoginPage } = usePageRouter();
+  const { goToOnboardingPage, goToLoginPage } = usePageRouter();
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -14,7 +14,7 @@ function KakaoCallbackPage() {
     const error = searchParams.get("error");
     const errorDescription = searchParams.get("error_description");
 
-    if (error) {
+    if (!code || error) {
       alert(errorDescription ?? "Failed to Login");
 
       goToLoginPage();
@@ -23,8 +23,7 @@ function KakaoCallbackPage() {
     if (code) {
       issueLoginToken(code)
         .then(() => {
-          alert("로그인 성공!");
-          goToMainPage();
+          goToOnboardingPage();
         })
         .catch(() => {
           alert("Failed to Login");
@@ -33,7 +32,7 @@ function KakaoCallbackPage() {
     }
   }, [location]);
 
-  return <div>Redirecting...</div>;
+  return <></>;
 }
 
-export default KakaoCallbackPage;
+export default OAuthCallbackPage;
