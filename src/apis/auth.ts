@@ -4,7 +4,10 @@ export type OAuthProvider = "kakao" | "google";
 
 export const LOCAL_STORAGE_KEY_OAUTH_PROVIDER = "provider";
 
-export const REISSUE_TOKEN_URL = { KAKAO: "/auth/kakao/reissue", GOOGLE: "/auth/google/reissue" };
+export const REISSUE_TOKEN_URL = {
+  KAKAO: "/v1/auth/kakao/reissue",
+  GOOGLE: "/v1/auth/google/reissue",
+};
 
 export const setOAuthProvider = (provider: OAuthProvider) => {
   localStorage.setItem(LOCAL_STORAGE_KEY_OAUTH_PROVIDER, provider);
@@ -32,7 +35,7 @@ export const issueLoginToken = async (authCode: string) => {
   const provider = getOauthProvider();
 
   if (provider) {
-    return await http.post(`/auth/${provider}/login?code=${authCode}`);
+    return await http.post(`/v1/auth/${provider}/login?code=${authCode}`);
   }
 };
 

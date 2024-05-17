@@ -6,7 +6,7 @@ import failedResponse from "./data/failedResponse.json";
 import postThreadResponse from "./data/postThreadResponse.json";
 
 export const handlers = [
-  http.post(`${HIBUDDY_BASE_URL}/auth/kakao/login`, async () => {
+  http.post(`${HIBUDDY_BASE_URL}/v1/auth/kakao/login`, async () => {
     await delay(3000);
 
     return new HttpResponse("OK", {
@@ -17,7 +17,7 @@ export const handlers = [
     });
   }),
 
-  http.post(`${HIBUDDY_BASE_URL}/auth/google/login`, async () => {
+  http.post(`${HIBUDDY_BASE_URL}/v1/auth/google/login`, async () => {
     await delay(3000);
 
     return new HttpResponse("OK", {
@@ -28,13 +28,13 @@ export const handlers = [
     });
   }),
 
-  http.get(`${HIBUDDY_BASE_URL}/posts/ranking`, async () => {
+  http.get(`${HIBUDDY_BASE_URL}/v1/posts/ranking`, async () => {
     await delay(2000);
 
     return HttpResponse.json(popularThreads);
   }),
 
-  http.post(`${HIBUDDY_BASE_URL}/images/upload`, async ({ request }) => {
+  http.post(`${HIBUDDY_BASE_URL}/v1/images/upload`, async ({ request }) => {
     await delay(3000);
     const data = successfulResponse;
 
@@ -54,7 +54,7 @@ export const handlers = [
     return HttpResponse.json(data);
   }),
 
-  http.post(`${HIBUDDY_BASE_URL}/thread/posts`, async () => {
+  http.post(`${HIBUDDY_BASE_URL}/v1/thread/posts`, async () => {
     await delay(1000);
 
     return new HttpResponse(JSON.stringify(postThreadResponse), {
@@ -64,13 +64,13 @@ export const handlers = [
     });
   }),
 
-  http.delete(`${HIBUDDY_BASE_URL}/images/:imageId/cancel`, async () => {
+  http.delete(`${HIBUDDY_BASE_URL}/v1/images/:imageId/cancel`, async () => {
     await delay(1000);
 
     return HttpResponse.json(successfulResponse);
   }),
 
-  http.post(`${HIBUDDY_BASE_URL}/auth/kakao/reissue`, async () => {
+  http.post(`${HIBUDDY_BASE_URL}/v1/auth/kakao/reissue`, async () => {
     await delay(1000);
 
     return new HttpResponse("OK", {
@@ -81,7 +81,7 @@ export const handlers = [
     });
   }),
 
-  http.post(`${HIBUDDY_BASE_URL}/auth/google/reissue`, async () => {
+  http.post(`${HIBUDDY_BASE_URL}/v1/auth/google/reissue`, async () => {
     await delay(1000);
 
     return new HttpResponse("OK", {
@@ -92,7 +92,7 @@ export const handlers = [
     });
   }),
 
-  http.post(`${HIBUDDY_BASE_URL}/onboarding`, async () => {
+  http.post(`${HIBUDDY_BASE_URL}/v1/onboarding`, async () => {
     await delay(1000);
 
     return HttpResponse.json(successfulResponse);

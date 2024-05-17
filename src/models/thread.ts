@@ -49,3 +49,9 @@ export interface PostThreadResponse extends ResponseBody {
     postId: number;
   };
 }
+
+export interface PatchThreadRequest {
+  title: string;
+  content: string;
+  imageIds: number[];
+}
