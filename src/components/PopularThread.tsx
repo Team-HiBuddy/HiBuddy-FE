@@ -1,6 +1,11 @@
 import ThumbsUpSVG from "@assets/thumbs-up.svg?react";
 import CommentSVG from "@assets/comment.svg?react";
-import { PopularThreadContents } from "@models/thread";
+import { ThreadListItemContents } from "./Thread";
+
+export type PopularThreadContents = Pick<
+  ThreadListItemContents,
+  "postId" | "title" | "likesCount" | "commentsCount"
+>;
 
 interface Props {
   thread: PopularThreadContents;

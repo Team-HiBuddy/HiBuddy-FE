@@ -24,7 +24,7 @@ function ThreadView({ threadData: { result } }: Props) {
     users,
     createdAt,
     checkLike: isLike,
-    checkScrap: isSaved,
+    checkScrap: isSave,
     isAuthor,
     comments,
     likeNum: likesCount,
@@ -126,7 +126,7 @@ function ThreadView({ threadData: { result } }: Props) {
               </p>
             </>
           )}
-          {isSaved ? (
+          {isSave ? (
             <BookmarkSVG className="cursor-pointer animate-pop" onClick={handleClickUnsave} />
           ) : (
             <BookmarkOutlineSVG className="cursor-pointer" onClick={handleClickSave} />
