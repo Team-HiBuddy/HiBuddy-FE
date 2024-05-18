@@ -8,7 +8,7 @@ import getThreadResponse from "./data/getThreadResponse.json";
 
 export const handlers = [
   http.post(`${HIBUDDY_BASE_URL}/v1/auth/kakao/login`, async () => {
-    await delay(3000);
+    await delay(2000);
 
     return new HttpResponse("OK", {
       status: 201,
@@ -19,7 +19,7 @@ export const handlers = [
   }),
 
   http.post(`${HIBUDDY_BASE_URL}/v1/auth/google/login`, async () => {
-    await delay(3000);
+    await delay(2000);
 
     return new HttpResponse("OK", {
       status: 201,
@@ -36,7 +36,7 @@ export const handlers = [
   }),
 
   http.post(`${HIBUDDY_BASE_URL}/v1/images/upload`, async ({ request }) => {
-    await delay(3000);
+    await delay(2000);
     const data = successfulResponse;
 
     const formData = await request.formData();
@@ -106,6 +106,12 @@ export const handlers = [
   }),
 
   http.patch(`${HIBUDDY_BASE_URL}/v1/thread/posts/:postId`, async () => {
+    await delay(1000);
+
+    return HttpResponse.json(successfulResponse);
+  }),
+
+  http.delete(`${HIBUDDY_BASE_URL}/v1/thread/posts/:postId`, async () => {
     await delay(1000);
 
     return HttpResponse.json(successfulResponse);

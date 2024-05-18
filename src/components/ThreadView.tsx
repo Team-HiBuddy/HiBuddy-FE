@@ -6,6 +6,8 @@ import { getTimeDiff } from "@utils/date";
 import CommentList from "./CommentList";
 import { Comment, GetThreadResponse } from "models/thread";
 import usePageRouter from "@hooks/usePageRouter";
+import useThreadMutation from "@hooks/query/useThreadMutation";
+import { useEffect } from "react";
 
 interface Props {
   threadData: Pick<GetThreadResponse, "result">;
@@ -27,7 +29,11 @@ function ThreadView({ threadData: { result } }: Props) {
     postImages,
   } = result;
 
-  const { goToEditThreadPage } = usePageRouter();
+  const {
+    deleteResult: { mutate: deleteThread, isSuccess: deleteIsSuccess },
+  } = useThreadMutation();
+
+  const { goToEditThreadPage, goToThreadListPage } = usePageRouter();
 
   const { nickname, profileUrl } = users;
   const createDate = new Date(createdAt);
@@ -46,6 +52,20 @@ function ThreadView({ threadData: { result } }: Props) {
     goToEditThreadPage(postId);
   };
 
+  const handleClickDelete = () => {
+    if (confirm("Are you sure you want to delete this thread?")) {
+      deleteThread(postId);
+    }
+  };
+
+  useEffect(() => {
+    if (!deleteIsSuccess) return;
+
+    alert("The deletion is complete.");
+
+    goToThreadListPage();
+  }, [deleteIsSuccess]);
+
   return (
     <div className="flex flex-col gap-y-2 p-2 rounded-xl">
       <section className="flex justify-between">
@@ -56,9 +76,14 @@ function ThreadView({ threadData: { result } }: Props) {
         </div>
         <div className="flex items-center gap-x-4">
           {isAuthor && (
-            <p className="underline cursor-pointer" onClick={handleClickEdit}>
-              Edit
-            </p>
+            <>
+              <p className="text-red cursor-pointer" onClick={handleClickDelete}>
+                Delete
+              </p>
+              <p className="underline cursor-pointer" onClick={handleClickEdit}>
+                Edit
+              </p>
+            </>
           )}
           {isSaved ? (
             <BookmarkSVG className="cursor-pointer" />
