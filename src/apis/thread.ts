@@ -14,7 +14,7 @@ export const getPopularThreads = () => {
   return http.get<GetPopularThreadsResponse>("v1/posts/ranking");
 };
 
-export const postThreadImages = (images: FileList) => {
+export const postThreadImages = async (images: FileList) => {
   const formData = new FormData();
 
   Array.from(images).forEach((image) => {
@@ -54,4 +54,12 @@ export const patchThread = (thread: PatchThreadRequest) => {
 
 export const getThread = (postId: number) => {
   return http.get<GetThreadResponse>(`v1/thread/posts/${postId}`);
+};
+
+export const likeThread = (postId: number) => {
+  return http.post<ResponseBody>(`/v1/thread/posts/${postId}/likes`);
+};
+
+export const unlikeThread = (postId: number) => {
+  return http.delete<ResponseBody>(`/v1/thread/posts/${postId}/likes`);
 };

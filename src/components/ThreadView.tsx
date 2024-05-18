@@ -1,6 +1,7 @@
 import BookmarkSVG from "@assets/bookmark.svg?react";
 import BookmarkOutlineSVG from "@assets/bookmark-outline.svg?react";
 import ThumbsUpSVG from "@assets/thumbs-up.svg?react";
+import ThumbsUpFillSVG from "@assets/thumbs-up-fill.svg?react";
 import CommentSVG from "@assets/comment.svg?react";
 import { getTimeDiff } from "@utils/date";
 import CommentList from "./CommentList";
@@ -8,6 +9,7 @@ import { Comment, GetThreadResponse } from "models/thread";
 import usePageRouter from "@hooks/usePageRouter";
 import useThreadMutation from "@hooks/query/useThreadMutation";
 import { useEffect } from "react";
+import useThreadLike from "@hooks/query/useThreadLike";
 
 interface Props {
   threadData: Pick<GetThreadResponse, "result">;
@@ -32,6 +34,11 @@ function ThreadView({ threadData: { result } }: Props) {
   const {
     deleteResult: { mutate: deleteThread, isSuccess: deleteIsSuccess },
   } = useThreadMutation();
+
+  const {
+    likeResult: { mutate: likeThread },
+    unLikeResult: { mutate: unlikeThread },
+  } = useThreadLike(postId);
 
   const { goToEditThreadPage, goToThreadListPage } = usePageRouter();
 
@@ -58,6 +65,20 @@ function ThreadView({ threadData: { result } }: Props) {
     }
   };
 
+  const handleClickLike = () => {
+    result.checkLike = true;
+    result.likeNum += 1;
+
+    likeThread();
+  };
+
+  const handleClickUnlike = () => {
+    result.checkLike = false;
+    result.likeNum -= 1;
+
+    unlikeThread();
+  };
+
   useEffect(() => {
     if (!deleteIsSuccess) return;
 
@@ -65,6 +86,8 @@ function ThreadView({ threadData: { result } }: Props) {
 
     goToThreadListPage();
   }, [deleteIsSuccess]);
+
+  useEffect(() => {}, []);
 
   return (
     <div className="flex flex-col gap-y-2 p-2 rounded-xl">
@@ -97,7 +120,11 @@ function ThreadView({ threadData: { result } }: Props) {
       <section className="flex justify-between">
         <div className="flex gap-4 mr-auto">
           <div className="flex items-center gap-1 text-red cursor-pointer">
-            <ThumbsUpSVG className="w-6" />
+            {isLike ? (
+              <ThumbsUpFillSVG className="w-6 animate-pop" onClick={handleClickUnlike} />
+            ) : (
+              <ThumbsUpSVG className="w-6 animate-pop" onClick={handleClickLike} />
+            )}
             <p className="w-4 text-sm">{likesCount}</p>
           </div>
           <div className="flex gap-1 items-center text-inhaDeepBlue">

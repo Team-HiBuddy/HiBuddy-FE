@@ -116,4 +116,16 @@ export const handlers = [
 
     return HttpResponse.json(successfulResponse);
   }),
+
+  http.post(`${HIBUDDY_BASE_URL}/v1/thread/posts/:postId/likes`, async () => {
+    await delay(1000);
+
+    return HttpResponse.json(successfulResponse);
+  }),
+
+  http.delete(`${HIBUDDY_BASE_URL}/v1/thread/posts/:postId/likes`, async () => {
+    await delay(1000);
+
+    return HttpResponse.json(successfulResponse);
+  }),
 ];
