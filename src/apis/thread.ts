@@ -63,3 +63,11 @@ export const likeThread = (postId: number) => {
 export const unlikeThread = (postId: number) => {
   return http.delete<ResponseBody>(`/v1/thread/posts/${postId}/likes`);
 };
+
+export const saveThread = (postId: number) => {
+  return http.post<ResponseBody>(`/v1/thread/posts/${postId}/scraps`);
+};
+
+export const unsaveThread = (postId: number) => {
+  return http.delete<ResponseBody>(`/v1/thread/posts/${postId}/scraps`);
+};

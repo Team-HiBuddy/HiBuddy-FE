@@ -10,13 +10,13 @@ function useThreadLike(postId: number) {
     onSettled: async () => queryClient.invalidateQueries({ queryKey: ["thread", postId] }),
   });
 
-  const unLikeResult = useMutation<ResponseBody, Error>({
+  const unlikeResult = useMutation<ResponseBody, Error>({
     mutationFn: () => unlikeThread(postId),
 
     onSettled: async () => queryClient.invalidateQueries({ queryKey: ["thread", postId] }),
   });
 
-  return { likeResult, unLikeResult };
+  return { likeResult, unlikeResult };
 }
 
 export default useThreadLike;

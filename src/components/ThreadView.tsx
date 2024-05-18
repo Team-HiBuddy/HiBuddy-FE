@@ -10,6 +10,7 @@ import usePageRouter from "@hooks/usePageRouter";
 import useThreadMutation from "@hooks/query/useThreadMutation";
 import { useEffect } from "react";
 import useThreadLike from "@hooks/query/useThreadLike";
+import useThreadSave from "@hooks/query/useThreadSave";
 
 interface Props {
   threadData: Pick<GetThreadResponse, "result">;
@@ -37,8 +38,13 @@ function ThreadView({ threadData: { result } }: Props) {
 
   const {
     likeResult: { mutate: likeThread },
-    unLikeResult: { mutate: unlikeThread },
+    unlikeResult: { mutate: unlikeThread },
   } = useThreadLike(postId);
+
+  const {
+    saveResult: { mutate: saveThread },
+    unsaveResult: { mutate: unsaveThread },
+  } = useThreadSave(postId);
 
   const { goToEditThreadPage, goToThreadListPage } = usePageRouter();
 
@@ -79,6 +85,18 @@ function ThreadView({ threadData: { result } }: Props) {
     unlikeThread();
   };
 
+  const handleClickSave = () => {
+    result.checkScrap = true;
+
+    saveThread();
+  };
+
+  const handleClickUnsave = () => {
+    result.checkScrap = false;
+
+    unsaveThread();
+  };
+
   useEffect(() => {
     if (!deleteIsSuccess) return;
 
@@ -109,9 +127,9 @@ function ThreadView({ threadData: { result } }: Props) {
             </>
           )}
           {isSaved ? (
-            <BookmarkSVG className="cursor-pointer" />
+            <BookmarkSVG className="cursor-pointer animate-pop" onClick={handleClickUnsave} />
           ) : (
-            <BookmarkOutlineSVG className="cursor-pointer" />
+            <BookmarkOutlineSVG className="cursor-pointer" onClick={handleClickSave} />
           )}
         </div>
       </section>
@@ -123,7 +141,7 @@ function ThreadView({ threadData: { result } }: Props) {
             {isLike ? (
               <ThumbsUpFillSVG className="w-6 animate-pop" onClick={handleClickUnlike} />
             ) : (
-              <ThumbsUpSVG className="w-6 animate-pop" onClick={handleClickLike} />
+              <ThumbsUpSVG className="w-6" onClick={handleClickLike} />
             )}
             <p className="w-4 text-sm">{likesCount}</p>
           </div>
