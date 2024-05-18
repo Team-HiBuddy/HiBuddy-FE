@@ -30,7 +30,7 @@ function EditThreadPage() {
 
   const {
     patchResult: { mutate: patchThread, isPending: isPatchPending, isSuccess: isPatchSuccess },
-  } = useThreadMutation();
+  } = useThreadMutation(Number(postId));
 
   const {
     titleRef,
