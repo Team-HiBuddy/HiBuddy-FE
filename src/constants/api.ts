@@ -1,6 +1,6 @@
-export const LOCAL_BASE_URL = "http://localhost:5173/hibuddy/v1";
+export const LOCAL_BASE_URL = "http://localhost:5173/hibuddy";
 
-export const HIBUDDY_BASE_URL = "https://hibuddy/v1";
+export const HIBUDDY_BASE_URL = "https://hibuddy";
 
 const KAKAO_CLIENT_ID = "badeb291be382d61336b18b4b854874b";
 const GOOGLE_CLIENT_ID = `754504914348-5vrksn2srattrm5kq4p9pquc765fn2bl.apps.googleusercontent.com`;

@@ -32,6 +32,10 @@ function usePageRouter() {
     navigate(ROUTER_PATH.ONBOARDING);
   };
 
+  const goToEditThreadPage = (postId: number) => {
+    navigate(ROUTER_PATH.EDIT_THREAD.replace(":postId", postId.toString()));
+  };
+
   return {
     goBack,
     goToMainPage,
@@ -40,6 +44,7 @@ function usePageRouter() {
     goToThreadViewPage,
     goToPostThreadPage,
     goToOnboardingPage,
+    goToEditThreadPage,
   };
 }
 

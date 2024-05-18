@@ -2,11 +2,11 @@ import { ResponseBody } from "./api";
 
 export interface Thread {
   id: number;
-  name: string;
+  nickname: string;
   createDate: Date;
   title: string;
   contents: string;
-  isStarred: boolean;
+  isSaved: boolean;
   likesCount: number;
   commentsCount: number;
   commentList: Comment[];
@@ -14,11 +14,10 @@ export interface Thread {
 
 export interface Comment {
   id: number;
-  name: string;
+  nickname: string;
   contents: string;
   imageUrl?: string;
   createDate: Date;
-  likesCount: number;
 }
 
 export interface GetPopularThreadsResponse extends ResponseBody {
@@ -47,5 +46,35 @@ export interface PostThreadRequest {
 export interface PostThreadResponse extends ResponseBody {
   result: {
     postId: number;
+  };
+}
+
+export interface PatchThreadRequest {
+  postId: number;
+  title: string;
+  content: string;
+  imageIds: number[];
+}
+
+interface users {
+  userId: number;
+  nickname: string;
+  profileUrl: string;
+}
+
+export interface GetThreadResponse extends ResponseBody {
+  result: {
+    postId: number;
+    isAuthor: boolean;
+    title: string;
+    content: string;
+    likeNum: number;
+    commentNum: number;
+    checkLike: boolean;
+    checkScrap: boolean;
+    createdAt: string;
+    users: users;
+    comments: { users: users; commentId: number; comment: string; createdAt: string }[];
+    postImages: { imageId: number; imageUrl: string }[];
   };
 }

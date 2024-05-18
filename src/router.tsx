@@ -10,6 +10,7 @@ import OAuthCallbackPage from "@pages/OAuthCallbackPage";
 import PostThreadPage from "@pages/PostThreadPage";
 import { isLogin } from "@apis/auth";
 import { enableMocking } from "./main";
+import EditThreadPage from "@pages/EditThreadPage";
 
 export const ROUTER_PATH = {
   MAIN: "/",
@@ -19,7 +20,8 @@ export const ROUTER_PATH = {
   THREAD_VIEW: "/thread/:postId",
   KAKAO_CALLBACK: "/login/oauth2/code/kakao",
   GOOGLE_CALLBACK: "/login/oauth2/code/google",
-  POST_THREAD: "/post",
+  POST_THREAD: "/thread/post",
+  EDIT_THREAD: "/thread/:postId/edit",
 };
 
 const verifyingAuthLoader = async () => {
@@ -66,6 +68,7 @@ export const router = createBrowserRouter([
             element: <ThreadViewPage />,
           },
           { path: ROUTER_PATH.POST_THREAD, element: <PostThreadPage /> },
+          { path: ROUTER_PATH.EDIT_THREAD, element: <EditThreadPage /> },
         ],
       },
     ],
