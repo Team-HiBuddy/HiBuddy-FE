@@ -1,5 +1,6 @@
 import {
   GetPopularThreadsResponse,
+  GetThreadResponse,
   PatchThreadRequest,
   PostThreadImagesResponse,
   PostThreadRequest,
@@ -35,7 +36,7 @@ export const cancelImageUpload = (imageId: number) => {
   return http.delete<ResponseBody>(`/v1/images/${imageId}/cancel`);
 };
 
-export const deletePost = (postId: number) => {
+export const deleteThread = (postId: number) => {
   return http.delete<ResponseBody>(`/v1/thread/posts/${postId}`);
 };
 
@@ -43,6 +44,14 @@ export const postOnboarding = (data: PostOnboardingRequest) => {
   return http.post<ResponseBody>("/v1/onboarding", data);
 };
 
-export const patchThread = (postId: number, thread: PatchThreadRequest) => {
-  return http.patch<ResponseBody>(`/v1/thread/posts/${postId}`, thread);
+export const patchThread = (thread: PatchThreadRequest) => {
+  return http.patch<ResponseBody>(`/v1/thread/posts/${thread.postId}`, {
+    title: thread.title,
+    content: thread.content,
+    imageIds: thread.imageIds,
+  });
+};
+
+export const getThread = (postId: number) => {
+  return http.get<GetThreadResponse>(`v1/thread/posts/${postId}`);
 };

@@ -4,6 +4,7 @@ import popularThreads from "./data/popularThreads.json";
 import successfulResponse from "./data/successfulResponse.json";
 import failedResponse from "./data/failedResponse.json";
 import postThreadResponse from "./data/postThreadResponse.json";
+import getThreadResponse from "./data/getThreadResponse.json";
 
 export const handlers = [
   http.post(`${HIBUDDY_BASE_URL}/v1/auth/kakao/login`, async () => {
@@ -93,6 +94,18 @@ export const handlers = [
   }),
 
   http.post(`${HIBUDDY_BASE_URL}/v1/onboarding`, async () => {
+    await delay(1000);
+
+    return HttpResponse.json(successfulResponse);
+  }),
+
+  http.get(`${HIBUDDY_BASE_URL}/v1/thread/posts/:postId`, async () => {
+    await delay(1000);
+
+    return HttpResponse.json(getThreadResponse);
+  }),
+
+  http.patch(`${HIBUDDY_BASE_URL}/v1/thread/posts/:postId`, async () => {
     await delay(1000);
 
     return HttpResponse.json(successfulResponse);
