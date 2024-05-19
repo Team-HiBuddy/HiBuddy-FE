@@ -7,6 +7,7 @@ import ThumbsUpFillSVG from "@assets/thumbs-up-fill.svg?react";
 import CommentSVG from "@assets/comment.svg?react";
 import { ROUTER_PATH } from "../router";
 import { useNavigate } from "react-router-dom";
+import { PostImage } from "@models/thread";
 
 export interface ThreadListItemContents {
   postId: number;
@@ -18,6 +19,7 @@ export interface ThreadListItemContents {
   isSave: boolean;
   likesCount: number;
   commentsCount: number;
+  postImages: PostImage[];
 }
 
 interface Props {
@@ -25,7 +27,18 @@ interface Props {
 }
 
 function Thread({
-  thread: { postId, nickname, date, title, contents, isLike, isSave, likesCount, commentsCount },
+  thread: {
+    postId,
+    nickname,
+    date,
+    title,
+    contents,
+    isLike,
+    isSave,
+    likesCount,
+    commentsCount,
+    postImages,
+  },
 }: Props) {
   const navigate = useNavigate();
 
@@ -38,17 +51,22 @@ function Thread({
       className="flex flex-col gap-y-2 p-2 rounded-xl cursor-pointer hover:bg-gray-200"
       onClick={goToThreadView}
     >
-      <div className="flex justify-between">
+      <section className="flex justify-between">
         <div className="flex items-center gap-x-2">
           <AccountCircleSVG />
           <p>{nickname}</p>
           <p className="text-gray-400">{`· ${getTimeDiff(date)}`}</p>
         </div>
         {isSave ? <BookmarkSVG /> : <BookmarkOutlineSVG />}
-      </div>
+      </section>
       <h3 className="text-lg font-semibold">{title}</h3>
       <p className="line-clamp-4">{contents}</p>
-      <div className="flex justify-between">
+      <section className="flex justify-center">
+        {postImages.length ? (
+          <img className="w-2/5" src={postImages[0].imageUrl} loading="lazy" />
+        ) : null}
+      </section>
+      <section className="flex justify-between">
         <div className="flex gap-4 mr-auto">
           <div className="flex items-center gap-1 text-red">
             {isLike ? <ThumbsUpFillSVG className="w-6" /> : <ThumbsUpSVG className="w-6" />}
@@ -59,7 +77,7 @@ function Thread({
             <p className="w-4 text-sm">{commentsCount}</p>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

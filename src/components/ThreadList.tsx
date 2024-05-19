@@ -2,13 +2,14 @@ import useThreadList from "@hooks/query/useThreadList";
 import Thread from "./Thread";
 import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
 import { useEffect, useRef } from "react";
+import BubbleLoadingSVG from "@assets/bubble-loading.svg?react";
 
 function ThreadList() {
   const { fetchNextPage, data: threadList, hasNextPage } = useThreadList();
 
-  const lastItemRef = useRef<HTMLLIElement>(null);
+  const lastItemRef = useRef<HTMLElement>(null);
 
-  const { isIntersecting } = useIntersectionObserver(lastItemRef, { threshold: 0.2 });
+  const { isIntersecting } = useIntersectionObserver(lastItemRef, { threshold: 0.1 });
 
   useEffect(() => {
     if (isIntersecting && hasNextPage) {
@@ -20,11 +21,7 @@ function ThreadList() {
     <div>
       <ul className="flex flex-col gap-y-2 p-2">
         {threadList?.map((thread, idx) => (
-          <li
-            key={thread.postId}
-            className="flex flex-col gap-y-4 mb-2"
-            ref={idx === threadList.length - 1 ? lastItemRef : null}
-          >
+          <li key={thread.postId} className="flex flex-col gap-y-4 mb-2">
             {idx > 0 && <div className="border w-full h-0"></div>}
             <Thread
               thread={{
@@ -37,11 +34,17 @@ function ThreadList() {
                 isSave: thread.checkScrap,
                 likesCount: thread.likeNum,
                 commentsCount: thread.commentNum,
+                postImages: thread.postImages,
               }}
             />
           </li>
         ))}
       </ul>
+      <section ref={lastItemRef}>
+        {hasNextPage ? (
+          <BubbleLoadingSVG className="w-20 h-20 ml-auto mr-auto text-inhaSkyBlue" />
+        ) : null}
+      </section>
     </div>
   );
 }

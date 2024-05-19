@@ -40,7 +40,7 @@ interface User {
   profileUrl: string;
 }
 
-interface PostImage {
+export interface PostImage {
   imageId: number;
   imageUrl: string;
 }
