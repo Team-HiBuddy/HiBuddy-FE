@@ -6,7 +6,7 @@ function Layout() {
   return (
     <>
       <Header />
-      <main className="h-screen">
+      <main className="min-h-screen">
         <Outlet />
       </main>
       <BottomNavigationBar />

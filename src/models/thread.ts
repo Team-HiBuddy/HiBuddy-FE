@@ -1,25 +1,5 @@
 import { ResponseBody } from "./api";
 
-export interface Thread {
-  id: number;
-  nickname: string;
-  createDate: Date;
-  title: string;
-  contents: string;
-  isSaved: boolean;
-  likesCount: number;
-  commentsCount: number;
-  commentList: Comment[];
-}
-
-export interface Comment {
-  id: number;
-  nickname: string;
-  contents: string;
-  imageUrl?: string;
-  createDate: Date;
-}
-
 export interface GetPopularThreadsResponse extends ResponseBody {
   result: {
     postId: number;
@@ -28,8 +8,6 @@ export interface GetPopularThreadsResponse extends ResponseBody {
     commentNum: number;
   }[];
 }
-
-export type PopularThreadContents = Pick<Thread, "id" | "title" | "likesCount" | "commentsCount">;
 
 export interface PostThreadImagesResponse extends ResponseBody {
   result: {
@@ -56,10 +34,15 @@ export interface PatchThreadRequest {
   imageIds: number[];
 }
 
-interface users {
+interface User {
   userId: number;
   nickname: string;
   profileUrl: string;
+}
+
+export interface PostImage {
+  imageId: number;
+  imageUrl: string;
 }
 
 export interface GetThreadResponse extends ResponseBody {
@@ -73,8 +56,31 @@ export interface GetThreadResponse extends ResponseBody {
     checkLike: boolean;
     checkScrap: boolean;
     createdAt: string;
-    users: users;
-    comments: { users: users; commentId: number; comment: string; createdAt: string }[];
-    postImages: { imageId: number; imageUrl: string }[];
+    users: User;
+    comments: { users: User; commentId: number; comment: string; createdAt: string }[];
+    postImages: PostImage[];
   };
+}
+
+export interface ThreadContents {
+  postId: number;
+  title: string;
+  content: string;
+  likeNum: number;
+  commentNum: number;
+  checkLike: boolean;
+  checkScrap: boolean;
+  createdAt: string;
+  users: User;
+  postImages: PostImage[];
+}
+
+export interface GetThreadListResponse extends ResponseBody {
+  result: ThreadContents[];
+  totalPages: number;
+  totalElements: number;
+  isFirst: boolean;
+  isLast: boolean;
+  number: 1;
+  numberOfElements: number;
 }

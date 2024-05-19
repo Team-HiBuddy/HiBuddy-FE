@@ -1,7 +1,14 @@
 import AccountCircleSVG from "@assets/account-circle.svg?react";
 import { TextField } from "@mui/material";
-import { Comment } from "models/thread";
 import CommentItem from "./CommentItem";
+
+export interface Comment {
+  id: number;
+  nickname: string;
+  contents: string;
+  imageUrl?: string;
+  createDate: Date;
+}
 
 interface Props {
   comments: Comment[];

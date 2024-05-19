@@ -24,7 +24,7 @@ function ThreadView({ threadData: { result } }: Props) {
     users,
     createdAt,
     checkLike: isLike,
-    checkScrap: isSaved,
+    checkScrap: isSave,
     isAuthor,
     comments,
     likeNum: likesCount,
@@ -108,7 +108,7 @@ function ThreadView({ threadData: { result } }: Props) {
   useEffect(() => {}, []);
 
   return (
-    <div className="flex flex-col gap-y-2 p-2 rounded-xl">
+    <div className="flex flex-col gap-y-4 p-2 rounded-xl">
       <section className="flex justify-between">
         <div className="flex items-center gap-x-2">
           <img className="w-8 h-8" src={profileUrl} />
@@ -126,7 +126,7 @@ function ThreadView({ threadData: { result } }: Props) {
               </p>
             </>
           )}
-          {isSaved ? (
+          {isSave ? (
             <BookmarkSVG className="cursor-pointer animate-pop" onClick={handleClickUnsave} />
           ) : (
             <BookmarkOutlineSVG className="cursor-pointer" onClick={handleClickSave} />
@@ -134,7 +134,12 @@ function ThreadView({ threadData: { result } }: Props) {
         </div>
       </section>
       <h3 className="text-lg font-semibold">{title}</h3>
-      <p className="line-clamp-4">{contents}</p>
+      <p>{contents}</p>
+      <section className="flex flex-col gap-y-2">
+        {postImages.map((image) => (
+          <img key={image.imageId} src={image.imageUrl} loading="lazy" />
+        ))}
+      </section>
       <section className="flex justify-between">
         <div className="flex gap-4 mr-auto">
           <div className="flex items-center gap-1 text-red cursor-pointer">

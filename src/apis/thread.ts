@@ -1,5 +1,6 @@
 import {
   GetPopularThreadsResponse,
+  GetThreadListResponse,
   GetThreadResponse,
   PatchThreadRequest,
   PostThreadImagesResponse,
@@ -70,4 +71,13 @@ export const saveThread = (postId: number) => {
 
 export const unsaveThread = (postId: number) => {
   return http.delete<ResponseBody>(`/v1/thread/posts/${postId}/scraps`);
+};
+
+export const getThreadList = (page: number) => {
+  const params = new URLSearchParams({
+    page: page.toString(),
+    limit: "5",
+  });
+
+  return http.get<GetThreadListResponse>(`/v1/thread/posts?${params.toString()}`);
 };
