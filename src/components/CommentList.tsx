@@ -1,10 +1,9 @@
-import AccountCircleSVG from "@assets/account-circle.svg?react";
 import BubbleLoadingSVG from "@assets/bubble-loading.svg?react";
-import { TextField } from "@mui/material";
 import CommentItem from "./CommentItem";
 import useThreadComment from "@hooks/query/useThreadComment";
 import { useEffect, useRef } from "react";
 import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
+import CommentInput from "./CommentInput";
 
 interface Props {
   postId: number;
@@ -25,10 +24,7 @@ function CommentList({ postId }: Props) {
 
   return (
     <div className="flex flex-col mt-4 gap-y-8">
-      <form className="flex gap-x-3 w-4/5">
-        <AccountCircleSVG className="min-w-10" />
-        <TextField variant="standard" placeholder="Add a Comment..." fullWidth />
-      </form>
+      <CommentInput postId={postId} />
       <ul className="flex flex-col gap-y-4">
         {comments?.map(
           ({ comment, commentId, users: { nickname, profileUrl }, createdAt, isAuthor }) => (

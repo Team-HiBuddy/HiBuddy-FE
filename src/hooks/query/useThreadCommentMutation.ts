@@ -11,6 +11,8 @@ import { queryClient } from "./queryClient";
 function useThreadCommentMutation(postId: number) {
   const postResult = useMutation<ResponseBody, Error, PostThreadCommentRequest>({
     mutationFn: postThreadComment,
+
+    onSuccess: async () => queryClient.invalidateQueries({ queryKey: ["comments", postId] }),
   });
 
   const deleteResult = useMutation<ResponseBody, Error, DeleteThreadCommentRequest>({

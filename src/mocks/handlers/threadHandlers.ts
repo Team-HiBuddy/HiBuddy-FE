@@ -1,14 +1,14 @@
 import { HIBUDDY_BASE_URL } from "@constants/api";
 import { delay, http, HttpResponse } from "msw";
-import popularThreads from "./data/popularThreads.json";
-import successfulResponse from "./data/successfulResponse.json";
-import failedResponse from "./data/failedResponse.json";
-import postThreadResponse from "./data/postThreadResponse.json";
-import getThreadResponse from "./data/getThreadResponse.json";
-import getThreadListResponse from "./data/getThreadListResponse.json";
-import getThreadCommentsResponse from "./data/getThreadCommentsResponse.json";
+import popularThreads from "../data/popularThreads.json";
+import successfulResponse from "../data/successfulResponse.json";
+import failedResponse from "../data/failedResponse.json";
+import postThreadResponse from "../data/postThreadResponse.json";
+import getThreadResponse from "../data/getThreadResponse.json";
+import getThreadListResponse from "../data/getThreadListResponse.json";
+import getThreadCommentsResponse from "../data/getThreadCommentsResponse.json";
 
-export const handlers = [
+export const threadHandlers = [
   http.post(`${HIBUDDY_BASE_URL}/v1/auth/kakao/login`, async () => {
     await delay(2000);
 
