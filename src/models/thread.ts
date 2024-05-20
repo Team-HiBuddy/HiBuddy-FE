@@ -57,7 +57,6 @@ export interface GetThreadResponse extends ResponseBody {
     checkScrap: boolean;
     createdAt: string;
     users: User;
-    comments: { users: User; commentId: number; comment: string; createdAt: string }[];
     postImages: PostImage[];
   };
 }
@@ -83,4 +82,37 @@ export interface GetThreadListResponse extends ResponseBody {
   isLast: boolean;
   number: 1;
   numberOfElements: number;
+}
+
+export interface Comment {
+  users: User;
+  commentId: number;
+  comment: string;
+  createdAt: string;
+  isAuthor: boolean;
+}
+
+export interface GetThreadCommentsResponse extends ResponseBody {
+  result: Comment[];
+  totalPages: number;
+  totalElements: number;
+  isFirst: boolean;
+  isLast: boolean;
+  number: 1;
+  numberOfElements: number;
+}
+
+export interface PostThreadCommentRequest {
+  postId: number;
+  comment: string;
+}
+export interface PatchThreadCommentRequest {
+  postId: number;
+  commentId: number;
+  comment: string;
+}
+
+export interface DeleteThreadCommentRequest {
+  postId: number;
+  commentId: number;
 }

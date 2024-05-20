@@ -1,8 +1,12 @@
 import {
+  DeleteThreadCommentRequest,
   GetPopularThreadsResponse,
+  GetThreadCommentsResponse,
   GetThreadListResponse,
   GetThreadResponse,
+  PatchThreadCommentRequest,
   PatchThreadRequest,
+  PostThreadCommentRequest,
   PostThreadImagesResponse,
   PostThreadRequest,
   PostThreadResponse,
@@ -77,7 +81,35 @@ export const getThreadList = (page: number) => {
   const params = new URLSearchParams({
     page: page.toString(),
     limit: "5",
+    sort: "created_at.desc",
   });
 
   return http.get<GetThreadListResponse>(`/v1/thread/posts?${params.toString()}`);
+};
+
+export const getThreadComments = (postId: number, page: number) => {
+  const params = new URLSearchParams({
+    page: page.toString(),
+    limit: "10",
+    sort: "created_at.asc",
+  });
+
+  return http.get<GetThreadCommentsResponse>(
+    `/v1/thread/posts/${postId}/comments?${params.toString()}`
+  );
+};
+
+export const postThreadComment = (data: PostThreadCommentRequest) => {
+  return http.post<ResponseBody>(`v1/thread/posts/${data.postId}/comments`, data.comment);
+};
+
+export const deleteThreadComment = (data: DeleteThreadCommentRequest) => {
+  return http.delete<ResponseBody>(`v1/thread/posts/${data.postId}/comments/${data.commentId}`);
+};
+
+export const patchThreadComment = (data: PatchThreadCommentRequest) => {
+  return http.patch<ResponseBody>(
+    `v1/thread/posts/${data.postId}/comments/${data.commentId}`,
+    data.comment
+  );
 };

@@ -1,5 +1,5 @@
 import useThreadList from "@hooks/query/useThreadList";
-import Thread from "./Thread";
+import ThreadItem from "./ThreadItem";
 import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
 import { useEffect, useRef } from "react";
 import BubbleLoadingSVG from "@assets/bubble-loading.svg?react";
@@ -23,11 +23,12 @@ function ThreadList() {
         {threadList?.map((thread, idx) => (
           <li key={thread.postId} className="flex flex-col gap-y-4 mb-2">
             {idx > 0 && <div className="border w-full h-0"></div>}
-            <Thread
+            <ThreadItem
               thread={{
                 postId: thread.postId,
                 title: thread.title,
                 nickname: thread.users.nickname,
+                profileUrl: thread.users.profileUrl,
                 contents: thread.content,
                 date: new Date(thread.createdAt),
                 isLike: thread.checkLike,

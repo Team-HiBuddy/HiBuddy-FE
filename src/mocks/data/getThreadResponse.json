@@ -17,28 +17,6 @@
       "nickname": "ABC",
       "profileUrl": "https://api.iconify.design/material-symbols:account-circle.svg"
     },
-    "comments": [
-      {
-        "users": {
-          "userId": 1,
-          "nickname": "ABC",
-          "profileUrl": "https://api.iconify.design/material-symbols:account-circle.svg"
-        },
-        "commentId": 1,
-        "comment": "Sed sem purus, bibendum et accumsan vitae, tempor accumsan est. Cras euismod leo vitae finibus suscipit. Mauris rhoncus non urna at hendrerit. Phasellus erat mi, rutrum quis dui ut, tincidunt dignissim nisi.",
-        "createdAt": "2024-05-15T12:34:56.789"
-      },
-      {
-        "users": {
-          "userId": 2,
-          "nickname": "WhoAreYou",
-          "profileUrl": "https://api.iconify.design/material-symbols:account-circle.svg"
-        },
-        "commentId": 2,
-        "comment": "Ut sagittis ullamcorper neque ut rhoncus. Nulla et hendrerit metus.",
-        "createdAt": "2024-05-17T12:34:56.789"
-      }
-    ],
     "postImages": [
       {
         "imageId": 1,

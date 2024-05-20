@@ -5,12 +5,13 @@ import ThumbsUpFillSVG from "@assets/thumbs-up-fill.svg?react";
 import CommentSVG from "@assets/comment.svg?react";
 import { getTimeDiff } from "@utils/date";
 import CommentList from "./CommentList";
-import { Comment, GetThreadResponse } from "models/thread";
+import { GetThreadResponse } from "models/thread";
 import usePageRouter from "@hooks/usePageRouter";
 import useThreadMutation from "@hooks/query/useThreadMutation";
 import { useEffect } from "react";
 import useThreadLike from "@hooks/query/useThreadLike";
 import useThreadSave from "@hooks/query/useThreadSave";
+import { Avatar } from "@mui/material";
 
 interface Props {
   threadData: Pick<GetThreadResponse, "result">;
@@ -26,7 +27,6 @@ function ThreadView({ threadData: { result } }: Props) {
     checkLike: isLike,
     checkScrap: isSave,
     isAuthor,
-    comments,
     likeNum: likesCount,
     commentNum: commentsCount,
     postImages,
@@ -50,16 +50,6 @@ function ThreadView({ threadData: { result } }: Props) {
 
   const { nickname, profileUrl } = users;
   const createDate = new Date(createdAt);
-
-  const commentList: Comment[] = comments.map((comment) => {
-    return {
-      id: comment.commentId,
-      nickname: comment.users.nickname,
-      imageUrl: comment.users.profileUrl,
-      contents: comment.comment,
-      createDate: new Date(comment.createdAt),
-    };
-  });
 
   const handleClickEdit = () => {
     goToEditThreadPage(postId);
@@ -111,7 +101,7 @@ function ThreadView({ threadData: { result } }: Props) {
     <div className="flex flex-col gap-y-4 p-2 rounded-xl">
       <section className="flex justify-between">
         <div className="flex items-center gap-x-2">
-          <img className="w-8 h-8" src={profileUrl} />
+          <Avatar src={profileUrl} />
           <p>{nickname}</p>
           <p className="text-gray-400">{`· ${getTimeDiff(createDate)}`}</p>
         </div>
@@ -156,7 +146,7 @@ function ThreadView({ threadData: { result } }: Props) {
           </div>
         </div>
       </section>
-      <CommentList comments={commentList} />
+      <CommentList postId={postId} />
     </div>
   );
 }
