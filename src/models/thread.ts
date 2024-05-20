@@ -89,6 +89,7 @@ export interface Comment {
   commentId: number;
   comment: string;
   createdAt: string;
+  isAuthor: boolean;
 }
 
 export interface GetThreadCommentsResponse extends ResponseBody {
@@ -99,4 +100,19 @@ export interface GetThreadCommentsResponse extends ResponseBody {
   isLast: boolean;
   number: 1;
   numberOfElements: number;
+}
+
+export interface PostThreadCommentRequest {
+  postId: number;
+  comment: string;
+}
+export interface PatchThreadCommentRequest {
+  postId: number;
+  commentId: number;
+  comment: string;
+}
+
+export interface DeleteThreadCommentRequest {
+  postId: number;
+  commentId: number;
 }

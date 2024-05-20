@@ -1,9 +1,12 @@
 import {
+  DeleteThreadCommentRequest,
   GetPopularThreadsResponse,
   GetThreadCommentsResponse,
   GetThreadListResponse,
   GetThreadResponse,
+  PatchThreadCommentRequest,
   PatchThreadRequest,
+  PostThreadCommentRequest,
   PostThreadImagesResponse,
   PostThreadRequest,
   PostThreadResponse,
@@ -91,5 +94,20 @@ export const getThreadComments = (postId: number, page: number) => {
 
   return http.get<GetThreadCommentsResponse>(
     `/v1/thread/posts/${postId}/comments?${params.toString()}`
+  );
+};
+
+export const postThreadComment = (data: PostThreadCommentRequest) => {
+  return http.post<ResponseBody>(`v1/thread/posts/${data.postId}/comments`, data.comment);
+};
+
+export const deleteThreadComment = (data: DeleteThreadCommentRequest) => {
+  return http.delete<ResponseBody>(`v1/thread/posts/${data.postId}/comments/${data.commentId}`);
+};
+
+export const patchThreadComment = (data: PatchThreadCommentRequest) => {
+  return http.patch<ResponseBody>(
+    `v1/thread/posts/${data.postId}/comments/${data.commentId}`,
+    data.comment
   );
 };

@@ -2,7 +2,7 @@ import { getThreadComments } from "@apis/thread";
 import { Comment, GetThreadCommentsResponse } from "@models/thread";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
-function useThreadComments(postId: number) {
+function useThreadComment(postId: number) {
   const queryResult = useInfiniteQuery<
     GetThreadCommentsResponse,
     Error,
@@ -24,4 +24,4 @@ function useThreadComments(postId: number) {
   return queryResult;
 }
 
-export default useThreadComments;
+export default useThreadComment;

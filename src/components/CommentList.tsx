@@ -2,7 +2,7 @@ import AccountCircleSVG from "@assets/account-circle.svg?react";
 import BubbleLoadingSVG from "@assets/bubble-loading.svg?react";
 import { TextField } from "@mui/material";
 import CommentItem from "./CommentItem";
-import useThreadComments from "@hooks/query/useThreadComments";
+import useThreadComment from "@hooks/query/useThreadComment";
 import { useEffect, useRef } from "react";
 import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
 
@@ -11,7 +11,7 @@ interface Props {
 }
 
 function CommentList({ postId }: Props) {
-  const { fetchNextPage, hasNextPage, data: comments } = useThreadComments(postId);
+  const { fetchNextPage, hasNextPage, data: comments } = useThreadComment(postId);
 
   const lastItemRef = useRef<HTMLElement>(null);
 
@@ -30,12 +30,22 @@ function CommentList({ postId }: Props) {
         <TextField variant="standard" placeholder="Add a Comment..." fullWidth />
       </form>
       <ul className="flex flex-col gap-y-4">
-        {comments?.map(({ comment, commentId, users: { nickname, profileUrl }, createdAt }) => (
-          <CommentItem
-            key={commentId}
-            comment={{ nickname, profileUrl, createdDate: new Date(createdAt), contents: comment }}
-          />
-        ))}
+        {comments?.map(
+          ({ comment, commentId, users: { nickname, profileUrl }, createdAt, isAuthor }) => (
+            <CommentItem
+              key={commentId}
+              comment={{
+                postId,
+                commentId,
+                nickname,
+                profileUrl,
+                createdDate: new Date(createdAt),
+                contents: comment,
+                isAuthor,
+              }}
+            />
+          )
+        )}
       </ul>
       <section ref={lastItemRef}>
         {hasNextPage ? (

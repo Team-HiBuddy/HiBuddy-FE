@@ -196,4 +196,16 @@ export const handlers = [
 
     return HttpResponse.json(data);
   }),
+
+  http.post(`${HIBUDDY_BASE_URL}/v1/thread/posts/:postId/comments`, async () => {
+    return HttpResponse.json(successfulResponse);
+  }),
+
+  http.delete(`${HIBUDDY_BASE_URL}/v1/thread/posts/:postId/comments/:commentId`, async () => {
+    return HttpResponse.json(successfulResponse);
+  }),
+
+  http.patch(`${HIBUDDY_BASE_URL}/v1/thread/posts/:postId/comments/:commentId`, async () => {
+    return HttpResponse.json(successfulResponse);
+  }),
 ];
