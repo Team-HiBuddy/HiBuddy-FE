@@ -1,0 +1,104 @@
+{
+  "isSuccess": true,
+  "code": "COMMON200",
+  "message": "성공입니다.",
+  "result": [
+    {
+      "postId": 1,
+      "title": "Donec feugiat eleifend nisl, a tempus nulla aliquet nec. In hac habitasse platea dictumst. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam porttitor pretium neque, et elementum sem efficitur in. Aliquam erat volutpat.",
+      "likeNum": 12,
+      "commentNum": 10,
+      "checkLike": true,
+      "checkScrap": false,
+      "createdAt": "2024-05-17T12:34:56.789",
+      "users": {
+        "userId": 1,
+        "nickname": "ABC",
+        "profileUrl": "https://api.iconify.design/material-symbols:account-circle.svg"
+      },
+      "postImages": [
+        {
+          "imageId": 1,
+          "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF1IwK6-SxM83UpFVY6WtUZxXx-phss_gAUfdKbkTfau6VWVkt"
+        }
+      ]
+    },
+    {
+      "postId": 2,
+      "title": "Donec feugiat eleifend nisl, a tempus nulla aliquet nec. In hac habitasse platea dictumst. Class aptent taciti sociosqu ad litora torquent",
+      "likeNum": 7,
+      "commentNum": 3,
+      "checkLike": false,
+      "checkScrap": true,
+      "createdAt": "2024-05-13T12:34:56.789",
+      "users": {
+        "userId": 1,
+        "nickname": "DEF",
+        "profileUrl": "https://api.iconify.design/material-symbols:account-circle.svg"
+      },
+      "postImages": [
+        {
+          "imageId": 1,
+          "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF1IwK6-SxM83UpFVY6WtUZxXx-phss_gAUfdKbkTfau6VWVkt"
+        }
+      ]
+    },
+    {
+      "postId": 3,
+      "title": "torquent per conubia nostra, per inceptos himenaeos. Nam porttitor pretium neque, et elementum sem efficitur in. Aliquam erat volutpat.",
+      "likeNum": 12,
+      "commentNum": 10,
+      "checkLike": true,
+      "checkScrap": true,
+      "createdAt": "2024-05-12T12:34:56.789",
+      "users": {
+        "userId": 1,
+        "nickname": "GHI",
+        "profileUrl": "https://api.iconify.design/material-symbols:account-circle.svg"
+      },
+      "postImages": [
+        {
+          "imageId": 1,
+          "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF1IwK6-SxM83UpFVY6WtUZxXx-phss_gAUfdKbkTfau6VWVkt"
+        }
+      ]
+    },
+    {
+      "postId": 4,
+      "title": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam porttitor pretium neque",
+      "likeNum": 12,
+      "commentNum": 10,
+      "checkLike": false,
+      "checkScrap": false,
+      "createdAt": "2024-05-11T12:34:56.789",
+      "users": {
+        "userId": 1,
+        "nickname": "JKL",
+        "profileUrl": "https://api.iconify.design/material-symbols:account-circle.svg"
+      },
+      "postImages": []
+    },
+    {
+      "postId": 5,
+      "title": "In hac habitasse platea dictumst. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+      "likeNum": 0,
+      "commentNum": 0,
+      "checkLike": false,
+      "checkScrap": false,
+      "createdAt": "2024-05-10T12:34:56.789",
+      "users": {
+        "userId": 1,
+        "nickname": "MNO",
+        "profileUrl": "https://api.iconify.design/material-symbols:account-circle.svg"
+      },
+      "postImages": []
+    }
+  ],
+  "totalPages": 10,
+  "totalElements": 30,
+  "isFirst": true,
+  "isLast": false,
+  "size": 5,
+  "number": 0,
+  "numberOfElements": 5
+}

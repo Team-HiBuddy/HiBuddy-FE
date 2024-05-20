@@ -5,11 +5,15 @@ import { Button, TextField } from "@mui/material";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import usePageRouter from "@hooks/usePageRouter";
 import useImageUpload from "@hooks/query/useImageUpload";
-import useThreadMutation from "@hooks/query/useThreadMutation";
+import useThread from "@hooks/query/useThread";
 import usePreventLeave from "@hooks/usePreventLeave";
 import useThreadText from "@hooks/useThreadText";
+import { useParams } from "react-router-dom";
+import useThreadMutation from "@hooks/query/useThreadMutation";
 
-function PostThreadPage() {
+function EditThreadPage() {
+  const { postId } = useParams();
+
   const { goBack, goToThreadViewPage } = usePageRouter();
   const { enablePrevent, disablePrevent } = usePreventLeave();
   const {
@@ -22,14 +26,11 @@ function PostThreadPage() {
     cancelResult: { mutate: cancelUploadImage, isPending: isCancelUploadImagePending },
   } = useImageUpload();
 
+  const { data: threadData, isSuccess: isGetSuccess } = useThread(Number(postId));
+
   const {
-    postResult: {
-      mutate: postThread,
-      data: postResponse,
-      isPending: isPostPending,
-      isSuccess: isPostSuccess,
-    },
-  } = useThreadMutation();
+    patchResult: { mutate: patchThread, isPending: isPatchPending, isSuccess: isPatchSuccess },
+  } = useThreadMutation(Number(postId));
 
   const {
     titleRef,
@@ -42,8 +43,13 @@ function PostThreadPage() {
     contentsHelperText,
   } = useThreadText();
 
-  const [images, setImages] = useState<string[]>([]);
-  const [imageIds, setImageIds] = useState<number[]>([]);
+  const [images, setImages] = useState<string[]>(
+    threadData?.result.postImages.map((image) => image.imageUrl) ?? []
+  );
+
+  const [imageIds, setImageIds] = useState<number[]>(
+    threadData?.result.postImages.map((image) => image.imageId) ?? []
+  );
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -76,10 +82,15 @@ function PostThreadPage() {
     uploadImages(files);
   };
 
-  const handlePostButton = () => {
+  const handleEditButton = () => {
     if (!titleRef.current || !contentsRef.current) return;
 
-    postThread({ title: titleRef.current.value, content: contentsRef.current.value, imageIds });
+    patchThread({
+      postId: Number(postId),
+      title: titleRef.current.value,
+      content: contentsRef.current.value,
+      imageIds,
+    });
   };
 
   const handleDeleteImageButton = (deleteIdx: number) => {
@@ -106,30 +117,30 @@ function PostThreadPage() {
   }, [isUploadImageSuccess]);
 
   useEffect(() => {
-    if (!isPostSuccess) return;
+    if (!isPatchSuccess) return;
 
-    goToThreadViewPage(postResponse.result.postId);
-  }, [isPostSuccess]);
+    goToThreadViewPage(Number(postId));
+  }, [isPatchSuccess]);
 
-  return (
+  return isGetSuccess ? (
     <main className="h-screen">
       <div className="sticky top-16 flex justify-between p-4 bg-white z-10">
         <div className="flex items-center gap-x-4">
           <PlusSVG className="scale-150 rotate-45 cursor-pointer" onClick={goBack} />
-          <p className="text-lg font-semibold">Create a Post</p>
+          <p className="text-lg font-semibold">Edit a Post</p>
         </div>
         <Button
           variant="contained"
           disabled={
-            isPostPending ||
+            isPatchPending ||
             isUploadImagePending ||
             isCancelUploadImagePending ||
             !isValidTitle ||
             !isValidContents
           }
-          onClick={handlePostButton}
+          onClick={handleEditButton}
         >
-          POST
+          EDIT
         </Button>
       </div>
       <div className="flex flex-col gap-8 px-8 py-4">
@@ -140,6 +151,7 @@ function PostThreadPage() {
           autoFocus
           error={!isValidTitle}
           inputRef={titleRef}
+          defaultValue={threadData?.result.title}
           onBlur={validateTitle}
         />
         <TextField
@@ -150,6 +162,7 @@ function PostThreadPage() {
           helperText={contentsHelperText}
           error={!isValidContents}
           inputRef={contentsRef}
+          defaultValue={threadData?.result.content}
           onBlur={validateContents}
         />
         <div className="flex flex-col gap-y-2 p-2">
@@ -195,7 +208,9 @@ function PostThreadPage() {
         </ul>
       </div>
     </main>
+  ) : (
+    <></>
   );
 }
 
-export default PostThreadPage;
+export default EditThreadPage;

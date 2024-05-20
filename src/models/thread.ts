@@ -1,26 +1,5 @@
 import { ResponseBody } from "./api";
 
-export interface Thread {
-  id: number;
-  name: string;
-  createDate: Date;
-  title: string;
-  contents: string;
-  isStarred: boolean;
-  likesCount: number;
-  commentsCount: number;
-  commentList: Comment[];
-}
-
-export interface Comment {
-  id: number;
-  name: string;
-  contents: string;
-  imageUrl?: string;
-  createDate: Date;
-  likesCount: number;
-}
-
 export interface GetPopularThreadsResponse extends ResponseBody {
   result: {
     postId: number;
@@ -29,8 +8,6 @@ export interface GetPopularThreadsResponse extends ResponseBody {
     commentNum: number;
   }[];
 }
-
-export type PopularThreadContents = Pick<Thread, "id" | "title" | "likesCount" | "commentsCount">;
 
 export interface PostThreadImagesResponse extends ResponseBody {
   result: {
@@ -48,4 +25,94 @@ export interface PostThreadResponse extends ResponseBody {
   result: {
     postId: number;
   };
+}
+
+export interface PatchThreadRequest {
+  postId: number;
+  title: string;
+  content: string;
+  imageIds: number[];
+}
+
+interface User {
+  userId: number;
+  nickname: string;
+  profileUrl: string;
+}
+
+export interface PostImage {
+  imageId: number;
+  imageUrl: string;
+}
+
+export interface GetThreadResponse extends ResponseBody {
+  result: {
+    postId: number;
+    isAuthor: boolean;
+    title: string;
+    content: string;
+    likeNum: number;
+    commentNum: number;
+    checkLike: boolean;
+    checkScrap: boolean;
+    createdAt: string;
+    users: User;
+    postImages: PostImage[];
+  };
+}
+
+export interface ThreadContents {
+  postId: number;
+  title: string;
+  content: string;
+  likeNum: number;
+  commentNum: number;
+  checkLike: boolean;
+  checkScrap: boolean;
+  createdAt: string;
+  users: User;
+  postImages: PostImage[];
+}
+
+export interface GetThreadListResponse extends ResponseBody {
+  result: ThreadContents[];
+  totalPages: number;
+  totalElements: number;
+  isFirst: boolean;
+  isLast: boolean;
+  number: 1;
+  numberOfElements: number;
+}
+
+export interface Comment {
+  users: User;
+  commentId: number;
+  comment: string;
+  createdAt: string;
+  isAuthor: boolean;
+}
+
+export interface GetThreadCommentsResponse extends ResponseBody {
+  result: Comment[];
+  totalPages: number;
+  totalElements: number;
+  isFirst: boolean;
+  isLast: boolean;
+  number: 1;
+  numberOfElements: number;
+}
+
+export interface PostThreadCommentRequest {
+  postId: number;
+  comment: string;
+}
+export interface PatchThreadCommentRequest {
+  postId: number;
+  commentId: number;
+  comment: string;
+}
+
+export interface DeleteThreadCommentRequest {
+  postId: number;
+  commentId: number;
 }
