@@ -1,6 +1,6 @@
 import ThumbsUpSVG from "@assets/thumbs-up.svg?react";
 import CommentSVG from "@assets/comment.svg?react";
-import { ThreadListItemContents } from "./Thread";
+import { ThreadListItemContents } from "./ThreadItem";
 
 export type PopularThreadContents = Pick<
   ThreadListItemContents,

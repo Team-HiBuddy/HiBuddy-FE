@@ -1,4 +1,3 @@
-import AccountCircleSVG from "@assets/account-circle.svg?react";
 import BookmarkSVG from "@assets/bookmark.svg?react";
 import BookmarkOutlineSVG from "@assets/bookmark-outline.svg?react";
 import { getTimeDiff } from "@utils/date";
@@ -8,10 +7,12 @@ import CommentSVG from "@assets/comment.svg?react";
 import { ROUTER_PATH } from "../router";
 import { useNavigate } from "react-router-dom";
 import { PostImage } from "@models/thread";
+import { Avatar } from "@mui/material";
 
 export interface ThreadListItemContents {
   postId: number;
   nickname: string;
+  profileUrl: string;
   date: Date;
   title: string;
   contents: string;
@@ -26,10 +27,11 @@ interface Props {
   thread: ThreadListItemContents;
 }
 
-function Thread({
+function ThreadItem({
   thread: {
     postId,
     nickname,
+    profileUrl,
     date,
     title,
     contents,
@@ -53,7 +55,7 @@ function Thread({
     >
       <section className="flex justify-between">
         <div className="flex items-center gap-x-2">
-          <AccountCircleSVG />
+          <Avatar src={profileUrl} />
           <p>{nickname}</p>
           <p className="text-gray-400">{`· ${getTimeDiff(date)}`}</p>
         </div>
@@ -82,4 +84,4 @@ function Thread({
   );
 }
 
-export default Thread;
+export default ThreadItem;

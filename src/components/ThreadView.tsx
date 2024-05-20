@@ -11,6 +11,7 @@ import useThreadMutation from "@hooks/query/useThreadMutation";
 import { useEffect } from "react";
 import useThreadLike from "@hooks/query/useThreadLike";
 import useThreadSave from "@hooks/query/useThreadSave";
+import { Avatar } from "@mui/material";
 
 interface Props {
   threadData: Pick<GetThreadResponse, "result">;
@@ -100,7 +101,7 @@ function ThreadView({ threadData: { result } }: Props) {
     <div className="flex flex-col gap-y-4 p-2 rounded-xl">
       <section className="flex justify-between">
         <div className="flex items-center gap-x-2">
-          <img className="w-8 h-8" src={profileUrl} />
+          <Avatar src={profileUrl} />
           <p>{nickname}</p>
           <p className="text-gray-400">{`· ${getTimeDiff(createDate)}`}</p>
         </div>

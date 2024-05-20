@@ -1,5 +1,5 @@
 import useThreadCommentMutation from "@hooks/query/useThreadCommentMutation";
-import { TextField } from "@mui/material";
+import { Avatar, TextField } from "@mui/material";
 import { getTimeDiff } from "@utils/date";
 import { KeyboardEvent, useRef, useState } from "react";
 
@@ -57,7 +57,7 @@ function CommentItem({ comment }: Props) {
 
   return (
     <li className="flex gap-x-2">
-      <img src={profileUrl} className="w-8 h-8" />
+      <Avatar src={profileUrl} />
       <div className="flex flex-col gap-y-1 w-full">
         <div className="flex gap-x-2">
           <p>{nickname}</p>
