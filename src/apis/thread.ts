@@ -81,6 +81,7 @@ export const getThreadList = (page: number) => {
   const params = new URLSearchParams({
     page: page.toString(),
     limit: "5",
+    sort: "created_at.desc",
   });
 
   return http.get<GetThreadListResponse>(`/v1/thread/posts?${params.toString()}`);
@@ -90,6 +91,7 @@ export const getThreadComments = (postId: number, page: number) => {
   const params = new URLSearchParams({
     page: page.toString(),
     limit: "10",
+    sort: "created_at.asc",
   });
 
   return http.get<GetThreadCommentsResponse>(
