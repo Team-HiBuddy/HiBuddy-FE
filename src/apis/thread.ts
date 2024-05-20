@@ -1,5 +1,6 @@
 import {
   GetPopularThreadsResponse,
+  GetThreadCommentsResponse,
   GetThreadListResponse,
   GetThreadResponse,
   PatchThreadRequest,
@@ -80,4 +81,15 @@ export const getThreadList = (page: number) => {
   });
 
   return http.get<GetThreadListResponse>(`/v1/thread/posts?${params.toString()}`);
+};
+
+export const getThreadComments = (postId: number, page: number) => {
+  const params = new URLSearchParams({
+    page: page.toString(),
+    limit: "10",
+  });
+
+  return http.get<GetThreadCommentsResponse>(
+    `/v1/thread/posts/${postId}/comments?${params.toString()}`
+  );
 };

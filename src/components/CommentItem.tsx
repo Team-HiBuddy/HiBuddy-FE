@@ -1,21 +1,26 @@
-import AccountCircleSVG from "@assets/account-circle.svg?react";
 import { getTimeDiff } from "@utils/date";
-import { Comment } from "models/thread";
+
+export interface CommentItemContents {
+  nickname: string;
+  createdDate: Date;
+  contents: string;
+  profileUrl: string;
+}
 
 interface Props {
-  comment: Comment;
+  comment: CommentItemContents;
 }
 
 function CommentItem({ comment }: Props) {
-  const { nickname, contents, createDate } = comment;
+  const { nickname, profileUrl, contents, createdDate } = comment;
 
   return (
     <li className="flex gap-x-2">
-      <AccountCircleSVG className="min-w-10" />
+      <img src={profileUrl} className="w-8 h-8" />
       <div className="flex flex-col gap-y-1">
         <div className="flex gap-x-2">
           <p>{nickname}</p>
-          <p className="text-gray-400">{`· ${getTimeDiff(createDate)}`}</p>
+          <p className="text-gray-400">{`· ${getTimeDiff(createdDate)}`}</p>
         </div>
         <p>{contents}</p>
       </div>

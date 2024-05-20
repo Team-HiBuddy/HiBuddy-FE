@@ -57,7 +57,6 @@ export interface GetThreadResponse extends ResponseBody {
     checkScrap: boolean;
     createdAt: string;
     users: User;
-    comments: { users: User; commentId: number; comment: string; createdAt: string }[];
     postImages: PostImage[];
   };
 }
@@ -77,6 +76,23 @@ export interface ThreadContents {
 
 export interface GetThreadListResponse extends ResponseBody {
   result: ThreadContents[];
+  totalPages: number;
+  totalElements: number;
+  isFirst: boolean;
+  isLast: boolean;
+  number: 1;
+  numberOfElements: number;
+}
+
+export interface Comment {
+  users: User;
+  commentId: number;
+  comment: string;
+  createdAt: string;
+}
+
+export interface GetThreadCommentsResponse extends ResponseBody {
+  result: Comment[];
   totalPages: number;
   totalElements: number;
   isFirst: boolean;

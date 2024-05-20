@@ -6,6 +6,7 @@ import failedResponse from "./data/failedResponse.json";
 import postThreadResponse from "./data/postThreadResponse.json";
 import getThreadResponse from "./data/getThreadResponse.json";
 import getThreadListResponse from "./data/getThreadListResponse.json";
+import getThreadCommentsResponse from "./data/getThreadCommentsResponse.json";
 
 export const handlers = [
   http.post(`${HIBUDDY_BASE_URL}/v1/auth/kakao/login`, async () => {
@@ -162,7 +163,34 @@ export const handlers = [
       };
     });
 
-    data.isLast = +page === 10;
+    data.isLast = +page === 9;
+    data.isFirst = +page === 0;
+    data.number = +page;
+
+    return HttpResponse.json(data);
+  }),
+
+  http.get(`${HIBUDDY_BASE_URL}/v1/thread/posts/:postId/comments`, async ({ request }) => {
+    await delay(500);
+
+    const url = new URL(request.url);
+
+    const page = url.searchParams.get("page");
+
+    if (!page || +page > 3) {
+      return new HttpResponse(null, { status: 404 });
+    }
+
+    const data = getThreadCommentsResponse;
+
+    data.result = getThreadCommentsResponse.result.map((thread) => {
+      return {
+        ...thread,
+        commentId: +page * 10 + thread.commentId,
+      };
+    });
+
+    data.isLast = +page === 2;
     data.isFirst = +page === 0;
     data.number = +page;
 
