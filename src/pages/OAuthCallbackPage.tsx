@@ -1,35 +1,37 @@
 import usePageRouter from "@hooks/usePageRouter";
 import { issueLoginToken } from "@apis/auth";
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 function OAuthCallbackPage() {
   const location = useLocation();
+  const { provider } = useParams();
 
   const { goToOnboardingPage, goToLoginPage } = usePageRouter();
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
+
     const code = searchParams.get("code");
     const error = searchParams.get("error");
     const errorDescription = searchParams.get("error_description");
 
-    if (!code || error) {
+    if (!code || error || (provider !== "kakao" && provider !== "google")) {
       alert(errorDescription ?? "Failed to Login");
 
       goToLoginPage();
+
+      return;
     }
 
-    if (code) {
-      issueLoginToken(code)
-        .then(() => {
-          goToOnboardingPage();
-        })
-        .catch(() => {
-          alert("Failed to Login");
-          goToLoginPage();
-        });
-    }
+    issueLoginToken(provider, code)
+      .then(() => {
+        goToOnboardingPage();
+      })
+      .catch(() => {
+        alert("Failed to Login");
+        goToLoginPage();
+      });
   }, [location]);
 
   return <></>;

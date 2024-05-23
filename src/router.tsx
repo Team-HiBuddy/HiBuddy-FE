@@ -19,8 +19,7 @@ export const ROUTER_PATH = {
   ONBOARDING: "/onboarding",
   THREAD_LIST: "/threads",
   THREAD_VIEW: "/thread/:postId",
-  KAKAO_CALLBACK: "/login/oauth2/code/kakao",
-  GOOGLE_CALLBACK: "/login/oauth2/code/google",
+  OAUTH_CALLBACK: "/login/oauth2/code/:provider",
   POST_THREAD: "/thread/post",
   EDIT_THREAD: "/thread/:postId/edit",
   MY_PAGE: "/my",
@@ -49,10 +48,10 @@ export const router = createBrowserRouter([
         element: <OnboardingPage />,
       },
       {
-        path: ROUTER_PATH.KAKAO_CALLBACK,
+        path: ROUTER_PATH.OAUTH_CALLBACK,
         element: <OAuthCallbackPage />,
       },
-      { path: ROUTER_PATH.GOOGLE_CALLBACK, element: <OAuthCallbackPage /> },
+
       {
         element: <Layout />,
         loader: verifyingAuthLoader,
@@ -70,6 +69,8 @@ export const router = createBrowserRouter([
             element: <ThreadViewPage />,
           },
           { path: ROUTER_PATH.POST_THREAD, element: <PostThreadPage /> },
+          { path: ROUTER_PATH.EDIT_THREAD, element: <EditThreadPage /> },
+          { path: ROUTER_PATH.MY_PAGE, element: <MyPage /> },
         ],
       },
     ],

@@ -4,25 +4,20 @@ import {
   GOOGLE_AUTHORIZATION_CODE_ISSUANCE_URL,
   KAKAO_AUTHORIZATION_CODE_ISSUANCE_URL,
 } from "@constants/api";
-import { setOAuthProvider } from "@apis/auth";
 import { ROUTER_PATH } from "../router";
 
 function LoginPage() {
   const handleKaKaoLoginButton = () => {
-    setOAuthProvider("kakao");
-
     window.location.href =
       process.env.NODE_ENV === "development"
-        ? `${ROUTER_PATH.KAKAO_CALLBACK}?code=kakaoAuthCode`
+        ? `${ROUTER_PATH.OAUTH_CALLBACK.replace(":provider", "kakao")}?code=kakaoAuthCode`
         : KAKAO_AUTHORIZATION_CODE_ISSUANCE_URL;
   };
 
   const handleGoogleLoginButton = () => {
-    setOAuthProvider("google");
-
     window.location.href =
       process.env.NODE_ENV === "development"
-        ? `${ROUTER_PATH.GOOGLE_CALLBACK}?code=googleAuthCode`
+        ? `${ROUTER_PATH.OAUTH_CALLBACK.replace(":provider", "google")}?code=googleAuthCode`
         : GOOGLE_AUTHORIZATION_CODE_ISSUANCE_URL;
   };
 
