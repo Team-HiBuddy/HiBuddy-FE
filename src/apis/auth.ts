@@ -10,6 +10,18 @@ export const reissueToken = async () => {
   return await http.post(REISSUE_TOKEN_URL);
 };
 
+export const logout = async () => {
+  removeAccessToken();
+
+  return await http.post("v1/auth/logout");
+};
+
+export const deleteAccount = async () => {
+  removeAccessToken();
+
+  return await http.delete("/v1/users/me");
+};
+
 export const setAccessToken = (token: string) => {
   http.defaults.headers.common["authorization"] = token;
 };

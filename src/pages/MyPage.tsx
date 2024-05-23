@@ -1,8 +1,26 @@
+import { deleteAccount, logout } from "@apis/auth";
 import AccountCircleSVG from "@assets/account-circle.svg?react";
 import GreaterThanSVG from "@assets/greater-than.svg?react";
+import usePageRouter from "@hooks/usePageRouter";
 import { Button, TextField } from "@mui/material";
 
 function MyPage() {
+  const { goToLoginPage } = usePageRouter();
+
+  const handelLogout = () => {
+    logout();
+
+    goToLoginPage();
+  };
+
+  const handleDeleteAccount = () => {
+    if (confirm("Are you sure you want to delete your account?")) {
+      deleteAccount();
+
+      goToLoginPage();
+    }
+  };
+
   return (
     <div className="flex flex-col gap-6 p-10">
       <section className="flex flex-col gap-3">
@@ -49,10 +67,14 @@ function MyPage() {
       <hr className="w-full" />
       <section className="flex flex-col gap-8">
         <Button color="inherit" className="mr-auto w-fit">
-          <div className="mr-auto">Logout</div>
+          <div className="mr-auto" onClick={handelLogout}>
+            Logout
+          </div>
         </Button>
         <Button color="warning" className="mr-auto w-fit">
-          <div className="mr-auto">Delete Account</div>
+          <div className="mr-auto" onClick={handleDeleteAccount}>
+            Delete Account
+          </div>
         </Button>
       </section>
     </div>

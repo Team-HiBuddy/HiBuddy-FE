@@ -1,6 +1,7 @@
 import { HIBUDDY_BASE_URL } from "@constants/api";
 import { delay, http, HttpResponse } from "msw";
 import getProfileResponse from "../data/getProfileResponse.json";
+import successfulResponse from "../data/successfulResponse.json";
 
 export const userHandlers = [
   http.post(`${HIBUDDY_BASE_URL}/v1/auth/kakao/login`, async () => {
@@ -40,5 +41,17 @@ export const userHandlers = [
     await delay(500);
 
     return HttpResponse.json(getProfileResponse);
+  }),
+
+  http.post(`${HIBUDDY_BASE_URL}/v1/auth/logout`, async () => {
+    await delay(500);
+
+    return HttpResponse.json(successfulResponse);
+  }),
+
+  http.delete(`${HIBUDDY_BASE_URL}/v1/users/me`, async () => {
+    await delay(500);
+
+    return HttpResponse.json(successfulResponse);
   }),
 ];
