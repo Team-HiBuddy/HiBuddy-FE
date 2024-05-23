@@ -16,3 +16,7 @@ export interface Profile {
 export interface GetProfileResponse extends ResponseBody {
   result: Profile;
 }
+
+export interface patchNickNameRequest {
+  nickname: string;
+}

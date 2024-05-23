@@ -32,6 +32,7 @@ function useNickname() {
     nickname,
     isValidName,
     helperText,
+    validateNickname,
     handleNicknameChange,
     handleNicknameBlur,
   };

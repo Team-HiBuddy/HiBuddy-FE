@@ -54,4 +54,10 @@ export const userHandlers = [
 
     return HttpResponse.json(successfulResponse);
   }),
+
+  http.patch(`${HIBUDDY_BASE_URL}/v1/users/me/nickname`, async () => {
+    await delay(500);
+
+    return HttpResponse.json(successfulResponse);
+  }),
 ];

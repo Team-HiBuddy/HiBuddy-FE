@@ -1,4 +1,4 @@
-import useProfile from "@hooks/query/userProfile";
+import useProfile from "@hooks/query/useProfile";
 import { Avatar, IconButton, TextField } from "@mui/material";
 import SendSVG from "@assets/send.svg?react";
 import useThreadCommentMutation from "@hooks/query/useThreadCommentMutation";
