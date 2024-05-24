@@ -1,17 +1,23 @@
 import { deleteAccount, logout } from "@apis/auth";
-import { patchNickname } from "@apis/user";
-import AccountCircleSVG from "@assets/account-circle.svg?react";
+import EditSVG from "@assets/edit.svg?react";
 import GreaterThanSVG from "@assets/greater-than.svg?react";
+import SpinnerSVG from "@assets/spinner.svg?react";
 import useProfile from "@hooks/query/useProfile";
+import useProfileMutation from "@hooks/query/useProfileMutation";
 import useNickname from "@hooks/useNickname";
 import usePageRouter from "@hooks/usePageRouter";
-import { Button, TextField } from "@mui/material";
+import { Avatar, Button, TextField } from "@mui/material";
 import { ChangeEvent, KeyboardEvent, useRef, useState } from "react";
 
 function MyPage() {
   const { goToLoginPage } = usePageRouter();
 
   const { data: profile, isPending } = useProfile();
+
+  const {
+    patchNicknameResult: { mutate: patchNickname },
+    patchProfileImageResult: { mutate: patchProfileImage, isPending: isUploadImagePending },
+  } = useProfileMutation();
 
   const {
     nickname,
@@ -59,11 +65,41 @@ function MyPage() {
     }
   };
 
+  const handelUploadImage = (e: ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+
+    if (!files) return;
+
+    patchProfileImage({ image: files[0] });
+  };
+
   return (
     !isPending && (
       <div className="flex flex-col gap-6 p-10">
         <section className="flex flex-col gap-3">
-          <AccountCircleSVG className="ml-auto mr-auto w-20 h-20" />
+          <div className="relative ml-auto mr-auto p-2">
+            <Avatar sx={{ width: "6rem", height: "6rem" }} src={profile?.profileUrl} />
+            <label
+              className="absolute bottom-0 right-0  text-white bg-gray-800 border border-gray-400 rounded cursor-pointer"
+              role="image-upload"
+              htmlFor="image-upload"
+              tabIndex={0}
+            >
+              {isUploadImagePending ? (
+                <SpinnerSVG className="h-6 w-8" />
+              ) : (
+                <EditSVG className="h-6 w-8" />
+              )}
+              <input
+                className="hidden"
+                id="image-upload"
+                type="file"
+                accept="image/png, image/jpeg"
+                disabled={isUploadImagePending}
+                onChange={handelUploadImage}
+              />
+            </label>
+          </div>
           <div className="flex items-end gap-x-2 w-full">
             <TextField
               className="w-4/5"

@@ -2,6 +2,7 @@ import { HIBUDDY_BASE_URL } from "@constants/api";
 import { delay, http, HttpResponse } from "msw";
 import getProfileResponse from "../data/getProfileResponse.json";
 import successfulResponse from "../data/successfulResponse.json";
+import failedResponse from "../data/failedResponse.json";
 
 export const userHandlers = [
   http.post(`${HIBUDDY_BASE_URL}/v1/auth/kakao/login`, async () => {
@@ -57,6 +58,19 @@ export const userHandlers = [
 
   http.patch(`${HIBUDDY_BASE_URL}/v1/users/me/nickname`, async () => {
     await delay(500);
+
+    return HttpResponse.json(successfulResponse);
+  }),
+
+  http.patch(`${HIBUDDY_BASE_URL}/v1/users/me/profile`, async ({ request }) => {
+    await delay(2000);
+
+    const formData = await request.formData();
+    const file = formData.get("file");
+
+    if (!file) {
+      return HttpResponse.json(failedResponse);
+    }
 
     return HttpResponse.json(successfulResponse);
   }),

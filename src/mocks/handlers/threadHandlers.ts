@@ -17,6 +17,7 @@ export const threadHandlers = [
 
   http.post(`${HIBUDDY_BASE_URL}/v1/images/upload`, async ({ request }) => {
     await delay(2000);
+    
     const data = successfulResponse;
 
     const formData = await request.formData();

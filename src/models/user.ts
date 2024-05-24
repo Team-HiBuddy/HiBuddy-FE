@@ -17,6 +17,10 @@ export interface GetProfileResponse extends ResponseBody {
   result: Profile;
 }
 
-export interface patchNickNameRequest {
+export interface PatchNickNameRequest {
   nickname: string;
+}
+
+export interface PatchProfileImageRequest {
+  image: File;
 }
