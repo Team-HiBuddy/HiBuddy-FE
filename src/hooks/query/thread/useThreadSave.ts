@@ -1,6 +1,6 @@
 import { ResponseBody } from "@models/api";
 import { useMutation } from "@tanstack/react-query";
-import { queryClient } from "./queryClient";
+import { queryClient } from "../queryClient";
 import { saveThread, unsaveThread } from "@apis/thread";
 
 function useThreadSave(postId: number) {

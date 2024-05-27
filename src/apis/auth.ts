@@ -1,4 +1,5 @@
 import { http } from "@apis/axios";
+import { getProfile } from "./user";
 
 export const REISSUE_TOKEN_URL = "v1/auth/reissue";
 
@@ -38,4 +39,14 @@ export const isLogin = async () => {
   await reissueToken();
 
   return Boolean(http.defaults.headers.common["authorization"]);
+};
+
+export const isOnboarded = async () => {
+  const { result } = await getProfile();
+
+  if (Object.values(result).some((value) => value === null || value === undefined)) {
+    return false;
+  }
+
+  return true;
 };

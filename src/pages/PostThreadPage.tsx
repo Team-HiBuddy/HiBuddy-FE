@@ -4,8 +4,8 @@ import SpinnerSVG from "@assets/spinner.svg?react";
 import { Button, TextField } from "@mui/material";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import usePageRouter from "@hooks/usePageRouter";
-import useImageUpload from "@hooks/query/useImageUpload";
-import useThreadMutation from "@hooks/query/useThreadMutation";
+import useImageUpload from "@hooks/query/thread/useImageUpload";
+import useThreadMutation from "@hooks/query/thread/useThreadMutation";
 import usePreventLeave from "@hooks/usePreventLeave";
 import useThreadText from "@hooks/useThreadText";
 

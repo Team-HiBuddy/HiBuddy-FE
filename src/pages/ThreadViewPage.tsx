@@ -1,5 +1,5 @@
 import ThreadView from "@components/ThreadView";
-import useThread from "@hooks/query/useThread";
+import useThread from "@hooks/query/thread/useThread";
 import usePageRouter from "@hooks/usePageRouter";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";

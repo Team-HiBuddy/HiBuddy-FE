@@ -1,5 +1,5 @@
 import PopularThreadItem from "./PopularThreadItem";
-import usePopularThreads from "@hooks/query/usePopularThreads";
+import usePopularThreads from "@hooks/query/thread/usePopularThreads";
 
 function PopularThreadList() {
   const { data: threads } = usePopularThreads();

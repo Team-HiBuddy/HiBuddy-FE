@@ -1,7 +1,7 @@
 import { Autocomplete, Button, TextField } from "@mui/material";
 import { SyntheticEvent, useEffect, useState } from "react";
 import useNickname from "../hooks/useNickname";
-import useOnboarding from "@hooks/query/useOnboarding";
+import useOnboarding from "@hooks/query/user/useOnboarding";
 import usePageRouter from "@hooks/usePageRouter";
 
 interface AutocompleteOption {

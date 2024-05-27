@@ -1,6 +1,6 @@
 import BubbleLoadingSVG from "@assets/bubble-loading.svg?react";
 import CommentItem from "./CommentItem";
-import useThreadComment from "@hooks/query/useThreadComment";
+import useThreadComment from "@hooks/query/thread/useThreadComment";
 import { useEffect, useRef } from "react";
 import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
 import CommentInput from "./CommentInput";

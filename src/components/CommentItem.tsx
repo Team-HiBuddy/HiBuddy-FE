@@ -1,4 +1,4 @@
-import useThreadCommentMutation from "@hooks/query/useThreadCommentMutation";
+import useThreadCommentMutation from "@hooks/query/thread/useThreadCommentMutation";
 import { Avatar, TextField } from "@mui/material";
 import { getTimeDiff } from "@utils/date";
 import { KeyboardEvent, useRef, useState } from "react";

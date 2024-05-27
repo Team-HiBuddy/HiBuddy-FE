@@ -6,7 +6,7 @@ import {
   PostThreadCommentRequest,
 } from "@models/thread";
 import { useMutation } from "@tanstack/react-query";
-import { queryClient } from "./queryClient";
+import { queryClient } from "../queryClient";
 
 function useThreadCommentMutation(postId: number) {
   const postResult = useMutation<ResponseBody, Error, PostThreadCommentRequest>({

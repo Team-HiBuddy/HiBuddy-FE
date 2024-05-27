@@ -8,7 +8,7 @@ import Layout from "@pages/Layout";
 import ThreadViewPage from "@pages/ThreadViewPage";
 import OAuthCallbackPage from "@pages/OAuthCallbackPage";
 import PostThreadPage from "@pages/PostThreadPage";
-import { isLogin } from "@apis/auth";
+import { isLogin, isOnboarded } from "@apis/auth";
 import { enableMocking } from "./main";
 import EditThreadPage from "@pages/EditThreadPage";
 import MyPage from "@pages/MyPage";
@@ -29,7 +29,11 @@ const verifyingAuthLoader = async () => {
   await enableMocking();
 
   if (await isLogin()) {
-    return null;
+    if (await isOnboarded()) {
+      return null;
+    }
+
+    return redirect(ROUTER_PATH.ONBOARDING);
   }
 
   return redirect(ROUTER_PATH.LOGIN);

@@ -1,7 +1,7 @@
-import useProfile from "@hooks/query/useProfile";
+import useProfile from "@hooks/query/user/useProfile";
 import { Avatar, IconButton, TextField } from "@mui/material";
 import SendSVG from "@assets/send.svg?react";
-import useThreadCommentMutation from "@hooks/query/useThreadCommentMutation";
+import useThreadCommentMutation from "@hooks/query/thread/useThreadCommentMutation";
 import { ChangeEvent, KeyboardEvent, useState } from "react";
 
 interface Props {

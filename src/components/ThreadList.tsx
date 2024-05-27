@@ -1,4 +1,4 @@
-import useThreadList from "@hooks/query/useThreadList";
+import useThreadList from "@hooks/query/thread/useThreadList";
 import ThreadItem from "./ThreadItem";
 import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
 import { useEffect, useRef } from "react";

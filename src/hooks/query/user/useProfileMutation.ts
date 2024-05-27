@@ -1,6 +1,6 @@
 import { ResponseBody } from "@models/api";
 import { useMutation } from "@tanstack/react-query";
-import { queryClient } from "./queryClient";
+import { queryClient } from "../queryClient";
 import { PatchNickNameRequest, PatchProfileImageRequest } from "@models/user";
 import { patchNickname, patchProfileImage } from "@apis/user";
 

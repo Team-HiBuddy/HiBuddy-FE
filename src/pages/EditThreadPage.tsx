@@ -4,12 +4,12 @@ import SpinnerSVG from "@assets/spinner.svg?react";
 import { Button, TextField } from "@mui/material";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import usePageRouter from "@hooks/usePageRouter";
-import useImageUpload from "@hooks/query/useImageUpload";
-import useThread from "@hooks/query/useThread";
+import useImageUpload from "@hooks/query/thread/useImageUpload";
+import useThread from "@hooks/query/thread/useThread";
 import usePreventLeave from "@hooks/usePreventLeave";
 import useThreadText from "@hooks/useThreadText";
 import { useParams } from "react-router-dom";
-import useThreadMutation from "@hooks/query/useThreadMutation";
+import useThreadMutation from "@hooks/query/thread/useThreadMutation";
 
 function EditThreadPage() {
   const { postId } = useParams();

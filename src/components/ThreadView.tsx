@@ -7,10 +7,10 @@ import { getTimeDiff } from "@utils/date";
 import CommentList from "./CommentList";
 import { GetThreadResponse } from "models/thread";
 import usePageRouter from "@hooks/usePageRouter";
-import useThreadMutation from "@hooks/query/useThreadMutation";
+import useThreadMutation from "@hooks/query/thread/useThreadMutation";
 import { useEffect } from "react";
-import useThreadLike from "@hooks/query/useThreadLike";
-import useThreadSave from "@hooks/query/useThreadSave";
+import useThreadLike from "@hooks/query/thread/useThreadLike";
+import useThreadSave from "@hooks/query/thread/useThreadSave";
 import { Avatar } from "@mui/material";
 
 interface Props {
