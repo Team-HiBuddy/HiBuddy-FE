@@ -1,12 +1,16 @@
 import { ResponseBody } from "./api";
 
+export interface PopularThreadContents {
+  postId: number;
+  title: string;
+  likeNum: number;
+  commentNum: number;
+  checkLike: boolean;
+  checkScrap: boolean;
+}
+
 export interface GetPopularThreadsResponse extends ResponseBody {
-  result: {
-    postId: number;
-    title: string;
-    likeNum: number;
-    commentNum: number;
-  }[];
+  result: PopularThreadContents[];
 }
 
 export interface PostThreadImagesResponse extends ResponseBody {

@@ -9,7 +9,7 @@ import getThreadListResponse from "../data/getThreadListResponse.json";
 import getThreadCommentsResponse from "../data/getThreadCommentsResponse.json";
 
 export const threadHandlers = [
-  http.get(`${HIBUDDY_BASE_URL}/v1/posts/ranking`, async () => {
+  http.get(`${HIBUDDY_BASE_URL}/v1/main/popular`, async () => {
     await delay(2000);
 
     return HttpResponse.json(popularThreads);
@@ -17,7 +17,7 @@ export const threadHandlers = [
 
   http.post(`${HIBUDDY_BASE_URL}/v1/images/upload`, async ({ request }) => {
     await delay(2000);
-    
+
     const data = successfulResponse;
 
     const formData = await request.formData();
