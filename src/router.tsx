@@ -14,6 +14,7 @@ import EditThreadPage from "@pages/EditThreadPage";
 import MyPage from "@pages/MyPage";
 import MyThreadListPage from "@pages/MyThreadListPage";
 import SavedThreadListPage from "@pages/SavedThreadListPage";
+import NotFoundPage from "@pages/NotFoundPage";
 
 export const ROUTER_PATH = {
   MAIN: "/",
@@ -84,5 +85,9 @@ export const router = createBrowserRouter([
         ],
       },
     ],
+  },
+  {
+    path: "/*",
+    element: <NotFoundPage />,
   },
 ]);
