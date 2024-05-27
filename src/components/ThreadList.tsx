@@ -1,11 +1,16 @@
-import useThreadList from "@hooks/query/thread/useThreadList";
 import ThreadItem from "./ThreadItem";
 import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
 import { useEffect, useRef } from "react";
 import BubbleLoadingSVG from "@assets/bubble-loading.svg?react";
+import { ThreadContents } from "@models/thread";
+import { UseInfiniteQueryResult } from "@tanstack/react-query";
 
-function ThreadList() {
-  const { fetchNextPage, data: threadList, hasNextPage } = useThreadList();
+interface Props {
+  infiniteQueryResult: UseInfiniteQueryResult<ThreadContents[]>;
+}
+
+function ThreadList({ infiniteQueryResult }: Props) {
+  const { data: threadList, fetchNextPage, hasNextPage } = infiniteQueryResult;
 
   const lastItemRef = useRef<HTMLElement>(null);
 
@@ -43,7 +48,7 @@ function ThreadList() {
       </ul>
       <section ref={lastItemRef}>
         {hasNextPage ? (
-          <BubbleLoadingSVG className="w-20 h-20 ml-auto mr-auto text-inhaSkyBlue" />
+          <BubbleLoadingSVG className="w-14 h-14 ml-auto mr-auto text-inhaSkyBlue" />
         ) : null}
       </section>
     </div>
