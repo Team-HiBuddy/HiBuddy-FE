@@ -1,4 +1,5 @@
 import { ResponseBody } from "./api";
+import { GetThreadListResponse } from "./thread";
 
 export interface PostOnboardingRequest {
   nickname: string;
@@ -24,3 +25,7 @@ export interface PatchNickNameRequest {
 export interface PatchProfileImageRequest {
   image: File;
 }
+
+export interface GetMyThreadListResponse extends GetThreadListResponse {}
+
+export interface GetSavedThreadListResponse extends GetThreadListResponse {}

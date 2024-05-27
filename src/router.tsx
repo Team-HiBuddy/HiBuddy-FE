@@ -12,6 +12,8 @@ import { isLogin, isOnboarded } from "@apis/auth";
 import { enableMocking } from "./main";
 import EditThreadPage from "@pages/EditThreadPage";
 import MyPage from "@pages/MyPage";
+import MyThreadListPage from "@pages/MyThreadListPage";
+import SavedThreadListPage from "@pages/SavedThreadListPage";
 
 export const ROUTER_PATH = {
   MAIN: "/",
@@ -23,6 +25,8 @@ export const ROUTER_PATH = {
   POST_THREAD: "/thread/post",
   EDIT_THREAD: "/thread/:postId/edit",
   MY_PAGE: "/my",
+  MY_THREAD_LIST: "/my/threads",
+  SAVED_THREAD_LIST: "/my/saved-threads",
 };
 
 const verifyingAuthLoader = async () => {
@@ -75,6 +79,8 @@ export const router = createBrowserRouter([
           { path: ROUTER_PATH.POST_THREAD, element: <PostThreadPage /> },
           { path: ROUTER_PATH.EDIT_THREAD, element: <EditThreadPage /> },
           { path: ROUTER_PATH.MY_PAGE, element: <MyPage /> },
+          { path: ROUTER_PATH.MY_THREAD_LIST, element: <MyThreadListPage /> },
+          { path: ROUTER_PATH.SAVED_THREAD_LIST, element: <SavedThreadListPage /> },
         ],
       },
     ],

@@ -10,7 +10,7 @@ import { Avatar, Button, TextField } from "@mui/material";
 import { ChangeEvent, KeyboardEvent, useRef, useState } from "react";
 
 function MyPage() {
-  const { goToLoginPage } = usePageRouter();
+  const { goToLoginPage, goToMyThreadListPage, goToSavedThreadListPage } = usePageRouter();
 
   const { data: profile, isPending } = useProfile();
 
@@ -147,14 +147,14 @@ function MyPage() {
         </section>
         <hr className="w-full" />
         <section className="flex flex-col gap-6">
-          <Button color="inherit">
+          <Button color="inherit" onClick={goToMyThreadListPage}>
             <div className="flex justify-between w-full">
               My Posts
               <GreaterThanSVG />
             </div>
           </Button>
           <Button color="inherit">
-            <div className="flex justify-between w-full">
+            <div className="flex justify-between w-full" onClick={goToSavedThreadListPage}>
               Saved Posts
               <GreaterThanSVG />
             </div>

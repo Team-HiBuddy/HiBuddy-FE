@@ -5,6 +5,7 @@ import successfulResponse from "../data/successfulResponse.json";
 import failedResponse from "../data/failedResponse.json";
 import onboardingCountries from "../data/onboardingCountries.json";
 import onboardingMajors from "../data/onboardingMajors.json";
+import getThreadListResponse from "../data/getThreadListResponse.json";
 
 export const userHandlers = [
   http.post(`${HIBUDDY_BASE_URL}/v1/auth/kakao/login`, async () => {
@@ -87,5 +88,60 @@ export const userHandlers = [
     await delay(500);
 
     return HttpResponse.json(onboardingMajors);
+  }),
+
+  http.get(`${HIBUDDY_BASE_URL}/v1/users/me/posts`, async ({ request }) => {
+    await delay(1000);
+
+    const url = new URL(request.url);
+
+    const page = url.searchParams.get("page");
+
+    if (!page || +page > 10) {
+      return new HttpResponse(null, { status: 404 });
+    }
+
+    const data = getThreadListResponse;
+
+    data.result = getThreadListResponse.result.map((thread) => {
+      return {
+        ...thread,
+        postId: +page * 5 + thread.postId,
+      };
+    });
+
+    data.isLast = +page === 9;
+    data.isFirst = +page === 0;
+    data.number = +page;
+
+    return HttpResponse.json(data);
+  }),
+
+  http.get(`${HIBUDDY_BASE_URL}/v1/users/me/posts/scraps`, async ({ request }) => {
+    await delay(1000);
+
+    const url = new URL(request.url);
+
+    const page = url.searchParams.get("page");
+
+    if (!page || +page > 10) {
+      return new HttpResponse(null, { status: 404 });
+    }
+
+    const data = getThreadListResponse;
+
+    data.result = getThreadListResponse.result.map((thread) => {
+      return {
+        ...thread,
+        postId: +page * 5 + thread.postId,
+        checkScrap: true,
+      };
+    });
+
+    data.isLast = +page === 9;
+    data.isFirst = +page === 0;
+    data.number = +page;
+
+    return HttpResponse.json(data);
   }),
 ];
