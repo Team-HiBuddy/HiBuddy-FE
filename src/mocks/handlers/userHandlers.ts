@@ -3,6 +3,8 @@ import { delay, http, HttpResponse } from "msw";
 import getProfileResponse from "../data/getProfileResponse.json";
 import successfulResponse from "../data/successfulResponse.json";
 import failedResponse from "../data/failedResponse.json";
+import onboardingCountries from "../data/onboardingCountries.json";
+import onboardingMajors from "../data/onboardingMajors.json";
 
 export const userHandlers = [
   http.post(`${HIBUDDY_BASE_URL}/v1/auth/kakao/login`, async () => {
@@ -73,5 +75,17 @@ export const userHandlers = [
     }
 
     return HttpResponse.json(successfulResponse);
+  }),
+
+  http.get(`${HIBUDDY_BASE_URL}/v1/info/countries`, async () => {
+    await delay(500);
+
+    return HttpResponse.json(onboardingCountries);
+  }),
+
+  http.get(`${HIBUDDY_BASE_URL}/v1/info/majors`, async () => {
+    await delay(500);
+
+    return HttpResponse.json(onboardingMajors);
   }),
 ];

@@ -1,7 +1,7 @@
 import { HIBUDDY_BASE_URL } from "@constants/api";
 import { http } from "./axios";
 import { GetProfileResponse, PatchNickNameRequest, PatchProfileImageRequest } from "@models/user";
-import { ResponseBody } from "@models/api";
+import { GetCountriesResponse, GetMajorsResponse, ResponseBody } from "@models/api";
 
 export const getProfile = () => {
   return http.get<GetProfileResponse>(`${HIBUDDY_BASE_URL}/v1/users/me`);
@@ -21,4 +21,12 @@ export const patchProfileImage = (data: PatchProfileImageRequest) => {
       "Content-Type": "multipart/form-data",
     },
   });
+};
+
+export const getCountries = () => {
+  return http.get<string[]>(`${HIBUDDY_BASE_URL}/v1/info/countries`);
+};
+
+export const getMajors = () => {
+  return http.get<string[]>(`${HIBUDDY_BASE_URL}/v1/info/majors`);
 };

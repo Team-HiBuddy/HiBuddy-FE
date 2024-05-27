@@ -1,17 +1,27 @@
 import { postOnboarding } from "@apis/thread";
+import { getCountries, getMajors } from "@apis/user";
 import { ResponseBody } from "@models/api";
 import { PostOnboardingRequest } from "@models/user";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
-/**
- * 수정 필요
- */
 function useOnboarding() {
-  const queryResult = useMutation<ResponseBody, Error, PostOnboardingRequest>({
+  const countriesResult = useQuery<string[], Error>({
+    queryKey: ["countries"],
+
+    queryFn: getCountries,
+  });
+
+  const majorsResult = useQuery<string[], Error>({
+    queryKey: ["majors"],
+
+    queryFn: getMajors,
+  });
+
+  const postResult = useMutation<ResponseBody, Error, PostOnboardingRequest>({
     mutationFn: postOnboarding,
   });
 
-  return queryResult;
+  return { postResult, countriesResult, majorsResult };
 }
 
 export default useOnboarding;
