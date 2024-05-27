@@ -16,7 +16,7 @@ import { ResponseBody } from "@models/api";
 import { PostOnboardingRequest } from "@models/user";
 
 export const getPopularThreads = () => {
-  return http.get<GetPopularThreadsResponse>("v1/posts/ranking");
+  return http.get<GetPopularThreadsResponse>("/v1/main/popular");
 };
 
 export const postThreadImages = async (images: FileList) => {

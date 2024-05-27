@@ -36,6 +36,14 @@ function usePageRouter() {
     navigate(ROUTER_PATH.EDIT_THREAD.replace(":postId", postId.toString()));
   };
 
+  const goToMyThreadListPage = () => {
+    navigate(ROUTER_PATH.MY_THREAD_LIST);
+  };
+
+  const goToSavedThreadListPage = () => {
+    navigate(ROUTER_PATH.SAVED_THREAD_LIST);
+  };
+
   return {
     goBack,
     goToMainPage,
@@ -45,6 +53,8 @@ function usePageRouter() {
     goToPostThreadPage,
     goToOnboardingPage,
     goToEditThreadPage,
+    goToMyThreadListPage,
+    goToSavedThreadListPage,
   };
 }
 

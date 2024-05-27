@@ -1,7 +1,7 @@
 import { likeThread, unlikeThread } from "@apis/thread";
 import { ResponseBody } from "@models/api";
 import { useMutation } from "@tanstack/react-query";
-import { queryClient } from "./queryClient";
+import { queryClient } from "../queryClient";
 
 function useThreadLike(postId: number) {
   const likeResult = useMutation<ResponseBody, Error>({

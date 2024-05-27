@@ -9,29 +9,7 @@ import getThreadListResponse from "../data/getThreadListResponse.json";
 import getThreadCommentsResponse from "../data/getThreadCommentsResponse.json";
 
 export const threadHandlers = [
-  http.post(`${HIBUDDY_BASE_URL}/v1/auth/kakao/login`, async () => {
-    await delay(2000);
-
-    return new HttpResponse("OK", {
-      status: 201,
-      headers: {
-        authorization: "Bearer FAKE_KAKAO_JWT",
-      },
-    });
-  }),
-
-  http.post(`${HIBUDDY_BASE_URL}/v1/auth/google/login`, async () => {
-    await delay(2000);
-
-    return new HttpResponse("OK", {
-      status: 201,
-      headers: {
-        authorization: "Bearer FAKE_GOOGLE_JWT",
-      },
-    });
-  }),
-
-  http.get(`${HIBUDDY_BASE_URL}/v1/posts/ranking`, async () => {
+  http.get(`${HIBUDDY_BASE_URL}/v1/main/popular`, async () => {
     await delay(2000);
 
     return HttpResponse.json(popularThreads);
@@ -39,6 +17,7 @@ export const threadHandlers = [
 
   http.post(`${HIBUDDY_BASE_URL}/v1/images/upload`, async ({ request }) => {
     await delay(2000);
+
     const data = successfulResponse;
 
     const formData = await request.formData();
@@ -71,28 +50,6 @@ export const threadHandlers = [
     await delay(1000);
 
     return HttpResponse.json(successfulResponse);
-  }),
-
-  http.post(`${HIBUDDY_BASE_URL}/v1/auth/kakao/reissue`, async () => {
-    await delay(1000);
-
-    return new HttpResponse("OK", {
-      status: 200,
-      headers: {
-        authorization: "Bearer REISSUED_KAKAO_JWT",
-      },
-    });
-  }),
-
-  http.post(`${HIBUDDY_BASE_URL}/v1/auth/google/reissue`, async () => {
-    await delay(1000);
-
-    return new HttpResponse("OK", {
-      status: 200,
-      headers: {
-        authorization: "Bearer REISSUED_GOOGLE_JWT",
-      },
-    });
   }),
 
   http.post(`${HIBUDDY_BASE_URL}/v1/onboarding`, async () => {

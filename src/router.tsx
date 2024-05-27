@@ -8,9 +8,13 @@ import Layout from "@pages/Layout";
 import ThreadViewPage from "@pages/ThreadViewPage";
 import OAuthCallbackPage from "@pages/OAuthCallbackPage";
 import PostThreadPage from "@pages/PostThreadPage";
-import { isLogin } from "@apis/auth";
+import { isLogin, isOnboarded } from "@apis/auth";
 import { enableMocking } from "./main";
 import EditThreadPage from "@pages/EditThreadPage";
+import MyPage from "@pages/MyPage";
+import MyThreadListPage from "@pages/MyThreadListPage";
+import SavedThreadListPage from "@pages/SavedThreadListPage";
+import NotFoundPage from "@pages/NotFoundPage";
 
 export const ROUTER_PATH = {
   MAIN: "/",
@@ -18,17 +22,23 @@ export const ROUTER_PATH = {
   ONBOARDING: "/onboarding",
   THREAD_LIST: "/threads",
   THREAD_VIEW: "/thread/:postId",
-  KAKAO_CALLBACK: "/login/oauth2/code/kakao",
-  GOOGLE_CALLBACK: "/login/oauth2/code/google",
+  OAUTH_CALLBACK: "/login/oauth2/code/:provider",
   POST_THREAD: "/thread/post",
   EDIT_THREAD: "/thread/:postId/edit",
+  MY_PAGE: "/my",
+  MY_THREAD_LIST: "/my/threads",
+  SAVED_THREAD_LIST: "/my/saved-threads",
 };
 
 const verifyingAuthLoader = async () => {
   await enableMocking();
 
   if (await isLogin()) {
-    return null;
+    if (await isOnboarded()) {
+      return null;
+    }
+
+    return redirect(ROUTER_PATH.ONBOARDING);
   }
 
   return redirect(ROUTER_PATH.LOGIN);
@@ -47,10 +57,10 @@ export const router = createBrowserRouter([
         element: <OnboardingPage />,
       },
       {
-        path: ROUTER_PATH.KAKAO_CALLBACK,
+        path: ROUTER_PATH.OAUTH_CALLBACK,
         element: <OAuthCallbackPage />,
       },
-      { path: ROUTER_PATH.GOOGLE_CALLBACK, element: <OAuthCallbackPage /> },
+
       {
         element: <Layout />,
         loader: verifyingAuthLoader,
@@ -69,8 +79,15 @@ export const router = createBrowserRouter([
           },
           { path: ROUTER_PATH.POST_THREAD, element: <PostThreadPage /> },
           { path: ROUTER_PATH.EDIT_THREAD, element: <EditThreadPage /> },
+          { path: ROUTER_PATH.MY_PAGE, element: <MyPage /> },
+          { path: ROUTER_PATH.MY_THREAD_LIST, element: <MyThreadListPage /> },
+          { path: ROUTER_PATH.SAVED_THREAD_LIST, element: <SavedThreadListPage /> },
         ],
       },
     ],
+  },
+  {
+    path: "/*",
+    element: <NotFoundPage />,
   },
 ]);

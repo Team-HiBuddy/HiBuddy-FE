@@ -8,18 +8,10 @@ function usePopularThreads() {
 
     queryFn: getPopularThreads,
 
-    select: (data) =>
-      data.result.map((value) => {
-        return {
-          id: value.postId,
-          title: value.title,
-          commentsCount: value.commentNum,
-          likesCount: value.likeNum,
-        };
-      }),
+    select: (data) => data.result,
   });
 
-  return { data: queryResult.data };
+  return queryResult;
 }
 
 export default usePopularThreads;

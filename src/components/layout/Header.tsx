@@ -1,4 +1,3 @@
-import SearchSVG from "@assets/serach.svg?react";
 import ProfileSVG from "@assets/profile.svg?react";
 import { IconButton } from "@mui/material";
 import { ROUTER_PATH } from "../../router";
@@ -11,11 +10,10 @@ function Header() {
         HiBuddy
       </Link>
       <div className="flex items-center gap-4">
-        <IconButton aria-label="search">
-          <SearchSVG />
-        </IconButton>
         <IconButton aria-label="profile">
-          <ProfileSVG />
+          <Link to={ROUTER_PATH.MY_PAGE}>
+            <ProfileSVG />
+          </Link>
         </IconButton>
       </div>
     </header>

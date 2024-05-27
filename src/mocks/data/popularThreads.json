@@ -7,19 +7,25 @@
       "postId": 1,
       "title": "Donec feugiat eleifend nisl, a tempus nulla aliquet nec. In hac habitasse platea dictumst. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam porttitor pretium neque, et elementum sem efficitur in. Aliquam erat volutpat.",
       "likeNum": 12,
-      "commentNum": 10
+      "commentNum": 10,
+      "checkLike": false,
+      "checkScrap": false
     },
     {
       "postId": 2,
       "title": "Cras imperdiet aliquam libero, non malesuada est vulputate in. Nulla id iaculis massa, vel scelerisque purus.",
       "likeNum": 11,
-      "commentNum": 9
+      "commentNum": 9,
+      "checkLike": true,
+      "checkScrap": true
     },
     {
       "postId": 3,
       "title": "Aenean pretium justo sollicitudin nunc condimentum, ac pellentesque justo venenatis. Ut vitae metus a mauris malesuada porta et convallis justo. Proin elementum urna neque, nec volutpat nibh fringilla eu.",
       "likeNum": 9,
-      "commentNum": 8
+      "commentNum": 8,
+      "checkLike": true,
+      "checkScrap": false
     }
   ]
 }
