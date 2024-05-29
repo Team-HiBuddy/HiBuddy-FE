@@ -25,12 +25,14 @@ function BottomNavigationBar() {
         setValue(1);
         break;
       case ROUTER_PATH.KOREAN_TEST:
+      case ROUTER_PATH.TEST_START:
+      case ROUTER_PATH.RECORD:
         setValue(2);
     }
   }, []);
 
   return (
-    <footer className="sticky bottom-0 w-full border-t-2 border-inhaSkyBlue py-2 px-6 bg-white z-10">
+    <footer className="sticky bottom-0 w-full mt-auto border-t-2 border-inhaSkyBlue py-2 px-6 bg-white z-10">
       <BottomNavigation
         showLabels
         value={value}

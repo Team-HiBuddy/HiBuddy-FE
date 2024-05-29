@@ -1,6 +1,7 @@
 import StarSVG from "@assets/star.svg?react";
 import StarOutlineSVG from "@assets/star-outline.svg?react";
 import GreaterThanSVG from "@assets/greater-than.svg?react";
+import usePageRouter from "@hooks/usePageRouter";
 
 export interface Script {
   id: number;
@@ -25,8 +26,17 @@ const DIFFICULTY_LABELS = {
 };
 
 function ScriptItem({ script }: Props) {
+  const { goToRecordPage } = usePageRouter();
+
+  const handleClick = () => {
+    goToRecordPage(script.id);
+  };
+
   return (
-    <li className="flex justify-between items-center border rounded border-inhaSkyBlue p-4 cursor-pointer">
+    <li
+      className="flex justify-between items-center border rounded border-inhaSkyBlue p-4 cursor-pointer"
+      onClick={handleClick}
+    >
       <section className={"flex flex-col items-center" + DIFFICULTY_COLORS[script.difficulty]}>
         <div className="flex">
           {Array.from({ length: 3 }).map((_, idx) =>

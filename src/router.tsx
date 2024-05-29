@@ -17,6 +17,7 @@ import SavedThreadListPage from "@pages/SavedThreadListPage";
 import NotFoundPage from "@pages/NotFoundPage";
 import KoreanTestPage from "@pages/KoreanTestPage";
 import TestStartPage from "@pages/TestStartPage";
+import RecordPage from "@pages/RecordPage";
 
 export const ROUTER_PATH = {
   MAIN: "/",
@@ -32,6 +33,7 @@ export const ROUTER_PATH = {
   SAVED_THREAD_LIST: "/my/saved-threads",
   KOREAN_TEST: "/korean-test",
   TEST_START: "/korean-test/start",
+  RECORD: "/korean-test/record/:scriptId",
 };
 
 const verifyingAuthLoader = async () => {
@@ -88,6 +90,7 @@ export const router = createBrowserRouter([
           { path: ROUTER_PATH.SAVED_THREAD_LIST, element: <SavedThreadListPage /> },
           { path: ROUTER_PATH.KOREAN_TEST, element: <KoreanTestPage /> },
           { path: ROUTER_PATH.TEST_START, element: <TestStartPage /> },
+          { path: ROUTER_PATH.RECORD, element: <RecordPage /> },
         ],
       },
     ],

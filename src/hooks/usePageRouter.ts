@@ -52,6 +52,10 @@ function usePageRouter() {
     navigate(ROUTER_PATH.TEST_START);
   };
 
+  const goToRecordPage = (scriptId: number) => {
+    navigate(ROUTER_PATH.RECORD.replace(":scriptId", scriptId.toString()));
+  };
+
   return {
     goBack,
     goToMainPage,
@@ -65,6 +69,7 @@ function usePageRouter() {
     goToSavedThreadListPage,
     goToKoreanTestPage,
     goToTestStartPage,
+    goToRecordPage,
   };
 }
 
