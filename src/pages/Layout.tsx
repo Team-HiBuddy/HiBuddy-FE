@@ -6,7 +6,7 @@ function Layout() {
   return (
     <div className="flex flex-col h-screen">
       <Header />
-      <main>
+      <main className="bg-white">
         <Outlet />
       </main>
       <BottomNavigationBar />

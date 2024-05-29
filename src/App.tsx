@@ -26,10 +26,8 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
-        <div className="bg-gray-200">
-          <div className="max-w-xl mx-auto bg-white">
-            <Outlet />
-          </div>
+        <div className="max-w-xl mx-auto bg-white">
+          <Outlet />
         </div>
       </QueryClientProvider>
     </ThemeProvider>
