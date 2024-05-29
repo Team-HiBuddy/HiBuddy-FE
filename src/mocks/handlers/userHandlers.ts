@@ -9,7 +9,7 @@ import getThreadListResponse from "../data/getThreadListResponse.json";
 
 export const userHandlers = [
   http.post(`${HIBUDDY_BASE_URL}/v1/auth/kakao/login`, async () => {
-    await delay(2000);
+    await delay(1000);
 
     return new HttpResponse("OK", {
       status: 201,
@@ -20,7 +20,7 @@ export const userHandlers = [
   }),
 
   http.post(`${HIBUDDY_BASE_URL}/v1/auth/google/login`, async () => {
-    await delay(2000);
+    await delay(1000);
 
     return new HttpResponse("OK", {
       status: 201,
@@ -66,7 +66,7 @@ export const userHandlers = [
   }),
 
   http.patch(`${HIBUDDY_BASE_URL}/v1/users/me/profile`, async ({ request }) => {
-    await delay(2000);
+    await delay(1000);
 
     const formData = await request.formData();
     const file = formData.get("file");
