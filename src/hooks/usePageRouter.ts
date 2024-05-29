@@ -44,6 +44,14 @@ function usePageRouter() {
     navigate(ROUTER_PATH.SAVED_THREAD_LIST);
   };
 
+  const goToKoreanTestPage = () => {
+    navigate(ROUTER_PATH.KOREAN_TEST);
+  };
+
+  const goToTestStartPage = () => {
+    navigate(ROUTER_PATH.TEST_START);
+  };
+
   return {
     goBack,
     goToMainPage,
@@ -55,6 +63,8 @@ function usePageRouter() {
     goToEditThreadPage,
     goToMyThreadListPage,
     goToSavedThreadListPage,
+    goToKoreanTestPage,
+    goToTestStartPage,
   };
 }
 
