@@ -21,7 +21,11 @@ function ThreadViewPage() {
     }
   }, [isPending]);
 
-  return <div className="px-4 py-2">{data && <ThreadView threadData={data} />}</div>;
+  return (
+    <div className="px-4 py-2">
+      <ThreadView threadData={data} />
+    </div>
+  );
 }
 
 export default ThreadViewPage;

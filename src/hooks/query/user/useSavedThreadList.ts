@@ -1,10 +1,10 @@
 import { getSavedThreadList } from "@apis/user";
 import { ThreadContents } from "@models/thread";
 import { GetSavedThreadListResponse } from "@models/user";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 
 function useSavedThreadList() {
-  const queryResult = useInfiniteQuery<
+  const queryResult = useSuspenseInfiniteQuery<
     GetSavedThreadListResponse,
     Error,
     ThreadContents[],

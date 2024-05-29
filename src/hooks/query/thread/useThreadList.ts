@@ -1,9 +1,9 @@
 import { getThreadList } from "@apis/thread";
 import { GetThreadListResponse, ThreadContents } from "@models/thread";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 
 function useThreadList() {
-  const queryResult = useInfiniteQuery<
+  const queryResult = useSuspenseInfiniteQuery<
     GetThreadListResponse,
     Error,
     ThreadContents[],
