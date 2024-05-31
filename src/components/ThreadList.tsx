@@ -7,11 +7,11 @@ import { UseSuspenseInfiniteQueryResult } from "@tanstack/react-query";
 import emptyBox from "@assets/empty-box.png";
 
 interface Props {
-  infiniteQueryResult: UseSuspenseInfiniteQueryResult<ThreadContents[]>;
+  infiniteQuery: () => UseSuspenseInfiniteQueryResult<ThreadContents[]>;
 }
 
-function ThreadList({ infiniteQueryResult }: Props) {
-  const { data: threadList, fetchNextPage, hasNextPage } = infiniteQueryResult;
+function ThreadList({ infiniteQuery }: Props) {
+  const { data: threadList, fetchNextPage, hasNextPage } = infiniteQuery();
 
   const lastItemRef = useRef<HTMLElement>(null);
 
@@ -25,9 +25,9 @@ function ThreadList({ infiniteQueryResult }: Props) {
 
   return (
     <div>
-      {threadList && threadList.length > 0 ? (
+      {threadList.length > 0 ? (
         <ul className="flex flex-col gap-y-2 p-2">
-          {threadList?.map((thread, idx) => (
+          {threadList.map((thread, idx) => (
             <li key={thread.postId} className="flex flex-col gap-y-4 mb-2">
               {idx > 0 && <div className="border w-full h-0"></div>}
               <ThreadItem
