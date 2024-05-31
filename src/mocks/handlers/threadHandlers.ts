@@ -10,13 +10,13 @@ import getThreadCommentsResponse from "../data/getThreadCommentsResponse.json";
 
 export const threadHandlers = [
   http.get(`${HIBUDDY_BASE_URL}/v1/main/popular`, async () => {
-    await delay(2000);
+    await delay(1000);
 
     return HttpResponse.json(popularThreads);
   }),
 
   http.post(`${HIBUDDY_BASE_URL}/v1/images/upload`, async ({ request }) => {
-    await delay(2000);
+    await delay(1000);
 
     const data = successfulResponse;
 

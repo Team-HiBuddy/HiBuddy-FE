@@ -3,15 +3,15 @@ import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
 import { useEffect, useRef } from "react";
 import BubbleLoadingSVG from "@assets/bubble-loading.svg?react";
 import { ThreadContents } from "@models/thread";
-import { UseInfiniteQueryResult } from "@tanstack/react-query";
+import { UseSuspenseInfiniteQueryResult } from "@tanstack/react-query";
 import emptyBox from "@assets/empty-box.png";
 
 interface Props {
-  infiniteQueryResult: UseInfiniteQueryResult<ThreadContents[]>;
+  infiniteQueryResult: UseSuspenseInfiniteQueryResult<ThreadContents[]>;
 }
 
 function ThreadList({ infiniteQueryResult }: Props) {
-  const { data: threadList, fetchNextPage, hasNextPage, isPending } = infiniteQueryResult;
+  const { data: threadList, fetchNextPage, hasNextPage } = infiniteQueryResult;
 
   const lastItemRef = useRef<HTMLElement>(null);
 
@@ -23,9 +23,7 @@ function ThreadList({ infiniteQueryResult }: Props) {
     }
   }, [isIntersecting, hasNextPage, fetchNextPage]);
 
-  return isPending ? (
-    <BubbleLoadingSVG className="w-14 h-14 m-auto mt-16 text-inhaSkyBlue" />
-  ) : (
+  return (
     <div>
       {threadList && threadList.length > 0 ? (
         <ul className="flex flex-col gap-y-2 p-2">

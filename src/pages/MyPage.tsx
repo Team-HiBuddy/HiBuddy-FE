@@ -12,7 +12,7 @@ import { ChangeEvent, KeyboardEvent, useRef, useState } from "react";
 function MyPage() {
   const { goToLoginPage, goToMyThreadListPage, goToSavedThreadListPage } = usePageRouter();
 
-  const { data: profile, isPending } = useProfile();
+  const { data: profile } = useProfile();
 
   const {
     patchNicknameResult: { mutate: patchNickname },
@@ -74,107 +74,105 @@ function MyPage() {
   };
 
   return (
-    !isPending && (
-      <div className="flex flex-col gap-6 p-10">
-        <section className="flex flex-col gap-3">
-          <div className="relative ml-auto mr-auto p-2">
-            <Avatar sx={{ width: "6rem", height: "6rem" }} src={profile?.profileUrl} />
-            <label
-              className="absolute bottom-0 right-0  text-white bg-gray-800 border border-gray-400 rounded cursor-pointer"
-              role="image-upload"
-              htmlFor="image-upload"
-              tabIndex={0}
-            >
-              {isUploadImagePending ? (
-                <SpinnerSVG className="h-6 w-8" />
-              ) : (
-                <EditSVG className="h-6 w-8" />
-              )}
-              <input
-                className="hidden"
-                id="image-upload"
-                type="file"
-                accept="image/png, image/jpeg"
-                disabled={isUploadImagePending}
-                onChange={handelUploadImage}
-              />
-            </label>
-          </div>
-          <div className="flex items-end gap-x-2 w-full">
-            <TextField
-              className="w-4/5"
-              variant="standard"
-              color="secondary"
-              label="nickname"
-              defaultValue={profile?.nickname}
-              helperText={isModifying ? helperText : ""}
-              error={!isValidName}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                setIsModifying(true);
-                handleNicknameChange(e);
-              }}
-              onBlur={handleNicknameBlur}
-              onKeyDown={handleKeydown}
-              inputRef={nicknameRef}
-            />
-            {isModifying && (
-              <Button
-                variant="outlined"
-                size="small"
-                disabled={!isValidName}
-                onClick={handleClickSave}
-              >
-                Save
-              </Button>
+    <div className="flex flex-col gap-6 p-10">
+      <section className="flex flex-col gap-3">
+        <div className="relative ml-auto mr-auto p-2">
+          <Avatar sx={{ width: "6rem", height: "6rem" }} src={profile?.profileUrl} />
+          <label
+            className="absolute bottom-0 right-0  text-white bg-gray-800 border border-gray-400 rounded cursor-pointer"
+            role="image-upload"
+            htmlFor="image-upload"
+            tabIndex={0}
+          >
+            {isUploadImagePending ? (
+              <SpinnerSVG className="h-6 w-8" />
+            ) : (
+              <EditSVG className="h-6 w-8" />
             )}
+            <input
+              className="hidden"
+              id="image-upload"
+              type="file"
+              accept="image/png, image/jpeg"
+              disabled={isUploadImagePending}
+              onChange={handelUploadImage}
+            />
+          </label>
+        </div>
+        <div className="flex items-end gap-x-2 w-full">
+          <TextField
+            className="w-4/5"
+            variant="standard"
+            color="secondary"
+            label="nickname"
+            defaultValue={profile?.nickname}
+            helperText={isModifying ? helperText : ""}
+            error={!isValidName}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setIsModifying(true);
+              handleNicknameChange(e);
+            }}
+            onBlur={handleNicknameBlur}
+            onKeyDown={handleKeydown}
+            inputRef={nicknameRef}
+          />
+          {isModifying && (
+            <Button
+              variant="outlined"
+              size="small"
+              disabled={!isValidName}
+              onClick={handleClickSave}
+            >
+              Save
+            </Button>
+          )}
+        </div>
+        <TextField
+          className="w-4/5"
+          variant="standard"
+          color="secondary"
+          label="country"
+          value="France"
+          disabled
+        />
+        <TextField
+          className="w-4/5"
+          variant="standard"
+          color="secondary"
+          label="major"
+          value="Computer Engineering"
+          disabled
+        />
+      </section>
+      <hr className="w-full" />
+      <section className="flex flex-col gap-6">
+        <Button color="inherit" onClick={goToMyThreadListPage}>
+          <div className="flex justify-between w-full">
+            My Posts
+            <GreaterThanSVG />
           </div>
-          <TextField
-            className="w-4/5"
-            variant="standard"
-            color="secondary"
-            label="country"
-            value="France"
-            disabled
-          />
-          <TextField
-            className="w-4/5"
-            variant="standard"
-            color="secondary"
-            label="major"
-            value="Computer Engineering"
-            disabled
-          />
-        </section>
-        <hr className="w-full" />
-        <section className="flex flex-col gap-6">
-          <Button color="inherit" onClick={goToMyThreadListPage}>
-            <div className="flex justify-between w-full">
-              My Posts
-              <GreaterThanSVG />
-            </div>
-          </Button>
-          <Button color="inherit">
-            <div className="flex justify-between w-full" onClick={goToSavedThreadListPage}>
-              Saved Posts
-              <GreaterThanSVG />
-            </div>
-          </Button>
-        </section>
-        <hr className="w-full" />
-        <section className="flex flex-col gap-8">
-          <Button color="inherit" className="mr-auto w-fit">
-            <div className="mr-auto" onClick={handelLogout}>
-              Logout
-            </div>
-          </Button>
-          <Button color="warning" className="mr-auto w-fit">
-            <div className="mr-auto" onClick={handleDeleteAccount}>
-              Delete Account
-            </div>
-          </Button>
-        </section>
-      </div>
-    )
+        </Button>
+        <Button color="inherit">
+          <div className="flex justify-between w-full" onClick={goToSavedThreadListPage}>
+            Saved Posts
+            <GreaterThanSVG />
+          </div>
+        </Button>
+      </section>
+      <hr className="w-full" />
+      <section className="flex flex-col gap-8">
+        <Button color="inherit" className="mr-auto w-fit">
+          <div className="mr-auto" onClick={handelLogout}>
+            Logout
+          </div>
+        </Button>
+        <Button color="warning" className="mr-auto w-fit">
+          <div className="mr-auto" onClick={handleDeleteAccount}>
+            Delete Account
+          </div>
+        </Button>
+      </section>
+    </div>
   );
 }
 

@@ -26,7 +26,11 @@ function EditThreadPage() {
     cancelResult: { mutate: cancelUploadImage, isPending: isCancelUploadImagePending },
   } = useImageUpload();
 
-  const { data: threadData, isSuccess: isGetSuccess } = useThread(Number(postId));
+  const {
+    data: threadData,
+    isPending: isGetPending,
+    isSuccess: isGetSuccess,
+  } = useThread(Number(postId));
 
   const {
     patchResult: { mutate: patchThread, isPending: isPatchPending, isSuccess: isPatchSuccess },
@@ -111,6 +115,16 @@ function EditThreadPage() {
   });
 
   useEffect(() => {
+    if (isGetPending) return;
+
+    if (!isGetSuccess) {
+      alert("The thread does not exist.");
+
+      goBack();
+    }
+  }, []);
+
+  useEffect(() => {
     if (!isUploadImageSuccess) return;
 
     setImageIds((prev) => [...prev, ...uploadResponse.result.imageIds]);
@@ -122,7 +136,7 @@ function EditThreadPage() {
     goToThreadViewPage(Number(postId));
   }, [isPatchSuccess]);
 
-  return isGetSuccess ? (
+  return (
     <main className="h-screen">
       <div className="sticky top-16 flex justify-between p-4 bg-white z-10">
         <div className="flex items-center gap-x-4">
@@ -197,7 +211,7 @@ function EditThreadPage() {
               <img className="w-40 h-40" src={image} />
               {!isUploadImagePending && !isCancelUploadImagePending && (
                 <PlusSVG
-                  className="absolute top-0 right-0 w-7 h-7 rotate-45 cursor-pointer"
+                  className="absolute -top-3 -right-3 w-6 h-6 rotate-45 cursor-pointer border rounded-full bg-white z-10"
                   onClick={() => {
                     handleDeleteImageButton(idx);
                   }}
@@ -208,8 +222,6 @@ function EditThreadPage() {
         </ul>
       </div>
     </main>
-  ) : (
-    <></>
   );
 }
 

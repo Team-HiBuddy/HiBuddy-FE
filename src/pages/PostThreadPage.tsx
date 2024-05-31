@@ -184,7 +184,7 @@ function PostThreadPage() {
               <img className="w-40 h-40" src={image} />
               {!isUploadImagePending && !isCancelUploadImagePending && (
                 <PlusSVG
-                  className="absolute top-0 right-0 w-7 h-7 rotate-45 cursor-pointer"
+                  className="absolute -top-3 -right-3 w-6 h-6 rotate-45 cursor-pointer border rounded-full bg-white z-10"
                   onClick={() => {
                     handleDeleteImageButton(idx);
                   }}
