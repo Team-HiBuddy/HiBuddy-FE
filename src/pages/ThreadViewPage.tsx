@@ -1,29 +1,25 @@
 import ThreadView from "@components/ThreadView";
-import useThread from "@hooks/query/thread/useThread";
+import ThreadViewSkeleton from "@components/skeleton/ThreadViewSkeleton";
 import usePageRouter from "@hooks/usePageRouter";
-import { useEffect } from "react";
+import { Suspense } from "react";
 import { useParams } from "react-router-dom";
 
 function ThreadViewPage() {
   const { postId } = useParams();
 
-  const { data, isPending, isSuccess } = useThread(Number(postId));
+  const { goToThreadListPage } = usePageRouter();
 
-  const { goBack } = usePageRouter();
+  if (!postId) {
+    alert("The thread does not exist.");
 
-  useEffect(() => {
-    if (isPending) return;
-
-    if (!isSuccess) {
-      alert("The thread does not exist.");
-
-      goBack();
-    }
-  }, [isPending]);
+    goToThreadListPage();
+  }
 
   return (
     <div className="px-4 py-2">
-      <ThreadView threadData={data} />
+      <Suspense fallback={<ThreadViewSkeleton />}>
+        <ThreadView postId={Number(postId)} />
+      </Suspense>
     </div>
   );
 }

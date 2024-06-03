@@ -1,12 +1,14 @@
 import ThreadList from "@components/ThreadList";
+import ThreadListSkeleton from "@components/skeleton/ThreadListSkeleton";
 import useMyThreadList from "@hooks/query/user/useMyThreadList";
+import { Suspense } from "react";
 
 function MyThreadListPage() {
-  const queryResult = useMyThreadList();
-
   return (
     <main className="flex-col gap-6 px-2 pb-14">
-      <ThreadList infiniteQueryResult={queryResult} />
+      <Suspense fallback={<ThreadListSkeleton length={2} />}>
+        <ThreadList infiniteQuery={useMyThreadList} />
+      </Suspense>
     </main>
   );
 }

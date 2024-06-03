@@ -5,21 +5,26 @@ import ThumbsUpFillSVG from "@assets/thumbs-up-fill.svg?react";
 import CommentSVG from "@assets/comment.svg?react";
 import { getTimeDiff } from "@utils/date";
 import CommentList from "./CommentList";
-import { GetThreadResponse } from "models/thread";
 import usePageRouter from "@hooks/usePageRouter";
 import useThreadMutation from "@hooks/query/thread/useThreadMutation";
 import { useEffect } from "react";
 import useThreadLike from "@hooks/query/thread/useThreadLike";
 import useThreadSave from "@hooks/query/thread/useThreadSave";
 import { Avatar } from "@mui/material";
+import useThread from "@hooks/query/thread/useThread";
 
 interface Props {
-  threadData: Pick<GetThreadResponse, "result">;
+  postId: number;
 }
 
-function ThreadView({ threadData: { result } }: Props) {
+function ThreadView({ postId }: Props) {
   const {
-    postId,
+    data: { result },
+    isPending,
+    isSuccess,
+  } = useThread(postId);
+
+  const {
     title,
     content: contents,
     users,
@@ -95,7 +100,15 @@ function ThreadView({ threadData: { result } }: Props) {
     goToThreadListPage();
   }, [deleteIsSuccess]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (isPending) return;
+
+    if (!isSuccess) {
+      alert("The thread does not exist.");
+
+      goToThreadListPage();
+    }
+  }, [isPending]);
 
   return (
     <div className="flex flex-col gap-y-4 p-2 rounded-xl">

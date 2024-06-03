@@ -50,7 +50,7 @@ function ThreadItem({
 
   return (
     <div
-      className="flex flex-col gap-y-2 p-2 rounded-xl cursor-pointer hover:bg-gray-200"
+      className="flex flex-col gap-y-2 h-80 p-2 rounded-xl cursor-pointer hover:bg-gray-200"
       onClick={goToThreadView}
     >
       <section className="flex justify-between">
@@ -61,13 +61,17 @@ function ThreadItem({
         </div>
         {isSave ? <BookmarkSVG /> : <BookmarkOutlineSVG />}
       </section>
-      <h3 className="text-lg font-semibold">{title}</h3>
-      <p className="line-clamp-4">{contents}</p>
-      <section className="flex justify-center">
+
+      <h3 className="text-lg font-semibold text-ellipsis line-clamp-2">{title}</h3>
+
+      <section className="flex justify-center mt-auto h-36">
         {postImages.length ? (
-          <img className="w-2/5" src={postImages[0].imageUrl} loading="lazy" />
-        ) : null}
+          <img className="w-36" src={postImages[0].imageUrl} loading="lazy" />
+        ) : (
+          <p className="text-ellipsis line-clamp-6">{contents}</p>
+        )}
       </section>
+
       <section className="flex justify-between">
         <div className="flex gap-4 mr-auto">
           <div className="flex items-center gap-1 text-red">

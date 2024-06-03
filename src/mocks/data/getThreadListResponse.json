@@ -6,6 +6,7 @@
     {
       "postId": 1,
       "title": "Donec feugiat eleifend nisl, a tempus nulla aliquet nec. In hac habitasse platea dictumst. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam porttitor pretium neque, et elementum sem efficitur in. Aliquam erat volutpat.",
+      "content": "Aenean pretium justo sollicitudin nunc condimentum, ac pellentesque justo venenatis. Ut vitae metus a mauris malesuada porta et convallis justo. Proin elementum urna neque, nec volutpat nibh fringilla eu.",
       "likeNum": 12,
       "commentNum": 10,
       "checkLike": true,
@@ -26,6 +27,7 @@
     {
       "postId": 2,
       "title": "Donec feugiat eleifend nisl, a tempus nulla aliquet nec. In hac habitasse platea dictumst. Class aptent taciti sociosqu ad litora torquent",
+      "content": "Aenean pretium justo sollicitudin nunc condimentum,Aenean pretium justo sollicitudin nunc condimentum,Aenean pretium justo sollicitudin nunc condimentum,Aenean pretium justo sollicitudin nunc condimentum,Aenean pretium justo sollicitudin nunc condimentum,Aenean pretium justo sollicitudin nunc condimentum,Aenean pretium justo sollicitudin nunc condimentum,Aenean pretium justo sollicitudin nunc condimentum,Aenean pretium justo sollicitudin nunc condimentum,Aenean pretium justo sollicitudin nunc condimentum, ac pellentesque justo venenatis. Ut vitae metus a mauris malesuada porta et convallis justo. Proin elementum urna neque, nec volutpat nibh fringilla eu.",
       "likeNum": 7,
       "commentNum": 3,
       "checkLike": false,
@@ -36,16 +38,12 @@
         "nickname": "DEF",
         "profileUrl": "https://api.iconify.design/material-symbols:account-circle.svg"
       },
-      "postImages": [
-        {
-          "imageId": 1,
-          "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF1IwK6-SxM83UpFVY6WtUZxXx-phss_gAUfdKbkTfau6VWVkt"
-        }
-      ]
+      "postImages": []
     },
     {
       "postId": 3,
       "title": "torquent per conubia nostra, per inceptos himenaeos. Nam porttitor pretium neque, et elementum sem efficitur in. Aliquam erat volutpat.",
+      "content": "Aenean pretium justo sollicitudin nunc condimentum, ac pellentesque justo venenatis. Ut vitae metus a mauris malesuada porta et convallis justo. Proin elementum urna neque, nec volutpat nibh fringilla eu.",
       "likeNum": 12,
       "commentNum": 10,
       "checkLike": true,
@@ -56,16 +54,12 @@
         "nickname": "GHI",
         "profileUrl": "https://api.iconify.design/material-symbols:account-circle.svg"
       },
-      "postImages": [
-        {
-          "imageId": 1,
-          "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF1IwK6-SxM83UpFVY6WtUZxXx-phss_gAUfdKbkTfau6VWVkt"
-        }
-      ]
+      "postImages": []
     },
     {
       "postId": 4,
       "title": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam porttitor pretium neque",
+      "content": "Aenean pretium justo sollicitudin nunc condimentum, ac pellentesque justo venenatis. Ut vitae metus a mauris malesuada porta et convallis justo. Proin elementum urna neque, nec volutpat nibh fringilla eu.",
       "likeNum": 12,
       "commentNum": 10,
       "checkLike": false,
@@ -81,6 +75,7 @@
     {
       "postId": 5,
       "title": "In hac habitasse platea dictumst. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+      "content": "Aenean pretium justo sollicitudin nunc condimentum, ac pellentesque justo venenatis. Ut vitae metus a mauris malesuada porta et convallis justo. Proin elementum urna neque, nec volutpat nibh fringilla eu.",
       "likeNum": 0,
       "commentNum": 0,
       "checkLike": false,

@@ -1,17 +1,17 @@
 import ThreadItem from "./ThreadItem";
 import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
 import { useEffect, useRef } from "react";
-import BubbleLoadingSVG from "@assets/bubble-loading.svg?react";
 import { ThreadContents } from "@models/thread";
 import { UseSuspenseInfiniteQueryResult } from "@tanstack/react-query";
 import emptyBox from "@assets/empty-box.png";
+import ThreadItemSkeleton from "./skeleton/ThreadItemSkeleton";
 
 interface Props {
-  infiniteQueryResult: UseSuspenseInfiniteQueryResult<ThreadContents[]>;
+  infiniteQuery: () => UseSuspenseInfiniteQueryResult<ThreadContents[]>;
 }
 
-function ThreadList({ infiniteQueryResult }: Props) {
-  const { data: threadList, fetchNextPage, hasNextPage } = infiniteQueryResult;
+function ThreadList({ infiniteQuery }: Props) {
+  const { data: threadList, fetchNextPage, hasNextPage } = infiniteQuery();
 
   const lastItemRef = useRef<HTMLElement>(null);
 
@@ -25,11 +25,10 @@ function ThreadList({ infiniteQueryResult }: Props) {
 
   return (
     <div>
-      {threadList && threadList.length > 0 ? (
+      {threadList.length > 0 ? (
         <ul className="flex flex-col gap-y-2 p-2">
-          {threadList?.map((thread, idx) => (
+          {threadList.map((thread) => (
             <li key={thread.postId} className="flex flex-col gap-y-4 mb-2">
-              {idx > 0 && <div className="border w-full h-0"></div>}
               <ThreadItem
                 thread={{
                   postId: thread.postId,
@@ -45,6 +44,7 @@ function ThreadList({ infiniteQueryResult }: Props) {
                   postImages: thread.postImages,
                 }}
               />
+              <hr className="w-full" />
             </li>
           ))}
         </ul>
@@ -54,13 +54,11 @@ function ThreadList({ infiniteQueryResult }: Props) {
           <p className="font-bold text-2xl">There is nothing yet.</p>
         </div>
       )}
-      <section ref={lastItemRef}>
-        {hasNextPage ? (
-          <BubbleLoadingSVG className="w-14 h-14 ml-auto mr-auto text-inhaSkyBlue" />
-        ) : null}
-      </section>
+      <section ref={lastItemRef}>{hasNextPage ? <ThreadItemSkeleton /> : null}</section>
     </div>
   );
 }
 
 export default ThreadList;
+
+// <BubbleLoadingSVG className="w-14 h-14 ml-auto mr-auto text-inhaSkyBlue" />
