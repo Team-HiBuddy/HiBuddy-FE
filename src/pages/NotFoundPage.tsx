@@ -1,16 +1,17 @@
 import { useEffect } from "react";
 import notFound from "@assets/not-found.jpg";
 import { Button } from "@mui/material";
+import { AxiosError } from "axios";
 
 interface Props {
   reset?: () => void;
-  error?: Error;
+  error?: Error | AxiosError | null;
 }
 
 const NotFoundPage = ({ reset, error }: Props) => {
   useEffect(() => {
     if (error) {
-      console.log(error);
+      console.error(error.name, error.message);
       alert({ title: "요청 오류", description: error.message });
     }
   }, []);
