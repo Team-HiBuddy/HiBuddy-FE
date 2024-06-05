@@ -60,5 +60,3 @@ function ThreadList({ infiniteQuery }: Props) {
 }
 
 export default ThreadList;
-
-// <BubbleLoadingSVG className="w-14 h-14 ml-auto mr-auto text-inhaSkyBlue" />
