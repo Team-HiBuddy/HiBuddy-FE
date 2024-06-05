@@ -5,7 +5,7 @@ import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { useEffect, useState } from "react";
 import usePageRouter from "@hooks/usePageRouter";
 import { useLocation } from "react-router-dom";
-import { ROUTER_PATH } from "../../router";
+import { ROUTER_PATH } from "../../routerConfig";
 
 function BottomNavigationBar() {
   const { goToMainPage, goToThreadListPage, goToKoreanTestPage } = usePageRouter();

@@ -4,7 +4,7 @@ import { getTimeDiff } from "@utils/date";
 import ThumbsUpSVG from "@assets/thumbs-up.svg?react";
 import ThumbsUpFillSVG from "@assets/thumbs-up-fill.svg?react";
 import CommentSVG from "@assets/comment.svg?react";
-import { ROUTER_PATH } from "../router";
+import { ROUTER_PATH } from "../routerConfig";
 import { useNavigate } from "react-router-dom";
 import { PostImage } from "@models/thread";
 import { Avatar } from "@mui/material";

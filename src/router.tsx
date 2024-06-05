@@ -1,56 +1,26 @@
 import App from "./App";
-import { createBrowserRouter, redirect } from "react-router-dom";
-import LoginPage from "./pages/LoginPage";
-import OnboardingPage from "./pages/OnboardingPage";
-import MainPage from "@pages/MainPage";
-import ThreadListPage from "@pages/ThreadListPage";
+import { createBrowserRouter } from "react-router-dom";
 import Layout from "@pages/Layout";
-import ThreadViewPage from "@pages/ThreadViewPage";
-import OAuthCallbackPage from "@pages/OAuthCallbackPage";
-import PostThreadPage from "@pages/PostThreadPage";
-import { isLogin, isOnboarded } from "@apis/auth";
-import { enableMocking } from "./main";
-import EditThreadPage from "@pages/EditThreadPage";
-import MyPage from "@pages/MyPage";
-import MyThreadListPage from "@pages/MyThreadListPage";
-import SavedThreadListPage from "@pages/SavedThreadListPage";
+import { lazy } from "react";
+import { ROUTER_PATH, verifyingAuthLoader } from "./routerConfig";
 import NotFoundPage from "@pages/NotFoundPage";
-import KoreanTestPage from "@pages/KoreanTestPage";
-import TestStartPage from "@pages/TestStartPage";
-import RecordPage from "@pages/RecordPage";
 
-export const ROUTER_PATH = {
-  MAIN: "/",
-  LOGIN: "/login",
-  ONBOARDING: "/onboarding",
-  THREAD_LIST: "/threads",
-  THREAD_VIEW: "/thread/:postId",
-  OAUTH_CALLBACK: "/login/oauth2/code/:provider",
-  POST_THREAD: "/thread/post",
-  EDIT_THREAD: "/thread/:postId/edit",
-  MY_PAGE: "/my",
-  MY_THREAD_LIST: "/my/threads",
-  SAVED_THREAD_LIST: "/my/saved-threads",
-  KOREAN_TEST: "/korean-test",
-  TEST_START: "/korean-test/start",
-  RECORD: "/korean-test/record/:scriptId",
-};
+const MainPage = lazy(() => import("./pages/MainPage"));
+const LoginPage = lazy(() => import("./pages/LoginPage"));
+const OnboardingPage = lazy(() => import("./pages/OnboardingPage"));
+const ThreadListPage = lazy(() => import("./pages/ThreadListPage"));
+const ThreadViewPage = lazy(() => import("./pages/ThreadViewPage"));
+const OAuthCallbackPage = lazy(() => import("./pages/OAuthCallbackPage"));
+const PostThreadPage = lazy(() => import("./pages/PostThreadPage"));
+const EditThreadPage = lazy(() => import("./pages/EditThreadPage"));
+const MyPage = lazy(() => import("./pages/MyPage"));
+const MyThreadListPage = lazy(() => import("./pages/MyThreadListPage"));
+const SavedThreadListPage = lazy(() => import("./pages/SavedThreadListPage"));
+const KoreanTestPage = lazy(() => import("./pages/KoreanTestPage"));
+const TestStartPage = lazy(() => import("./pages/TestStartPage"));
+const RecordPage = lazy(() => import("./pages/RecordPage"));
 
-const verifyingAuthLoader = async () => {
-  await enableMocking();
-
-  if (await isLogin()) {
-    if (await isOnboarded()) {
-      return null;
-    }
-
-    return redirect(ROUTER_PATH.ONBOARDING);
-  }
-
-  return redirect(ROUTER_PATH.LOGIN);
-};
-
-export const router = createBrowserRouter([
+export const Router = createBrowserRouter([
   {
     element: <App />,
     children: [
