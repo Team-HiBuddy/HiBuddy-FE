@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ROUTER_PATH } from "../router";
+import { ROUTER_PATH } from "../routerConfig";
 
 function usePageRouter() {
   const navigate = useNavigate();
