@@ -18,4 +18,15 @@ export default defineConfig({
       "@models": "/src/models",
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ["react", "react-dom"],
+          reactRouter: ["react-router-dom"],
+          axios: ["axios"],
+        },
+      },
+    },
+  },
 });
