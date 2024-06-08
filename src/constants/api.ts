@@ -17,6 +17,7 @@ const GOOGLE_LOGIN_PARAMS = new URLSearchParams({
   response_type: "code",
   client_id: GOOGLE_CLIENT_ID,
   redirect_uri: GOOGLE_REDIRECT_URI,
+  scope: "email",
 });
 
 export const KAKAO_AUTHORIZATION_CODE_ISSUANCE_URL = `https://kauth.kakao.com/oauth/authorize?${KAKAO_LOGIN_PARAMS.toString()}`;
