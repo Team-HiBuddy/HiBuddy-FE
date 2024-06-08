@@ -26,10 +26,7 @@ class GlobalErrorBoundary extends React.Component<Props, State> {
   resetErrorBoundary() {
     this.props.onReset();
 
-    this.state = {
-      hasError: false,
-      error: null,
-    };
+    this.setState({ hasError: false, error: null });
   }
 
   static getDerivedStateFromError(error: Error | AxiosError) {
