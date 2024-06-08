@@ -28,11 +28,11 @@ function OnboardingPage() {
   const [country, setCountry] = useState<string | null>(null);
   const [major, setDepartment] = useState<string | null>(null);
 
-  const handleCountryChange = (e: SyntheticEvent, value: string | null) => {
+  const handleCountryChange = (_: SyntheticEvent, value: string | null) => {
     setCountry(value);
   };
 
-  const handleDepartmentChange = (e: SyntheticEvent, value: string | null) => {
+  const handleDepartmentChange = (_: SyntheticEvent, value: string | null) => {
     setDepartment(value);
   };
 

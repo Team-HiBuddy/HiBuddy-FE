@@ -2,7 +2,7 @@ import { ThemeProvider, createTheme } from "@mui/material";
 import { QueryClientProvider, useQueryErrorResetBoundary } from "@tanstack/react-query";
 import { queryClient } from "@hooks/query/queryClient";
 import { Outlet } from "react-router-dom";
-import GlobalErrorBoundary from "@components/GlobalErrorBoundary";
+import GlobalErrorBoundary from "@components/errorBoundary/GlobalErrorBoundary";
 
 const theme = createTheme({
   palette: {
@@ -28,13 +28,13 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <GlobalErrorBoundary onReset={reset}>
-        <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient}>
+        <GlobalErrorBoundary onReset={reset}>
           <div className="max-w-xl mx-auto bg-white">
             <Outlet />
           </div>
-        </QueryClientProvider>
-      </GlobalErrorBoundary>
+        </GlobalErrorBoundary>
+      </QueryClientProvider>
     </ThemeProvider>
   );
 }

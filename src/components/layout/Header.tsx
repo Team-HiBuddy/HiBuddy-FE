@@ -1,6 +1,6 @@
 import ProfileSVG from "@assets/profile.svg?react";
 import { IconButton } from "@mui/material";
-import { ROUTER_PATH } from "../../router";
+import { ROUTER_PATH } from "../../routerConfig";
 import { Link } from "react-router-dom";
 
 function Header() {

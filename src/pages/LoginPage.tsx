@@ -4,7 +4,7 @@ import {
   GOOGLE_AUTHORIZATION_CODE_ISSUANCE_URL,
   KAKAO_AUTHORIZATION_CODE_ISSUANCE_URL,
 } from "@constants/api";
-import { ROUTER_PATH } from "../router";
+import { ROUTER_PATH } from "../routerConfig";
 
 function LoginPage() {
   const handleKaKaoLoginButton = () => {

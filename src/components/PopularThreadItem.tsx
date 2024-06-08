@@ -3,7 +3,7 @@ import CommentSVG from "@assets/comment.svg?react";
 import ThumbsUpFillSVG from "@assets/thumbs-up-fill.svg?react";
 import { ThreadListItemContents } from "./ThreadItem";
 import { Link } from "react-router-dom";
-import { ROUTER_PATH } from "../router";
+import { ROUTER_PATH } from "../routerConfig";
 
 export type PopularThreadContents = Pick<
   ThreadListItemContents,

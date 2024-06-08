@@ -12,9 +12,8 @@ const NotFoundPage = ({ reset, error }: Props) => {
   useEffect(() => {
     if (error) {
       console.error(error.name, error.message);
-      alert({ title: "요청 오류", description: error.message });
     }
-  }, []);
+  });
 
   const handleClickHomeButton = () => {
     if (reset) {
