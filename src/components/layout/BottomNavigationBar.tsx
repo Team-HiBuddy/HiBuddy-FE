@@ -52,7 +52,7 @@ function BottomNavigationBar() {
         }}
       >
         <BottomNavigationAction label="Home" icon={<HomeSVG />} />
-        <BottomNavigationAction label="Thread" icon={<ThreadSVG />} />
+        <BottomNavigationAction label="Threads" icon={<ThreadSVG />} />
         <BottomNavigationAction label="Test" icon={<RecorderSVG />} />
       </BottomNavigation>
     </footer>

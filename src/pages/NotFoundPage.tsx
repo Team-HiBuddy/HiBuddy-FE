@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import notFound from "@assets/not-found.jpg";
 import { Button } from "@mui/material";
 import { AxiosError } from "axios";
 
@@ -25,7 +24,6 @@ const NotFoundPage = ({ reset, error }: Props) => {
 
   return (
     <div className="flex flex-col items-center gap-y-8 mt-10">
-      <img src={notFound} className="w-3/5 h-3/5" />
       <div className="flex flex-col items-center gap-y-2 p-6">
         <p className="font-bold text-4xl">404</p>
         <p className="font-bold text-2xl">Page not found</p>
