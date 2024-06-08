@@ -12,7 +12,7 @@ export const queryClient = new QueryClient({
 
   queryCache: new QueryCache({
     onError: (error) => {
-      alert(error.message);
+      console.error(error.message);
     },
   }),
 });
