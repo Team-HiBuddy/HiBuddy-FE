@@ -36,7 +36,11 @@ export const isLogin = async () => {
     return true;
   }
 
-  await reissueToken();
+  try {
+    await reissueToken();
+  } catch (error) {
+    return false;
+  }
 
   return Boolean(http.defaults.headers.common["authorization"]);
 };
