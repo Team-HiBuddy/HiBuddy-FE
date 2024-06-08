@@ -5,7 +5,9 @@ import { Suspense } from "react";
 
 function MyThreadListPage() {
   return (
-    <main className="flex-col gap-6 px-2 pb-14">
+    <main className="flex-col px-2 pb-14">
+      <h2 className="text-lg font-semibold p-2">My Posts</h2>
+      <hr className="w-full" />
       <Suspense fallback={<ThreadListSkeleton length={2} />}>
         <ThreadList infiniteQuery={useMyThreadList} />
       </Suspense>
