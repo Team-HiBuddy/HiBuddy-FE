@@ -1,10 +1,11 @@
-export const HIBUDDY_BASE_URL = "https://api.hibuddy.shop";
+export const HIBUDDY_BASE_URL = "https://www.hibuddyinha.shop";
+export const PRODUCTION_DOMAIN = "https://hi-buddy.vercel.app";
 
 const KAKAO_CLIENT_ID = "badeb291be382d61336b18b4b854874b";
 const GOOGLE_CLIENT_ID = `754504914348-5vrksn2srattrm5kq4p9pquc765fn2bl.apps.googleusercontent.com`;
 
-const KAKAO_REDIRECT_URI = "http://localhost:5173/login/oauth2/code/kakao";
-const GOOGLE_REDIRECT_URI = "http://localhost:5173/login/oauth2/code/google";
+const KAKAO_REDIRECT_URI = `${PRODUCTION_DOMAIN}/callback/kakao`;
+const GOOGLE_REDIRECT_URI = `${PRODUCTION_DOMAIN}/callback/google`;
 
 const KAKAO_LOGIN_PARAMS = new URLSearchParams({
   response_type: "code",

@@ -22,7 +22,7 @@ export const ROUTER_PATH = {
   ONBOARDING: "/onboarding",
   THREAD_LIST: "/threads",
   THREAD_VIEW: "/thread/:postId",
-  OAUTH_CALLBACK: "/login/oauth2/code/:provider",
+  OAUTH_CALLBACK: "/callback/:provider",
   POST_THREAD: "/thread/post",
   EDIT_THREAD: "/thread/:postId/edit",
   MY_PAGE: "/my",
