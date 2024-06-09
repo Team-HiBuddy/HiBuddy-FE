@@ -1,14 +1,20 @@
 import { HIBUDDY_BASE_URL } from "@constants/api";
 import { delay, http, HttpResponse } from "msw";
-import getProfileResponse from "../data/getProfileResponse.json";
+import profile from "../data/profile.json";
 import successfulResponse from "../data/successfulResponse.json";
 import failedResponse from "../data/failedResponse.json";
 import onboardingCountries from "../data/onboardingCountries.json";
 import onboardingMajors from "../data/onboardingMajors.json";
-import getThreadListResponse from "../data/getThreadListResponse.json";
+import threadList from "../data/threadList.json";
 
 export const userHandlers = [
-  http.post(`${HIBUDDY_BASE_URL}/v1/auth/kakao/login`, async () => {
+  http.patch(`${HIBUDDY_BASE_URL}/v1/users/me/onboarding`, async () => {
+    await delay(1000);
+
+    return HttpResponse.json(successfulResponse);
+  }),
+
+  http.post(`${HIBUDDY_BASE_URL}/v1/auth/login/kakao`, async () => {
     await delay(1000);
 
     return new HttpResponse("OK", {
@@ -19,7 +25,7 @@ export const userHandlers = [
     });
   }),
 
-  http.post(`${HIBUDDY_BASE_URL}/v1/auth/google/login`, async () => {
+  http.post(`${HIBUDDY_BASE_URL}/v1/auth/login/google`, async () => {
     await delay(1000);
 
     return new HttpResponse("OK", {
@@ -44,7 +50,7 @@ export const userHandlers = [
   http.get(`${HIBUDDY_BASE_URL}/v1/users/me`, async () => {
     await delay(500);
 
-    return HttpResponse.json(getProfileResponse);
+    return HttpResponse.json(profile);
   }),
 
   http.post(`${HIBUDDY_BASE_URL}/v1/auth/logout`, async () => {
@@ -101,18 +107,18 @@ export const userHandlers = [
       return new HttpResponse(null, { status: 404 });
     }
 
-    const data = getThreadListResponse;
+    const data = threadList;
 
-    data.result = getThreadListResponse.result.map((thread) => {
+    data.result.posts = threadList.result.posts.map((thread) => {
       return {
         ...thread,
         postId: +page * 5 + thread.postId,
       };
     });
 
-    data.isLast = +page === 9;
-    data.isFirst = +page === 0;
-    data.number = +page;
+    data.result.last = +page === 9;
+    data.result.first = +page === 0;
+    data.result.number = +page;
 
     return HttpResponse.json(data);
   }),
@@ -128,9 +134,9 @@ export const userHandlers = [
       return new HttpResponse(null, { status: 404 });
     }
 
-    const data = getThreadListResponse;
+    const data = threadList;
 
-    data.result = getThreadListResponse.result.map((thread) => {
+    data.result.posts = threadList.result.posts.map((thread) => {
       return {
         ...thread,
         postId: +page * 5 + thread.postId,
@@ -138,9 +144,9 @@ export const userHandlers = [
       };
     });
 
-    data.isLast = +page === 9;
-    data.isFirst = +page === 0;
-    data.number = +page;
+    data.result.last = +page === 9;
+    data.result.first = +page === 0;
+    data.result.number = +page;
 
     return HttpResponse.json(data);
   }),

@@ -16,9 +16,10 @@ function useThreadComment(postId: number) {
 
     initialPageParam: 0,
 
-    getNextPageParam: (lastPage) => (lastPage.isLast ? undefined : lastPage.number + 1),
+    getNextPageParam: ({ result }) => (result.last ? undefined : result.number + 1),
 
-    select: ({ pages }) => pages.reduce<Comment[]>((acc, { result }) => acc.concat(result), []),
+    select: ({ pages }) =>
+      pages.reduce<Comment[]>((acc, { result }) => acc.concat(result.comments), []),
   });
 
   return queryResult;

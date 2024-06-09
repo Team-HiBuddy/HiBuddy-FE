@@ -13,10 +13,9 @@ import {
 } from "models/thread";
 import { http } from "./axios";
 import { ResponseBody } from "@models/api";
-import { PostOnboardingRequest } from "@models/user";
 
 export const getPopularThreads = () => {
-  return http.get<GetPopularThreadsResponse>("/v1/main/popular");
+  return http.get<GetPopularThreadsResponse>("/v1/thread/main/popular");
 };
 
 export const postThreadImages = async (images: FileList) => {
@@ -37,16 +36,12 @@ export const postThread = (thread: PostThreadRequest) => {
   return http.post<PostThreadResponse>("/v1/thread/posts", thread);
 };
 
-export const cancelImageUpload = (imageId: number) => {
-  return http.delete<ResponseBody>(`/v1/images/${imageId}/cancel`);
+export const deleteImage = (imageId: number) => {
+  return http.delete<ResponseBody>(`/v1/images/${imageId}`);
 };
 
 export const deleteThread = (postId: number) => {
   return http.delete<ResponseBody>(`/v1/thread/posts/${postId}`);
-};
-
-export const postOnboarding = (data: PostOnboardingRequest) => {
-  return http.post<ResponseBody>("/v1/onboarding", data);
 };
 
 export const patchThread = (thread: PatchThreadRequest) => {

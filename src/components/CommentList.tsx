@@ -27,7 +27,7 @@ function CommentList({ postId }: Props) {
       <CommentInput postId={postId} />
       <ul className="flex flex-col gap-y-4">
         {comments?.map(
-          ({ comment, commentId, users: { nickname, profileUrl }, createdAt, isAuthor }) => (
+          ({ comment, commentId, user: { nickname, profileUrl }, createdAt, author }) => (
             <CommentItem
               key={commentId}
               comment={{
@@ -37,7 +37,7 @@ function CommentList({ postId }: Props) {
                 profileUrl,
                 createdDate: new Date(createdAt),
                 contents: comment,
-                isAuthor,
+                isAuthor: author,
               }}
             />
           )

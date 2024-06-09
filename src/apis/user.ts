@@ -5,9 +5,14 @@ import {
   GetProfileResponse,
   GetSavedThreadListResponse,
   PatchNickNameRequest,
+  PatchOnboardingRequest,
   PatchProfileImageRequest,
 } from "@models/user";
 import { ResponseBody } from "@models/api";
+
+export const patchOnboarding = (data: PatchOnboardingRequest) => {
+  return http.patch<ResponseBody>("/v1/users/me/onboarding", data);
+};
 
 export const getProfile = () => {
   return http.get<GetProfileResponse>(`${HIBUDDY_BASE_URL}/v1/users/me`);
@@ -51,8 +56,7 @@ export const getSavedThreadList = (page: number) => {
   const params = new URLSearchParams({
     page: page.toString(),
     limit: "5",
-    sort: "created_at.desc",
   });
 
-  return http.get<GetSavedThreadListResponse>(`/v1/users/me/posts/scraps?${params.toString()}`);
+  return http.get<GetSavedThreadListResponse>(`/v1/users/me/scraps?${params.toString()}`);
 };

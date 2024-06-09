@@ -4,7 +4,7 @@
   "isSuccess": true,
   "result": {
     "postId": 1,
-    "isAuthor": true,
+    "author": true,
     "title": "Donec feugiat eleifend nisl, a tempus nulla aliquet nec.",
     "content": "Aenean pretium justo sollicitudin nunc condimentum, ac pellentesque justo venenatis. Ut vitae metus a mauris malesuada porta et convallis justo. Proin elementum urna neque, nec volutpat nibh fringilla eu.",
     "likeNum": 12,
@@ -12,7 +12,7 @@
     "checkLike": false,
     "checkScrap": false,
     "createdAt": "2024-05-17T12:34:56.789",
-    "users": {
+    "user": {
       "userId": 1,
       "nickname": "ABC",
       "profileUrl": "https://api.iconify.design/material-symbols:account-circle.svg"

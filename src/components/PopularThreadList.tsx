@@ -10,7 +10,7 @@ function PopularThreadList() {
         <h2 className="text-xl font-bold px-1 mb-2">Popular</h2>
         <div>
           <ul className="flex flex-col gap-2 border rounded border-inhaSkyBlue p-3">
-            {threads.map(({ postId, title, likeNum, commentNum, checkLike }) => (
+            {threads.map(({ postId, title, likeNum, commentNum }) => (
               <PopularThreadItem
                 key={postId}
                 thread={{
@@ -18,7 +18,6 @@ function PopularThreadList() {
                   title,
                   commentsCount: commentNum,
                   likesCount: likeNum,
-                  isLike: checkLike,
                 }}
               />
             ))}

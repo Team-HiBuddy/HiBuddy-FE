@@ -77,7 +77,7 @@ function MyPage() {
     <div className="flex flex-col gap-6 p-10">
       <section className="flex flex-col gap-3">
         <div className="relative ml-auto mr-auto p-2">
-          <Avatar sx={{ width: "6rem", height: "6rem" }} src={profile?.profileUrl} />
+          <Avatar sx={{ width: "6rem", height: "6rem" }} src={profile?.profileImage.url} />
           <label
             className="absolute bottom-0 right-0  text-white bg-gray-800 border border-gray-400 rounded cursor-pointer"
             role="image-upload"

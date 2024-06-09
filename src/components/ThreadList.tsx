@@ -33,8 +33,8 @@ function ThreadList({ infiniteQuery }: Props) {
                 thread={{
                   postId: thread.postId,
                   title: thread.title,
-                  nickname: thread.users.nickname,
-                  profileUrl: thread.users.profileUrl,
+                  nickname: thread.user.nickname,
+                  profileUrl: thread.user.profileUrl,
                   contents: thread.content,
                   date: new Date(thread.createdAt),
                   isLike: thread.checkLike,

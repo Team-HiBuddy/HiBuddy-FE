@@ -17,10 +17,10 @@ function useSavedThreadList() {
 
     initialPageParam: 0,
 
-    getNextPageParam: (lastPage) => (lastPage.isLast ? undefined : lastPage.number + 1),
+    getNextPageParam: ({ result }) => (result.last ? undefined : result.number + 1),
 
     select: ({ pages }) =>
-      pages.reduce<ThreadContents[]>((acc, { result }) => acc.concat(result), []),
+      pages.reduce<ThreadContents[]>((acc, { result }) => acc.concat(result.posts), []),
   });
 
   return queryResult;

@@ -1,0 +1,125 @@
+{
+  "isSuccess": true,
+  "code": "COMMON200",
+  "message": "성공입니다.",
+  "result": {
+    "comments": [
+      {
+        "user": {
+          "userId": 1,
+          "nickname": "aaaaaaaaaaaaaaaa",
+          "profileUrl": "https://api.iconify.design/material-symbols:account-circle.svg"
+        },
+        "commentId": 1,
+        "comment": "Donec feugiat eleifend nisl, a tempus nulla aliquet nec. In hac habitasse platea dictumst.",
+        "createdAt": "2024-05-13T12:34:56.789",
+        "author": false
+      },
+      {
+        "user": {
+          "userId": 2,
+          "nickname": "bbb",
+          "profileUrl": "https://api.iconify.design/material-symbols:account-circle.svg"
+        },
+        "commentId": 2,
+        "comment": "Nullam venenatis vehicula nisi, ut ullamcorper urna ullamcorper non. Aliquam ultricies nisi quis cursus volutpat.",
+        "createdAt": "2024-05-12T12:34:56.789",
+        "author": true
+      },
+      {
+        "user": {
+          "userId": 3,
+          "nickname": "ccc",
+          "profileUrl": "https://api.iconify.design/material-symbols:account-circle.svg"
+        },
+        "commentId": 3,
+        "comment": "Mauris ullamcorper nunc at bibendum semper.",
+        "createdAt": "2024-05-11T12:34:56.789",
+        "author": false
+      },
+      {
+        "user": {
+          "userId": 4,
+          "nickname": "ddd",
+          "profileUrl": "https://api.iconify.design/material-symbols:account-circle.svg"
+        },
+        "commentId": 4,
+        "comment": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+        "createdAt": "2024-05-10T12:34:56.789",
+        "author": false
+      },
+      {
+        "user": {
+          "userId": 5,
+          "nickname": "eee",
+          "profileUrl": "https://api.iconify.design/material-symbols:account-circle.svg"
+        },
+        "commentId": 5,
+        "comment": "Sed lacinia odio ac lorem tincidunt, eget ullamcorper diam fringilla.",
+        "createdAt": "2024-05-09T12:34:56.789",
+        "author": false
+      },
+      {
+        "user": {
+          "userId": 6,
+          "nickname": "fff",
+          "profileUrl": "https://api.iconify.design/material-symbols:account-circle.svg"
+        },
+        "commentId": 6,
+        "comment": "Donec bibendum purus risus, a mattis eros malesuada sed. Vestibulum vel fringilla leo.",
+        "createdAt": "2024-05-08T12:34:56.789",
+        "author": false
+      },
+      {
+        "user": {
+          "userId": 7,
+          "nickname": "ggg",
+          "profileUrl": "https://api.iconify.design/material-symbols:account-circle.svg"
+        },
+        "commentId": 7,
+        "comment": "Aliquam tempus, sapien at bibendum sodales, sem enim tincidunt risus, sit amet imperdiet velit turpis ac sem.",
+        "createdAt": "2024-05-07T12:34:56.789",
+        "author": false
+      },
+      {
+        "user": {
+          "userId": 8,
+          "nickname": "hhh",
+          "profileUrl": "https://api.iconify.design/material-symbols:account-circle.svg"
+        },
+        "commentId": 8,
+        "comment": "Quisque dapibus semper pretium. Maecenas euismod lectus sit amet metus gravida, eu rutrum mi tincidunt. Ut pharetra iaculis malesuada.",
+        "createdAt": "2024-05-06T12:34:56.789",
+        "author": false
+      },
+      {
+        "user": {
+          "userId": 9,
+          "nickname": "iii",
+          "profileUrl": "https://api.iconify.design/material-symbols:account-circle.svg"
+        },
+        "commentId": 9,
+        "comment": "Donec non est imperdiet, malesuada massa non, vestibulum ex. Aliquam in nisi vel purus egestas venenatis.",
+        "createdAt": "2024-05-05T12:34:56.789",
+        "author": false
+      },
+      {
+        "user": {
+          "userId": 10,
+          "nickname": "jjj",
+          "profileUrl": "https://api.iconify.design/material-symbols:account-circle.svg"
+        },
+        "commentId": 10,
+        "comment": "Maecenas eget sem eget ipsum dapibus viverra a ut neque. Suspendisse potenti.",
+        "createdAt": "2024-05-04T12:34:56.789",
+        "author": false
+      }
+    ],
+    "totalPages": 3,
+    "totalElements": 30,
+    "first": true,
+    "last": false,
+    "number": 0,
+    "numberOfElements": 10
+  }
+}

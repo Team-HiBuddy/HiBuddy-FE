@@ -1,7 +1,7 @@
 import { ResponseBody } from "./api";
 import { GetThreadListResponse } from "./thread";
 
-export interface PostOnboardingRequest {
+export interface PatchOnboardingRequest {
   nickname: string;
   country: string;
   major: string;
@@ -11,7 +11,9 @@ export interface Profile {
   nickname: string;
   country: string;
   major: string;
-  profileUrl: string;
+  profileImage: {
+    url: string;
+  };
 }
 
 export interface GetProfileResponse extends ResponseBody {
