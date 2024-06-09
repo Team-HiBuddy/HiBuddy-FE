@@ -35,7 +35,7 @@ function CommentInput({ postId }: Props) {
 
   return (
     <div className="flex gap-x-3">
-      <Avatar src={data?.profileUrl} />
+      <Avatar src={data?.profileImage.url} />
       <TextField
         variant="standard"
         placeholder="Add a Comment..."
