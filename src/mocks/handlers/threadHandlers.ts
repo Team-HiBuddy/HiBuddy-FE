@@ -1,18 +1,18 @@
 import { HIBUDDY_BASE_URL } from "@constants/api";
 import { delay, http, HttpResponse } from "msw";
-import popularThreads from "../data/popularThreads.json";
+import popularThreadList from "../data/popularThreadList.json";
 import successfulResponse from "../data/successfulResponse.json";
 import failedResponse from "../data/failedResponse.json";
 import postThreadResponse from "../data/postThreadResponse.json";
-import getThreadResponse from "../data/getThreadResponse.json";
-import getThreadListResponse from "../data/getThreadListResponse.json";
-import getThreadCommentsResponse from "../data/getThreadCommentsResponse.json";
+import threadData from "../data/threadData.json";
+import threadList from "../data/threadList.json";
+import threadCommentList from "../data/threadCommentList.json";
 
 export const threadHandlers = [
-  http.get(`${HIBUDDY_BASE_URL}/v1/main/popular`, async () => {
+  http.get(`${HIBUDDY_BASE_URL}/v1/thread/main/popular`, async () => {
     await delay(1000);
 
-    return HttpResponse.json(popularThreads);
+    return HttpResponse.json(popularThreadList);
   }),
 
   http.post(`${HIBUDDY_BASE_URL}/v1/images/upload`, async ({ request }) => {
@@ -46,13 +46,7 @@ export const threadHandlers = [
     });
   }),
 
-  http.delete(`${HIBUDDY_BASE_URL}/v1/images/:imageId/cancel`, async () => {
-    await delay(1000);
-
-    return HttpResponse.json(successfulResponse);
-  }),
-
-  http.post(`${HIBUDDY_BASE_URL}/v1/onboarding`, async () => {
+  http.delete(`${HIBUDDY_BASE_URL}/v1/images/:imageId`, async () => {
     await delay(1000);
 
     return HttpResponse.json(successfulResponse);
@@ -61,7 +55,7 @@ export const threadHandlers = [
   http.get(`${HIBUDDY_BASE_URL}/v1/thread/posts/:postId`, async () => {
     await delay(1000);
 
-    return HttpResponse.json(getThreadResponse);
+    return HttpResponse.json(threadData);
   }),
 
   http.patch(`${HIBUDDY_BASE_URL}/v1/thread/posts/:postId`, async () => {
@@ -111,18 +105,18 @@ export const threadHandlers = [
       return new HttpResponse(null, { status: 404 });
     }
 
-    const data = getThreadListResponse;
+    const data = threadList;
 
-    data.result = getThreadListResponse.result.map((thread) => {
+    data.result.posts = threadList.result.posts.map((thread) => {
       return {
         ...thread,
         postId: +page * 5 + thread.postId,
       };
     });
 
-    data.isLast = +page === 9;
-    data.isFirst = +page === 0;
-    data.number = +page;
+    data.result.last = +page === 9;
+    data.result.first = +page === 0;
+    data.result.number = +page;
 
     return HttpResponse.json(data);
   }),
@@ -138,18 +132,18 @@ export const threadHandlers = [
       return new HttpResponse(null, { status: 404 });
     }
 
-    const data = getThreadCommentsResponse;
+    const data = threadCommentList;
 
-    data.result = getThreadCommentsResponse.result.map((thread) => {
+    data.result.comments = threadCommentList.result.comments.map((thread) => {
       return {
         ...thread,
         commentId: +page * 10 + thread.commentId,
       };
     });
 
-    data.isLast = +page === 2;
-    data.isFirst = +page === 0;
-    data.number = +page;
+    data.result.last = +page === 2;
+    data.result.first = +page === 0;
+    data.result.number = +page;
 
     return HttpResponse.json(data);
   }),

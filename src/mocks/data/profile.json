@@ -6,6 +6,8 @@
     "nickname": "myName",
     "country": "France",
     "major": "Computer Science",
-    "profileUrl": "https://t3.ftcdn.net/jpg/00/97/05/06/240_F_97050621_vz0EQJQAQtThNWD59UOJCQUROMpShncT.jpg"
+    "profileImage": {
+      "url": "https://t3.ftcdn.net/jpg/00/97/05/06/240_F_97050621_vz0EQJQAQtThNWD59UOJCQUROMpShncT.jpg"
+    }
   }
 }

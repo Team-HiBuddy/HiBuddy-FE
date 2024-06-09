@@ -1,7 +1,6 @@
-import { postOnboarding } from "@apis/thread";
-import { getCountries, getMajors } from "@apis/user";
+import { getCountries, getMajors, patchOnboarding } from "@apis/user";
 import { ResponseBody } from "@models/api";
-import { PostOnboardingRequest } from "@models/user";
+import { PatchOnboardingRequest } from "@models/user";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 function useOnboarding() {
@@ -17,11 +16,11 @@ function useOnboarding() {
     queryFn: getMajors,
   });
 
-  const postResult = useMutation<ResponseBody, Error, PostOnboardingRequest>({
-    mutationFn: postOnboarding,
+  const patchResult = useMutation<ResponseBody, Error, PatchOnboardingRequest>({
+    mutationFn: patchOnboarding,
   });
 
-  return { postResult, countriesResult, majorsResult };
+  return { countriesResult, majorsResult, patchResult };
 }
 
 export default useOnboarding;

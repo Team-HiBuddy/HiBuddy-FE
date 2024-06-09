@@ -1,4 +1,4 @@
-import { cancelImageUpload, postThreadImages } from "@apis/thread";
+import { deleteImage, postThreadImages } from "@apis/thread";
 import { ResponseBody } from "@models/api";
 import { PostThreadImagesResponse } from "@models/thread";
 import { useMutation } from "@tanstack/react-query";
@@ -9,7 +9,7 @@ function useImageUpload() {
   });
 
   const cancelResult = useMutation<ResponseBody, Error, number>({
-    mutationFn: cancelImageUpload,
+    mutationFn: deleteImage,
   });
 
   return { uploadResult, cancelResult };

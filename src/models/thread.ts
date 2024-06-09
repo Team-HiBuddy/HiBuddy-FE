@@ -5,8 +5,6 @@ export interface PopularThreadContents {
   title: string;
   likeNum: number;
   commentNum: number;
-  checkLike: boolean;
-  checkScrap: boolean;
 }
 
 export interface GetPopularThreadsResponse extends ResponseBody {
@@ -52,7 +50,7 @@ export interface PostImage {
 export interface GetThreadResponse extends ResponseBody {
   result: {
     postId: number;
-    isAuthor: boolean;
+    author: boolean;
     title: string;
     content: string;
     likeNum: number;
@@ -60,7 +58,7 @@ export interface GetThreadResponse extends ResponseBody {
     checkLike: boolean;
     checkScrap: boolean;
     createdAt: string;
-    users: User;
+    user: User;
     postImages: PostImage[];
   };
 }
@@ -69,41 +67,50 @@ export interface ThreadContents {
   postId: number;
   title: string;
   content: string;
+  createdAt: string;
   likeNum: number;
   commentNum: number;
   checkLike: boolean;
   checkScrap: boolean;
-  createdAt: string;
-  users: User;
+  user: User;
   postImages: PostImage[];
+  author: boolean;
+}
+
+export interface ThreadListResult {
+  posts: ThreadContents[];
+  totalPages: number;
+  totalElements: number;
+  number: number;
+  numberOfElements: number;
+  first: boolean;
+  last: boolean;
 }
 
 export interface GetThreadListResponse extends ResponseBody {
-  result: ThreadContents[];
-  totalPages: number;
-  totalElements: number;
-  isFirst: boolean;
-  isLast: boolean;
-  number: 1;
-  numberOfElements: number;
+  result: ThreadListResult;
 }
 
 export interface Comment {
-  users: User;
+  user: User;
   commentId: number;
   comment: string;
   createdAt: string;
-  isAuthor: boolean;
+  author: boolean;
+}
+
+export interface CommentListResult {
+  comments: Comment[];
+  totalPages: number;
+  totalElements: number;
+  number: number;
+  numberOfElements: number;
+  first: boolean;
+  last: boolean;
 }
 
 export interface GetThreadCommentsResponse extends ResponseBody {
-  result: Comment[];
-  totalPages: number;
-  totalElements: number;
-  isFirst: boolean;
-  isLast: boolean;
-  number: 1;
-  numberOfElements: number;
+  result: CommentListResult;
 }
 
 export interface PostThreadCommentRequest {

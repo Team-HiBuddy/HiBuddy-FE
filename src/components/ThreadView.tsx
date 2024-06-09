@@ -27,11 +27,11 @@ function ThreadView({ postId }: Props) {
   const {
     title,
     content: contents,
-    users,
+    user,
     createdAt,
     checkLike: isLike,
     checkScrap: isSave,
-    isAuthor,
+    author: isAuthor,
     likeNum: likesCount,
     commentNum: commentsCount,
     postImages,
@@ -53,7 +53,7 @@ function ThreadView({ postId }: Props) {
 
   const { goToEditThreadPage, goToThreadListPage } = usePageRouter();
 
-  const { nickname, profileUrl } = users;
+  const { nickname, profileUrl } = user;
   const createDate = new Date(createdAt);
 
   const handleClickEdit = () => {

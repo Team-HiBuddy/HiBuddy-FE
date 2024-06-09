@@ -11,7 +11,7 @@ function OnboardingPage() {
     useNickname();
 
   const {
-    postResult: { mutate: postData, isPending, isSuccess },
+    patchResult: { mutate: patchData, isPending, isSuccess },
     countriesResult: {
       data: countries,
       isPending: isCountriesPending,
@@ -39,7 +39,7 @@ function OnboardingPage() {
   const handleContinueButton = () => {
     if (!country || !major) return;
 
-    postData({
+    patchData({
       nickname,
       country: convertToUpperSnakeCase(country),
       major: convertToUpperSnakeCase(major),
