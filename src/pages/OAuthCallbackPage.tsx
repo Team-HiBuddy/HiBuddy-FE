@@ -7,7 +7,7 @@ function OAuthCallbackPage() {
   const location = useLocation();
   const { provider } = useParams();
 
-  const { goToOnboardingPage, goToLoginPage } = usePageRouter();
+  const { goToMainPage, goToLoginPage } = usePageRouter();
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -26,7 +26,7 @@ function OAuthCallbackPage() {
 
     issueLoginToken(provider, code)
       .then(() => {
-        goToOnboardingPage();
+        goToMainPage();
       })
       .catch(() => {
         alert("Failed to Login");
