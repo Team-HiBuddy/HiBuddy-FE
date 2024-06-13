@@ -14,7 +14,7 @@ function useThreadSearch(keyword: string) {
 
     queryFn: ({ pageParam }) => searchThread(keyword, pageParam),
 
-    initialPageParam: 0,
+    initialPageParam: 1,
 
     getNextPageParam: ({ result }) => (result.last ? undefined : result.number + 1),
 

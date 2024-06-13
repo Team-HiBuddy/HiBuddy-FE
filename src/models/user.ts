@@ -11,9 +11,7 @@ export interface Profile {
   nickname: string;
   country: string;
   major: string;
-  profileImage: {
-    url: string;
-  };
+  profileImage: string;
 }
 
 export interface GetProfileResponse extends ResponseBody {
