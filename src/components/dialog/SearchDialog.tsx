@@ -28,8 +28,13 @@ function SearchDialog({ isOpen, handleClose }: Props) {
   };
 
   return (
-    <Dialog open={isOpen} onClose={handleClose} disableAutoFocus={true}>
-      <div className="top-1 w-80">
+    <Dialog
+      sx={{ position: "absolute", top: 1 }}
+      open={isOpen}
+      onClose={handleClose}
+      disableAutoFocus={true}
+    >
+      <div className="w-72">
         <TextField
           placeholder="What are you looking for?"
           fullWidth
