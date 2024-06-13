@@ -20,13 +20,13 @@ function SearchedThreadListPage() {
   const useThreadSearchQuery = () => useThreadSearch(keyword);
 
   return (
-    <main className="flex-col gap-6 px-2 pb-14">
+    <div className="flex-col gap-6 px-2 pb-14">
       <h2 className="text-lg font-semibold p-2">{`Search results for '${keyword}'`}</h2>
       <hr className="w-full" />
       <Suspense fallback={<ThreadListSkeleton length={2} />}>
         <ThreadList infiniteQuery={useThreadSearchQuery} />
       </Suspense>
-    </main>
+    </div>
   );
 }
 

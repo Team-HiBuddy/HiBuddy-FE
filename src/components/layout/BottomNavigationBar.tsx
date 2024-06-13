@@ -33,7 +33,7 @@ function BottomNavigationBar() {
   }, []);
 
   return (
-    <footer className="sticky bottom-0 w-full mt-auto border-t-2 border-inhaSkyBlue py-2 px-6 bg-white z-10">
+    <footer className="sticky bottom-0 w-full mt-auto border-t border-gray-300 py-2 px-6 bg-white z-10">
       <BottomNavigation
         showLabels
         value={value}

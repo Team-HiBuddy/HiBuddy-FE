@@ -10,7 +10,7 @@ function ThreadListPage() {
   const { goToPostThreadPage } = usePageRouter();
 
   return (
-    <main className="flex-col gap-6 px-2 pb-14">
+    <div className="flex-col gap-6 px-2 pb-14">
       <Suspense fallback={<ThreadListSkeleton length={2} />}>
         <ThreadList infiniteQuery={useThreadList} />
       </Suspense>
@@ -19,7 +19,7 @@ function ThreadListPage() {
           <PlusSVG />
         </Fab>
       </div>
-    </main>
+    </div>
   );
 }
 
