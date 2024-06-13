@@ -46,9 +46,11 @@ export const isLogin = async () => {
 };
 
 export const isOnboarded = async () => {
-  const { result } = await getProfile();
+  const {
+    result: { nickname, country, major },
+  } = await getProfile();
 
-  if (Object.values(result).some((value) => value === null || value === undefined)) {
+  if ([nickname, country, major].some((value) => value === null || value === undefined)) {
     return false;
   }
 
