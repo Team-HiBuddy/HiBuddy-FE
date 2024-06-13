@@ -65,7 +65,7 @@ function OnboardingPage() {
   }, [isCountriesSuccess, isMajorsSuccess]);
 
   return (
-    <div className="flex flex-col items-center gap-y-20 h-screen">
+    <div className="flex flex-col items-center gap-y-20 h-svh">
       <h1 className="text-6xl text-inhaDeepBlue font-bold mt-24">HiBuddy</h1>
       {isCountriesPending || isMajorsPending ? (
         <BubbleLoadingSVG className="w-14 h-14 text-inhaSkyBlue" />
