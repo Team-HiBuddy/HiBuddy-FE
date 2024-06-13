@@ -56,6 +56,10 @@ function usePageRouter() {
     navigate(ROUTER_PATH.RECORD.replace(":scriptId", scriptId.toString()));
   };
 
+  const goToThreadSearchPage = (keyword: string) => {
+    navigate(ROUTER_PATH.SEARCHED_THREAD_LIST.replace(":keyword", keyword));
+  };
+
   return {
     goBack,
     goToMainPage,
@@ -70,6 +74,7 @@ function usePageRouter() {
     goToKoreanTestPage,
     goToTestStartPage,
     goToRecordPage,
+    goToThreadSearchPage,
   };
 }
 

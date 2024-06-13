@@ -127,3 +127,5 @@ export interface DeleteThreadCommentRequest {
   postId: number;
   commentId: number;
 }
+
+export interface GetSearchedThreadListResponse extends GetThreadListResponse {}

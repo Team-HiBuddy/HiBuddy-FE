@@ -159,4 +159,33 @@ export const threadHandlers = [
   http.patch(`${HIBUDDY_BASE_URL}/v1/thread/posts/:postId/comments/:commentId`, async () => {
     return HttpResponse.json(successfulResponse);
   }),
+
+  http.get(`${HIBUDDY_BASE_URL}/v1/thread/search`, async ({ request }) => {
+    await delay(1000);
+
+    const url = new URL(request.url);
+
+    const page = url.searchParams.get("page");
+    const keyword = url.searchParams.get("keyword");
+
+    if (!page || +page > 10 || !keyword) {
+      return new HttpResponse(null, { status: 404 });
+    }
+
+    const data = threadList;
+
+    data.result.posts = threadList.result.posts.map((thread) => {
+      return {
+        ...thread,
+        postId: +page * 5 + thread.postId,
+        title: keyword + thread.title,
+      };
+    });
+
+    data.result.last = +page === 9;
+    data.result.first = +page === 0;
+    data.result.number = +page;
+
+    return HttpResponse.json(data);
+  }),
 ];
