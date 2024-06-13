@@ -32,4 +32,5 @@ export const ROUTER_PATH = {
   TEST_START: "/korean-test/start",
   RECORD: "/korean-test/record/:scriptId",
   TEST_RESULT: "/korean-test/result",
+  SEARCHED_THREAD_LIST: "/thread/search/:keyword",
 };

@@ -1,6 +1,7 @@
 import {
   DeleteThreadCommentRequest,
   GetPopularThreadsResponse,
+  GetSearchedThreadListResponse,
   GetThreadCommentsResponse,
   GetThreadListResponse,
   GetThreadResponse,
@@ -53,7 +54,7 @@ export const patchThread = (thread: PatchThreadRequest) => {
 };
 
 export const getThread = (postId: number) => {
-  return http.get<GetThreadResponse>(`v1/thread/posts/${postId}`);
+  return http.get<GetThreadResponse>(`/v1/thread/posts/${postId}`);
 };
 
 export const likeThread = (postId: number) => {
@@ -95,16 +96,25 @@ export const getThreadComments = (postId: number, page: number) => {
 };
 
 export const postThreadComment = (data: PostThreadCommentRequest) => {
-  return http.post<ResponseBody>(`v1/thread/posts/${data.postId}/comments`, data.comment);
+  return http.post<ResponseBody>(`/v1/thread/posts/${data.postId}/comments`, data.comment);
 };
 
 export const deleteThreadComment = (data: DeleteThreadCommentRequest) => {
-  return http.delete<ResponseBody>(`v1/thread/posts/${data.postId}/comments/${data.commentId}`);
+  return http.delete<ResponseBody>(`/v1/thread/posts/${data.postId}/comments/${data.commentId}`);
 };
 
 export const patchThreadComment = (data: PatchThreadCommentRequest) => {
   return http.patch<ResponseBody>(
-    `v1/thread/posts/${data.postId}/comments/${data.commentId}`,
+    `/v1/thread/posts/${data.postId}/comments/${data.commentId}`,
     data.comment
   );
+};
+
+export const searchThread = (keyword: string, page: number) => {
+  const params = new URLSearchParams({
+    keyword: keyword,
+    page: page.toString(),
+  });
+
+  return http.get<GetSearchedThreadListResponse>(`/v1/thread/search?${params.toString()}`);
 };

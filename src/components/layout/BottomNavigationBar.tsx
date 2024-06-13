@@ -21,6 +21,7 @@ function BottomNavigationBar() {
       case ROUTER_PATH.POST_THREAD:
       case ROUTER_PATH.MY_THREAD_LIST:
       case ROUTER_PATH.SAVED_THREAD_LIST:
+      case ROUTER_PATH.SEARCHED_THREAD_LIST:
       case ROUTER_PATH.EDIT_THREAD:
         setValue(1);
         break;
