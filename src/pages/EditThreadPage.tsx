@@ -137,8 +137,8 @@ function EditThreadPage() {
   }, [isPatchSuccess]);
 
   return (
-    <main className="h-screen">
-      <div className="sticky top-16 flex justify-between p-4 bg-white z-10">
+    <div>
+      <section className="sticky top-16 flex justify-between p-4 bg-white z-10">
         <div className="flex items-center gap-x-4">
           <PlusSVG className="scale-150 rotate-45 cursor-pointer" onClick={goBack} />
           <p className="text-lg font-semibold">Edit a Post</p>
@@ -156,8 +156,9 @@ function EditThreadPage() {
         >
           EDIT
         </Button>
-      </div>
-      <div className="flex flex-col gap-8 px-8 py-4">
+      </section>
+
+      <section className="flex flex-col gap-8 px-8 py-4">
         <TextField
           variant="standard"
           placeholder="Add a title..."
@@ -220,8 +221,8 @@ function EditThreadPage() {
             </li>
           ))}
         </ul>
-      </div>
-    </main>
+      </section>
+    </div>
   );
 }
 

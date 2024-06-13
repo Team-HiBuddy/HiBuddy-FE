@@ -2,7 +2,7 @@ import { Skeleton } from "@mui/material";
 
 function ThreadViewSkeleton() {
   return (
-    <div className="flex flex-col gap-y-4 h-screen p-2 rounded-xl  ">
+    <div className="flex flex-col gap-y-4 h-svh p-2 rounded-xl  ">
       <section className="flex items-center gap-x-2 h-10">
         <Skeleton variant="circular" width={40} height={40} />
         <Skeleton variant="rounded" width="70%" />

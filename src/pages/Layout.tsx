@@ -8,7 +8,7 @@ import ApiErrorBoundary from "@components/errorBoundary/ApiErrorBoundary";
 
 function Layout() {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-svh">
       <Header />
       <main className="bg-white">
         <QueryErrorResetBoundary>

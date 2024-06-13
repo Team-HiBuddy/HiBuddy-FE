@@ -63,7 +63,7 @@ function TestResultPage() {
       value: pitch,
     },
     {
-      type: "Criteria",
+      type: "Native",
       value: criteria,
     },
   ];
@@ -101,7 +101,7 @@ function TestResultPage() {
           <div className="w-3/6 h-40">
             <Gauge value={score} startAngle={-90} endAngle={90} innerRadius={"50%"} text="" />
           </div>
-          <div className="flex flex-col items-center gap-y-2  text-lg font-semibold">
+          <div className="flex flex-col items-center gap-y-2 text-lg font-semibold">
             <div className="flex gap-x-1">
               <p>{score}</p>
               <p className="text-gray-500">/ 100</p>
