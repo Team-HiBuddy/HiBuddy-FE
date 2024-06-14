@@ -5,6 +5,7 @@ import { Outlet } from "react-router-dom";
 import BubbleLoadingSVG from "@assets/bubble-loading.svg?react";
 import { QueryErrorResetBoundary } from "@tanstack/react-query";
 import ApiErrorBoundary from "@components/errorBoundary/ApiErrorBoundary";
+import DeferredComponent from "@components/DeferredComponent";
 
 function Layout() {
   return (
@@ -16,7 +17,9 @@ function Layout() {
             <ApiErrorBoundary onReset={reset}>
               <Suspense
                 fallback={
-                  <BubbleLoadingSVG className="w-16 h-16 ml-auto mr-auto mt-12 text-inhaSkyBlue" />
+                  <DeferredComponent>
+                    <BubbleLoadingSVG className="w-16 h-16 ml-auto mr-auto mt-12 text-inhaSkyBlue" />
+                  </DeferredComponent>
                 }
               >
                 <Outlet />
