@@ -68,7 +68,7 @@ function ThreadItem({
         {postImages.length ? (
           <img className="w-36" src={postImages[0].imageUrl} loading="lazy" />
         ) : (
-          <p className="text-ellipsis line-clamp-6">{contents}</p>
+          <p className="w-full text-ellipsis line-clamp-6">{contents}</p>
         )}
       </section>
 
