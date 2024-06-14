@@ -1,4 +1,4 @@
-import ThreadsSpriteSheet from "@assets/threads-sprite-sheet.svg";
+import ThreadsSpriteSheet from "/spriteSheets/threads-sprite-sheet.svg";
 import { SVGProps } from "react";
 
 interface Props extends SVGProps<SVGSVGElement> {

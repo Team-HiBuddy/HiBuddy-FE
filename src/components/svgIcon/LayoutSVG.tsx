@@ -1,4 +1,4 @@
-import LayoutSpriteSheet from "@assets/layout-sprite-sheet.svg";
+import LayoutSpriteSheet from "/spriteSheets/layout-sprite-sheet.svg";
 import { SVGProps } from "react";
 
 interface Props extends SVGProps<SVGSVGElement> {

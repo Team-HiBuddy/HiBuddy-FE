@@ -1,4 +1,4 @@
-import SchoolInfoSpriteSheet from "@assets/school-info-sprite-sheet.svg";
+import SchoolInfoSpriteSheet from "/spriteSheets/school-info-sprite-sheet.svg";
 import { SVGProps } from "react";
 
 interface Props extends SVGProps<SVGSVGElement> {
