@@ -7,6 +7,8 @@ import { queryClient } from "../queryClient";
 function useThreadMutation(postId?: number) {
   const postResult = useMutation<PostThreadResponse, Error, PostThreadRequest>({
     mutationFn: postThread,
+
+    onSuccess: async () => queryClient.invalidateQueries({ queryKey: ["myThreadList"] }),
   });
 
   const deleteResult = useMutation<ResponseBody, Error, number>({

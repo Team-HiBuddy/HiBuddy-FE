@@ -8,12 +8,16 @@ function useThreadSave(postId: number) {
     mutationFn: () => saveThread(postId),
 
     onSettled: async () => queryClient.invalidateQueries({ queryKey: ["thread", postId] }),
+
+    onSuccess: async () => queryClient.invalidateQueries({ queryKey: ["savedThreadList"] }),
   });
 
   const unsaveResult = useMutation<ResponseBody, Error>({
     mutationFn: () => unsaveThread(postId),
 
     onSettled: async () => queryClient.invalidateQueries({ queryKey: ["thread", postId] }),
+
+    onSuccess: async () => queryClient.invalidateQueries({ queryKey: ["savedThreadList"] }),
   });
 
   return { saveResult, unsaveResult };
