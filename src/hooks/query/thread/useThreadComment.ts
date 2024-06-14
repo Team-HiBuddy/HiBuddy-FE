@@ -14,7 +14,7 @@ function useThreadComment(postId: number) {
 
     queryFn: ({ pageParam }) => getThreadComments(postId, pageParam),
 
-    initialPageParam: 0,
+    initialPageParam: 1,
 
     getNextPageParam: ({ result }) => (result.last ? undefined : result.number + 1),
 
