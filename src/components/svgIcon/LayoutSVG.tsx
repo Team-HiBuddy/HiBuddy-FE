@@ -1,12 +1,13 @@
 import LayoutSpriteSheet from "@assets/layout-sprite-sheet.svg";
+import { SVGProps } from "react";
 
-interface Props {
+interface Props extends SVGProps<SVGSVGElement> {
   id: "home" | "profile" | "search" | "thread" | "recorder";
   className?: string;
 }
 
-const LayoutSVG = ({ id, className }: Props) => (
-  <svg className={className}>
+const LayoutSVG = ({ id, className, ...rest }: Props) => (
+  <svg className={className} {...rest}>
     <use href={`${LayoutSpriteSheet}#${id}`} />
   </svg>
 );
