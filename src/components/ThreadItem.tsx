@@ -46,7 +46,7 @@ function ThreadItem({
 
   return (
     <div
-      className="flex flex-col gap-y-2 h-80 p-2 rounded-xl cursor-pointer hover:bg-gray-200"
+      className="flex flex-col gap-y-2 p-2 rounded-xl cursor-pointer hover:bg-gray-200"
       onClick={goToThreadView}
     >
       <section className="flex justify-between">
@@ -62,13 +62,13 @@ function ThreadItem({
         )}
       </section>
 
-      <h3 className="text-lg font-semibold text-ellipsis line-clamp-2">{title}</h3>
+      <h3 className="text-lg font-semibold text-ellipsis line-clamp-1">{title}</h3>
 
-      <section className="flex justify-center mt-auto h-36">
+      <section className="flex justify-center mt-auto">
         {postImages.length ? (
           <img className="w-36" src={postImages[0].imageUrl} loading="lazy" />
         ) : (
-          <p className="text-ellipsis line-clamp-6">{contents}</p>
+          <p className="text-ellipsis line-clamp-3">{contents}</p>
         )}
       </section>
 
