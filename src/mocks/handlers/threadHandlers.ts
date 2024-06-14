@@ -1,5 +1,5 @@
 import { HIBUDDY_BASE_URL } from "@constants/api";
-import { delay, http, HttpResponse } from "msw";
+import { http, HttpResponse } from "msw";
 import popularThreadList from "../data/popularThreadList.json";
 import successfulResponse from "../data/successfulResponse.json";
 import failedResponse from "../data/failedResponse.json";
@@ -10,14 +10,10 @@ import threadCommentList from "../data/threadCommentList.json";
 
 export const threadHandlers = [
   http.get(`${HIBUDDY_BASE_URL}/v1/thread/main/popular`, async () => {
-    await delay(1000);
-
     return HttpResponse.json(popularThreadList);
   }),
 
   http.post(`${HIBUDDY_BASE_URL}/v1/images/upload`, async ({ request }) => {
-    await delay(1000);
-
     const data = successfulResponse;
 
     const formData = await request.formData();
@@ -37,8 +33,6 @@ export const threadHandlers = [
   }),
 
   http.post(`${HIBUDDY_BASE_URL}/v1/thread/posts`, async () => {
-    await delay(1000);
-
     return new HttpResponse(JSON.stringify(postThreadResponse), {
       headers: {
         location: "/v1/thread/posts/123",
@@ -47,56 +41,38 @@ export const threadHandlers = [
   }),
 
   http.delete(`${HIBUDDY_BASE_URL}/v1/images/:imageId`, async () => {
-    await delay(1000);
-
     return HttpResponse.json(successfulResponse);
   }),
 
   http.get(`${HIBUDDY_BASE_URL}/v1/thread/posts/:postId`, async () => {
-    await delay(1000);
-
     return HttpResponse.json(threadData);
   }),
 
   http.patch(`${HIBUDDY_BASE_URL}/v1/thread/posts/:postId`, async () => {
-    await delay(1000);
-
     return HttpResponse.json(successfulResponse);
   }),
 
   http.delete(`${HIBUDDY_BASE_URL}/v1/thread/posts/:postId`, async () => {
-    await delay(1000);
-
     return HttpResponse.json(successfulResponse);
   }),
 
   http.post(`${HIBUDDY_BASE_URL}/v1/thread/posts/:postId/likes`, async () => {
-    await delay(1000);
-
     return HttpResponse.json(successfulResponse);
   }),
 
   http.delete(`${HIBUDDY_BASE_URL}/v1/thread/posts/:postId/likes`, async () => {
-    await delay(1000);
-
     return HttpResponse.json(successfulResponse);
   }),
 
   http.post(`${HIBUDDY_BASE_URL}/v1/thread/posts/:postId/scraps`, async () => {
-    await delay(1000);
-
     return HttpResponse.json(successfulResponse);
   }),
 
   http.delete(`${HIBUDDY_BASE_URL}/v1/thread/posts/:postId/scraps`, async () => {
-    await delay(1000);
-
     return HttpResponse.json(successfulResponse);
   }),
 
   http.get(`${HIBUDDY_BASE_URL}/v1/thread/posts`, async ({ request }) => {
-    await delay(1000);
-
     const url = new URL(request.url);
 
     const page = url.searchParams.get("page");
@@ -122,8 +98,6 @@ export const threadHandlers = [
   }),
 
   http.get(`${HIBUDDY_BASE_URL}/v1/thread/posts/:postId/comments`, async ({ request }) => {
-    await delay(500);
-
     const url = new URL(request.url);
 
     const page = url.searchParams.get("page");
@@ -161,8 +135,6 @@ export const threadHandlers = [
   }),
 
   http.get(`${HIBUDDY_BASE_URL}/v1/thread/search`, async ({ request }) => {
-    await delay(1000);
-
     const url = new URL(request.url);
 
     const page = url.searchParams.get("page");

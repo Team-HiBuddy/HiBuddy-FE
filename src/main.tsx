@@ -5,10 +5,6 @@ import { RouterProvider } from "react-router-dom";
 import { Router } from "./Router.tsx";
 
 export async function enableMocking() {
-  if (process.env.NODE_ENV !== "development") {
-    return;
-  }
-
   const { worker } = await import("./mocks/browser.ts");
 
   return worker.start();
