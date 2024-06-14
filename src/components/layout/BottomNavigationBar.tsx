@@ -1,11 +1,9 @@
-import HomeSVG from "@assets/home.svg?react";
-import ThreadSVG from "@assets/thread.svg?react";
-import RecorderSVG from "@assets/recorder.svg?react";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { useEffect, useState } from "react";
 import usePageRouter from "@hooks/usePageRouter";
 import { useLocation } from "react-router-dom";
 import { ROUTER_PATH } from "../../routerConfig";
+import LayoutSVG from "@components/svgIcon/LayoutSVG";
 
 function BottomNavigationBar() {
   const { goToMainPage, goToThreadListPage, goToKoreanTestPage } = usePageRouter();
@@ -52,9 +50,9 @@ function BottomNavigationBar() {
           }
         }}
       >
-        <BottomNavigationAction label="Home" icon={<HomeSVG />} />
-        <BottomNavigationAction label="Threads" icon={<ThreadSVG />} />
-        <BottomNavigationAction label="Test" icon={<RecorderSVG />} />
+        <BottomNavigationAction label="Home" icon={<LayoutSVG id="home" />} />
+        <BottomNavigationAction label="Threads" icon={<LayoutSVG id="thread" />} />
+        <BottomNavigationAction label="Test" icon={<LayoutSVG id="recorder" />} />
       </BottomNavigation>
     </footer>
   );
