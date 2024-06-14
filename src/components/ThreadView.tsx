@@ -1,8 +1,3 @@
-import BookmarkSVG from "@assets/bookmark.svg?react";
-import BookmarkOutlineSVG from "@assets/bookmark-outline.svg?react";
-import ThumbsUpSVG from "@assets/thumbs-up.svg?react";
-import ThumbsUpFillSVG from "@assets/thumbs-up-fill.svg?react";
-import CommentSVG from "@assets/comment.svg?react";
 import { getTimeDiff } from "@utils/date";
 import CommentList from "./CommentList";
 import usePageRouter from "@hooks/usePageRouter";
@@ -12,6 +7,7 @@ import useThreadLike from "@hooks/query/thread/useThreadLike";
 import useThreadSave from "@hooks/query/thread/useThreadSave";
 import { Avatar } from "@mui/material";
 import useThread from "@hooks/query/thread/useThread";
+import ThreadsSVG from "./svgIcon/ThreadsSVG";
 
 interface Props {
   postId: number;
@@ -130,9 +126,17 @@ function ThreadView({ postId }: Props) {
             </>
           )}
           {isSave ? (
-            <BookmarkSVG className="cursor-pointer animate-pop" onClick={handleClickUnsave} />
+            <ThreadsSVG
+              id="bookmark"
+              className="w-8 h-8 cursor-pointer animate-pop"
+              onClick={handleClickUnsave}
+            />
           ) : (
-            <BookmarkOutlineSVG className="cursor-pointer" onClick={handleClickSave} />
+            <ThreadsSVG
+              id="bookmark-outline"
+              className="w-8 h-8 cursor-pointer"
+              onClick={handleClickSave}
+            />
           )}
         </div>
       </section>
@@ -147,14 +151,18 @@ function ThreadView({ postId }: Props) {
         <div className="flex gap-4 mr-auto">
           <div className="flex items-center gap-1 text-red cursor-pointer">
             {isLike ? (
-              <ThumbsUpFillSVG className="w-6 animate-pop" onClick={handleClickUnlike} />
+              <ThreadsSVG
+                id="thumbs-up-fill"
+                className="w-6 h-6 animate-pop"
+                onClick={handleClickUnlike}
+              />
             ) : (
-              <ThumbsUpSVG className="w-6" onClick={handleClickLike} />
+              <ThreadsSVG id="thumbs-up" className="w-6 h-6" onClick={handleClickLike} />
             )}
             <p className="w-4 text-sm">{likesCount}</p>
           </div>
           <div className="flex gap-1 items-center text-inhaDeepBlue">
-            <CommentSVG className="w-6" />
+            <ThreadsSVG id="comment" className="w-6 h-6" />
             <p className="w-4 text-sm">{commentsCount}</p>
           </div>
         </div>

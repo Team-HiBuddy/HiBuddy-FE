@@ -1,13 +1,9 @@
-import BookmarkSVG from "@assets/bookmark.svg?react";
-import BookmarkOutlineSVG from "@assets/bookmark-outline.svg?react";
 import { getTimeDiff } from "@utils/date";
-import ThumbsUpSVG from "@assets/thumbs-up.svg?react";
-import ThumbsUpFillSVG from "@assets/thumbs-up-fill.svg?react";
-import CommentSVG from "@assets/comment.svg?react";
 import { ROUTER_PATH } from "../routerConfig";
 import { useNavigate } from "react-router-dom";
 import { PostImage } from "@models/thread";
 import { Avatar } from "@mui/material";
+import ThreadsSVG from "./svgIcon/ThreadsSVG";
 
 export interface ThreadListItemContents {
   postId: number;
@@ -59,7 +55,11 @@ function ThreadItem({
           <p>{nickname}</p>
           <p className="text-gray-400">{`· ${getTimeDiff(date)}`}</p>
         </div>
-        {isSave ? <BookmarkSVG /> : <BookmarkOutlineSVG />}
+        {isSave ? (
+          <ThreadsSVG id="bookmark" className="w-8 h-8" />
+        ) : (
+          <ThreadsSVG id="bookmark-outline" className="w-8 h-8" />
+        )}
       </section>
 
       <h3 className="text-lg font-semibold text-ellipsis line-clamp-2">{title}</h3>
@@ -75,11 +75,15 @@ function ThreadItem({
       <section className="flex justify-between">
         <div className="flex gap-4 mr-auto">
           <div className="flex items-center gap-1 text-red">
-            {isLike ? <ThumbsUpFillSVG className="w-6" /> : <ThumbsUpSVG className="w-6" />}
+            {isLike ? (
+              <ThreadsSVG id="thumbs-up-fill" className="w-6 h-6" />
+            ) : (
+              <ThreadsSVG id="thumbs-up" className="w-6 h-6" />
+            )}
             <p className="w-4 text-sm">{likesCount}</p>
           </div>
           <div className="flex gap-1 items-center text-inhaDeepBlue">
-            <CommentSVG className="w-6" />
+            <ThreadsSVG id="comment" className="w-6 h-6" />
             <p className="w-4 text-sm">{commentsCount}</p>
           </div>
         </div>
