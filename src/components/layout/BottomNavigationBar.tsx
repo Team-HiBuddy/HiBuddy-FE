@@ -50,9 +50,15 @@ function BottomNavigationBar() {
           }
         }}
       >
-        <BottomNavigationAction label="Home" icon={<LayoutSVG id="home" />} />
-        <BottomNavigationAction label="Threads" icon={<LayoutSVG id="thread" />} />
-        <BottomNavigationAction label="Test" icon={<LayoutSVG id="recorder" />} />
+        <BottomNavigationAction label="Home" icon={<LayoutSVG id="home" className="w-8 h-8" />} />
+        <BottomNavigationAction
+          label="Threads"
+          icon={<LayoutSVG id="thread" className="w-8 h-8" />}
+        />
+        <BottomNavigationAction
+          label="Test"
+          icon={<LayoutSVG id="recorder" className="w-8 h-8" />}
+        />
       </BottomNavigation>
     </footer>
   );

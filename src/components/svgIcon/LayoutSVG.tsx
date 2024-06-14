@@ -1,4 +1,4 @@
-import LayoutSpriteSVG from "@assets/layout-sprite-sheet.svg";
+import LayoutSpriteSheet from "@assets/layout-sprite-sheet.svg";
 
 interface Props {
   id: "home" | "profile" | "search" | "thread" | "recorder";
@@ -7,7 +7,7 @@ interface Props {
 
 const LayoutSVG = ({ id, className }: Props) => (
   <svg className={className}>
-    <use href={`${LayoutSpriteSVG}#${id}`} />
+    <use href={`${LayoutSpriteSheet}#${id}`} />
   </svg>
 );
 
