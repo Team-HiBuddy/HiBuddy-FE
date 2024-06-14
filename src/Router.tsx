@@ -4,8 +4,6 @@ import Layout from "@pages/Layout";
 import { lazy } from "react";
 import { ROUTER_PATH, verifyingAuthLoader } from "./routerConfig";
 import NotFoundPage from "@pages/NotFoundPage";
-import TestResultPage from "@pages/TestResultPage";
-import SearchedThreadListPage from "@pages/SearchedThreadListPage";
 
 const MainPage = lazy(() => import("./pages/MainPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
@@ -21,6 +19,8 @@ const SavedThreadListPage = lazy(() => import("./pages/SavedThreadListPage"));
 const KoreanTestPage = lazy(() => import("./pages/KoreanTestPage"));
 const TestStartPage = lazy(() => import("./pages/TestStartPage"));
 const RecordPage = lazy(() => import("./pages/RecordPage"));
+const TestResultPage = lazy(() => import("./pages/TestResultPage"));
+const SearchedThreadListPage = lazy(() => import("./pages/SearchedThreadListPage"));
 
 export const Router = createBrowserRouter([
   {
