@@ -14,7 +14,7 @@ export const reissueToken = async () => {
 export const logout = async () => {
   removeAccessToken();
 
-  return await http.post("v1/auth/logout");
+  return await http.post("/v1/auth/logout");
 };
 
 export const deleteAccount = async () => {
