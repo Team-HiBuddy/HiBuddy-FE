@@ -132,7 +132,7 @@ function MyPage() {
           variant="standard"
           color="secondary"
           label="country"
-          value="France"
+          value={profile.country}
           disabled
         />
         <TextField
@@ -140,7 +140,7 @@ function MyPage() {
           variant="standard"
           color="secondary"
           label="major"
-          value="Computer Engineering"
+          value={profile.major}
           disabled
         />
       </section>
