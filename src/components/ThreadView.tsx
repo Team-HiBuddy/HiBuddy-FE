@@ -5,7 +5,7 @@ import useThreadMutation from "@hooks/query/thread/useThreadMutation";
 import { useEffect } from "react";
 import useThreadLike from "@hooks/query/thread/useThreadLike";
 import useThreadSave from "@hooks/query/thread/useThreadSave";
-import { Avatar } from "@mui/material";
+import { Avatar, Tooltip } from "@mui/material";
 import useThread from "@hooks/query/thread/useThread";
 import ThreadsSVG from "./svgIcon/ThreadsSVG";
 
@@ -50,7 +50,7 @@ function ThreadView({ postId }: Props) {
   const { goToEditThreadPage, goToThreadListPage } = usePageRouter();
 
   const { nickname, profileUrl } = user;
-  const createDate = new Date(createdAt);
+  const createdDate = new Date(createdAt);
 
   const handleClickEdit = () => {
     goToEditThreadPage(postId);
@@ -112,7 +112,9 @@ function ThreadView({ postId }: Props) {
         <div className="flex items-center gap-x-2">
           <Avatar src={profileUrl} />
           <p>{nickname}</p>
-          <p className="text-gray-400">{`· ${getTimeDiff(createDate)}`}</p>
+          <Tooltip title={createdDate.toUTCString()}>
+            <p className="text-gray-400">{`· ${getTimeDiff(createdDate)}`}</p>
+          </Tooltip>
         </div>
         <div className="flex items-center gap-x-4">
           {isAuthor && (

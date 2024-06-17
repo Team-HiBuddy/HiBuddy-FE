@@ -1,5 +1,5 @@
 import useThreadCommentMutation from "@hooks/query/thread/useThreadCommentMutation";
-import { Avatar, TextField } from "@mui/material";
+import { Avatar, TextField, Tooltip } from "@mui/material";
 import { getTimeDiff } from "@utils/date";
 import { KeyboardEvent, useRef, useState } from "react";
 
@@ -61,7 +61,9 @@ function CommentItem({ comment }: Props) {
       <div className="flex flex-col gap-y-1 w-full">
         <div className="flex gap-x-2">
           <p>{nickname}</p>
-          <p className="text-gray-400">{`· ${getTimeDiff(createdDate)}`}</p>
+          <Tooltip title={createdDate.toUTCString()}>
+            <p className="text-gray-400">{`· ${getTimeDiff(createdDate)}`}</p>
+          </Tooltip>
           {isAuthor && (
             <div className="flex gap-x-4 ml-auto">
               <p className="text-red cursor-pointer" onClick={handleClickDelete}>
