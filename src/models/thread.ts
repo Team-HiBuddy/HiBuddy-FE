@@ -1,4 +1,4 @@
-import { ResponseBody } from "./api";
+import { PageInfo, ResponseBody } from "./api";
 
 export interface PopularThreadContents {
   postId: number;
@@ -77,14 +77,8 @@ export interface ThreadContents {
   author: boolean;
 }
 
-export interface ThreadListResult {
+export interface ThreadListResult extends PageInfo {
   posts: ThreadContents[];
-  totalPages: number;
-  totalElements: number;
-  number: number;
-  numberOfElements: number;
-  first: boolean;
-  last: boolean;
 }
 
 export interface GetThreadListResponse extends ResponseBody {
@@ -99,14 +93,8 @@ export interface Comment {
   author: boolean;
 }
 
-export interface CommentListResult {
+export interface CommentListResult extends PageInfo {
   comments: Comment[];
-  totalPages: number;
-  totalElements: number;
-  number: number;
-  numberOfElements: number;
-  first: boolean;
-  last: boolean;
 }
 
 export interface GetThreadCommentsResponse extends ResponseBody {

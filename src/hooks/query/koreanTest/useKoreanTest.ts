@@ -1,13 +1,29 @@
-import { useMutation } from "@tanstack/react-query";
-import { postKoreanTestRecording } from "@apis/koreanTest";
-import { PostKoreanTestResult } from "@models/koreanTest";
+import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
+import { getTestScripts, postKoreanTestRecording } from "@apis/koreanTest";
+import {
+  GetTestScriptsResponse,
+  PostTestRecordingRequest,
+  PostTestRecordingResponse,
+  TestScript,
+} from "@models/koreanTest";
+import { queryClient } from "../queryClient";
 
-function useKoreanTestMutation() {
-  const postResult = useMutation<PostKoreanTestResult, Error, Blob>({
+function useKoreanTest() {
+  const postResult = useMutation<PostTestRecordingResponse, Error, PostTestRecordingRequest>({
     mutationFn: postKoreanTestRecording,
+
+    onSuccess: async () => queryClient.invalidateQueries({ queryKey: ["testHistory"] }),
   });
 
-  return { postResult };
+  const scriptsResult = useSuspenseQuery<GetTestScriptsResponse, Error, TestScript[]>({
+    queryKey: ["scripts"],
+
+    queryFn: getTestScripts,
+
+    select: ({ result }) => result.script,
+  });
+
+  return { postResult, scriptsResult };
 }
 
-export default useKoreanTestMutation;
+export default useKoreanTest;

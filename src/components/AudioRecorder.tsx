@@ -4,14 +4,17 @@ import MicrophoneSVG from "@assets/microphone.svg?react";
 import CheckSVG from "@assets/check.svg?react";
 import PauseSVG from "@assets/pause.svg?react";
 import { IconButton } from "@mui/material";
-import useKoreanTestMutation from "@hooks/query/koreanTest/useKoreanTest";
+import useKoreanTest from "@hooks/query/koreanTest/useKoreanTest";
 import BackdropLoader from "./dialog/BackdropLoader";
 import usePageRouter from "@hooks/usePageRouter";
+import { useParams } from "react-router-dom";
 
 function AudioRecorder() {
+  const { scriptId } = useParams();
+
   const {
     postResult: { mutate: postRecording, data, isPending, isSuccess },
-  } = useKoreanTestMutation();
+  } = useKoreanTest();
 
   const { goToTestResultPage } = usePageRouter();
 
@@ -100,7 +103,7 @@ function AudioRecorder() {
       const response = await fetch(audioURL);
       const blob = await response.blob();
 
-      postRecording(blob);
+      postRecording({ scriptId: Number(scriptId), recording: blob });
     } catch (error) {
       console.error(error);
       alert("Uploading the recording file failed.");
@@ -125,7 +128,7 @@ function AudioRecorder() {
     }
 
     if (isSuccess) {
-      goToTestResultPage(data.result.testId);
+      goToTestResultPage(Number(data.result.testId));
     }
   }, [isPending]);
 

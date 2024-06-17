@@ -60,8 +60,8 @@ function usePageRouter() {
     navigate(ROUTER_PATH.SEARCHED_THREAD_LIST.replace(":keyword", keyword));
   };
 
-  const goToTestResultPage = (testId: string) => {
-    navigate(ROUTER_PATH.TEST_RESULT.replace(":testId", testId));
+  const goToTestResultPage = (testId: number) => {
+    navigate(ROUTER_PATH.TEST_RESULT.replace(":testId", testId.toString()));
   };
 
   return {

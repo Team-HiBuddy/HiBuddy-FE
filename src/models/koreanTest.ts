@@ -1,17 +1,56 @@
-import { ResponseBody } from "./api";
+import { PageInfo, ResponseBody } from "./api";
+
+export interface TestScript {
+  scriptId: number;
+  scriptName: string;
+  difficulty: "easy" | "medium" | "hard";
+  text: string;
+}
+
+export interface GetTestScriptsResponse extends ResponseBody {
+  result: {
+    script: TestScript[];
+  };
+}
+
+export interface PostTestRecordingRequest {
+  recording: Blob;
+  scriptId: number;
+}
+
+export interface PostTestRecordingResponse extends ResponseBody {
+  result: {
+    testId: string;
+  };
+}
+
+export interface TestRecord {
+  testId: number;
+  scriptId: number;
+  scriptName: string;
+  testDate: string;
+}
+
+interface TestHistoryResult extends PageInfo {
+  test: TestRecord[];
+}
+
+export interface GetTestHistoryResponse extends ResponseBody {
+  result: TestHistoryResult;
+}
 
 export interface KoreanTestResult {
   testId: string;
-  script_name: string;
-  test_data: string;
-  recognized_text: string;
-  score: number;
+  scriptName: string;
+  testData: string;
+  difficulty: "easy" | "medium" | "hard";
+  recognizedText: string;
   pitch: number;
-  best_pitch: number;
-  pitch_level: "low" | "medium" | "high";
-  best_pitch_level: "low" | "medium" | "high";
+  basePitch: number;
+  pitchLevel: "low" | "good" | "high";
+  pronunciationScore: number;
 }
 
-export interface PostKoreanTestResult extends ResponseBody {
+export interface GetTestResultResponse extends ResponseBody {
   result: KoreanTestResult;
 }

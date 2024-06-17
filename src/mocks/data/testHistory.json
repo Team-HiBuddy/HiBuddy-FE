@@ -1,0 +1,33 @@
+{
+  "isSuccess": true,
+  "code": "COMMON200",
+  "message": "성공입니다.",
+  "result": {
+    "test": [
+      {
+        "testId": 3,
+        "scriptId": 3,
+        "scriptName": "script3",
+        "testDate": "2024-05-15T12:34:56.789"
+      },
+      {
+        "testId": 2,
+        "scriptId": 1,
+        "scriptName": "script1",
+        "testDate": "2024-05-10T12:34:56.789"
+      },
+      {
+        "testId": 1,
+        "scriptId": 1,
+        "scriptName": "script1",
+        "testDate": "2024-05-11T12:34:56.789"
+      }
+    ],
+    "totalPages": 3,
+    "totalElements": 9,
+    "first": true,
+    "last": false,
+    "number": 1,
+    "numberOfElements": 3
+  }
+}

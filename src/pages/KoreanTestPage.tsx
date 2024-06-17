@@ -1,6 +1,9 @@
 import TestHistoryList from "@components/TestHistoryList";
+import ApiErrorBoundary from "@components/errorBoundary/ApiErrorBoundary";
 import usePageRouter from "@hooks/usePageRouter";
 import { Button } from "@mui/material";
+import { QueryErrorResetBoundary } from "@tanstack/react-query";
+import { Suspense } from "react";
 
 function KoreanTestPage() {
   const { goToTestStartPage } = usePageRouter();
@@ -11,7 +14,15 @@ function KoreanTestPage() {
       <Button variant="contained" onClick={goToTestStartPage}>
         START TEST
       </Button>
-      <TestHistoryList />
+      <QueryErrorResetBoundary>
+        {({ reset }) => (
+          <ApiErrorBoundary onReset={reset}>
+            <Suspense>
+              <TestHistoryList />
+            </Suspense>
+          </ApiErrorBoundary>
+        )}
+      </QueryErrorResetBoundary>
     </div>
   );
 }

@@ -116,8 +116,8 @@ export const userHandlers = [
       };
     });
 
-    data.result.last = +page === 9;
-    data.result.first = +page === 0;
+    data.result.last = +page === 10;
+    data.result.first = +page === 1;
     data.result.number = +page;
 
     return HttpResponse.json(data);
@@ -144,8 +144,8 @@ export const userHandlers = [
       };
     });
 
-    data.result.last = +page === 9;
-    data.result.first = +page === 0;
+    data.result.last = +page === 10;
+    data.result.first = +page === 1;
     data.result.number = +page;
 
     return HttpResponse.json(data);

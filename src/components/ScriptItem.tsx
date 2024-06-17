@@ -6,7 +6,7 @@ import usePageRouter from "@hooks/usePageRouter";
 export interface Script {
   id: number;
   difficulty: 1 | 2 | 3;
-  text: string;
+  name: string;
 }
 
 interface Props {
