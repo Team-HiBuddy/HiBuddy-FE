@@ -61,6 +61,10 @@ function PostThreadPage() {
       return alert("You can attach up to three images!");
     }
 
+    if (Array.from(files).some((file) => file.size > 1024 * 1024 * 20)) {
+      return alert("You can attach up to 20MB of image!");
+    }
+
     Array.from(files).forEach((file) => {
       const fileReader = new FileReader();
 
@@ -155,7 +159,7 @@ function PostThreadPage() {
         />
         <div className="flex flex-col gap-y-2 p-2">
           <Button
-            className="w-44"
+            className="w-52"
             component="label"
             role="image-upload"
             variant="contained"
@@ -171,7 +175,7 @@ function PostThreadPage() {
               className="hidden"
               id="image-upload"
               type="file"
-              accept="image/png, image/jpeg"
+              accept="image/png, image/jpg"
               multiple
               ref={fileInputRef}
               onChange={handelUploadImage}

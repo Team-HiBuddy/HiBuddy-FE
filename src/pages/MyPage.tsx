@@ -70,6 +70,10 @@ function MyPage() {
 
     if (!files) return;
 
+    if (Array.from(files).some((file) => file.size > 1024 * 1024 * 20)) {
+      return alert("You can attach up to 20MB of image!");
+    }
+
     patchProfileImage({ image: files[0] });
   };
 
