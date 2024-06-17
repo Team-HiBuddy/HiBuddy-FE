@@ -94,7 +94,7 @@ function CommentItem({ comment }: Props) {
             onKeyDown={handleKeydown}
           />
         ) : (
-          <p>{contents}</p>
+          <p className="break-all">{contents}</p>
         )}
       </div>
     </li>
