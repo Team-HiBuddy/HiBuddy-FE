@@ -6,10 +6,13 @@ import {
   PostTestRecordingResponse,
   TestScript,
 } from "@models/koreanTest";
+import { queryClient } from "../queryClient";
 
 function useKoreanTest() {
   const postResult = useMutation<PostTestRecordingResponse, Error, PostTestRecordingRequest>({
     mutationFn: postKoreanTestRecording,
+
+    onSuccess: async () => queryClient.invalidateQueries({ queryKey: ["testHistory"] }),
   });
 
   const scriptsResult = useSuspenseQuery<GetTestScriptsResponse, Error, TestScript[]>({

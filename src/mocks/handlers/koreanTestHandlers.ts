@@ -4,9 +4,10 @@ import failedResponse from "../data/failedResponse.json";
 import postKoreanTestResponse from "../data/postKoreanTestResponse.json";
 import testHistory from "../data/testHistory.json";
 import testScripts from "../data/testScripts.json";
+import TestResult from "../data/testResult.json";
 
 export const koreanTestHandlers = [
-  http.post(`${HIBUDDY_BASE_URL}/v1/tests/start`, async ({ request }) => {
+  http.post(`${HIBUDDY_BASE_URL}/v1/tests/start/:scriptId`, async ({ request }) => {
     await delay(1000);
 
     const formData = await request.formData();
@@ -50,5 +51,11 @@ export const koreanTestHandlers = [
     await delay(500);
 
     return HttpResponse.json(testScripts);
+  }),
+
+  http.get(`${HIBUDDY_BASE_URL}/v1/tests/result/:testId`, async () => {
+    await delay(1000);
+
+    return HttpResponse.json(TestResult);
   }),
 ];
