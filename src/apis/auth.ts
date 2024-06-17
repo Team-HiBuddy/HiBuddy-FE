@@ -1,26 +1,23 @@
 import { http } from "@apis/axios";
 import { getProfile } from "./user";
+import { ResponseBody } from "@models/api";
 
 export const REISSUE_TOKEN_URL = "v1/auth/reissue";
 
 export const issueLoginToken = async (provider: "kakao" | "google", authCode: string) => {
-  return await http.post(`/v1/auth/login/${provider}?code=${authCode}`);
+  return await http.post<ResponseBody>(`/v1/auth/login/${provider}?code=${authCode}`);
 };
 
 export const reissueToken = async () => {
-  return await http.post(REISSUE_TOKEN_URL);
+  return await http.post<ResponseBody>(REISSUE_TOKEN_URL);
 };
 
 export const logout = async () => {
-  removeAccessToken();
-
-  return await http.post("/v1/auth/logout");
+  return await http.post<ResponseBody>("/v1/auth/logout");
 };
 
 export const deleteAccount = async () => {
-  removeAccessToken();
-
-  return await http.delete("/v1/users/me");
+  return await http.delete<ResponseBody>("/v1/users/me");
 };
 
 export const setAccessToken = (token: string) => {

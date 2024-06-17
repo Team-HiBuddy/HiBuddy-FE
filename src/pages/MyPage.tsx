@@ -1,7 +1,7 @@
-import { deleteAccount, logout } from "@apis/auth";
 import EditSVG from "@assets/edit.svg?react";
 import GreaterThanSVG from "@assets/greater-than.svg?react";
 import SpinnerSVG from "@assets/spinner.svg?react";
+import useAuth from "@hooks/query/user/useAuth";
 import useProfile from "@hooks/query/user/useProfile";
 import useProfileMutation from "@hooks/query/user/useProfileMutation";
 import useNickname from "@hooks/useNickname";
@@ -10,7 +10,7 @@ import { Avatar, Button, TextField } from "@mui/material";
 import { ChangeEvent, KeyboardEvent, useRef, useState } from "react";
 
 function MyPage() {
-  const { goToLoginPage, goToMyThreadListPage, goToSavedThreadListPage } = usePageRouter();
+  const { goToMyThreadListPage, goToSavedThreadListPage } = usePageRouter();
 
   const { data: profile } = useProfile();
 
@@ -28,21 +28,24 @@ function MyPage() {
     handleNicknameChange,
   } = useNickname();
 
+  const {
+    logoutResult: { mutate: logout },
+    deleteAccountResult: { mutate: deleteAccount },
+  } = useAuth();
+
   const [isModifying, setIsModifying] = useState<boolean>(false);
 
   const nicknameRef = useRef<HTMLInputElement>(null);
 
   const handelLogout = () => {
-    logout();
-
-    goToLoginPage();
+    if (confirm("Are you sure you want to logout?")) {
+      logout();
+    }
   };
 
   const handleDeleteAccount = () => {
     if (confirm("Are you sure you want to delete your account?")) {
       deleteAccount();
-
-      goToLoginPage();
     }
   };
 
