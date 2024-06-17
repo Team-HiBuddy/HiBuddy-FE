@@ -52,8 +52,8 @@ function ThreadItem({
       <section className="flex justify-between">
         <div className="flex items-center gap-x-2">
           <Avatar src={profileUrl} />
-          <p>{nickname}</p>
-          <p className="text-gray-400">{`· ${getTimeDiff(date)}`}</p>
+          <p className="text-sm sm:text-base font-semibold">{nickname}</p>
+          <p className="text-sm sm:text-base text-gray-400">{`· ${getTimeDiff(date)}`}</p>
         </div>
         {isSave ? (
           <ThreadsSVG id="bookmark" className="w-8 h-8" />
