@@ -111,21 +111,25 @@ function ThreadView({ postId }: Props) {
       <section className="flex justify-between">
         <div className="flex items-center gap-x-2">
           <Avatar src={profileUrl} />
-          <p>{nickname}</p>
-          <Tooltip title={createdDate.toUTCString()}>
-            <p className="text-gray-400">{`· ${getTimeDiff(createdDate)}`}</p>
-          </Tooltip>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-x-2">
+            <p className="break-all">{nickname}</p>
+            <Tooltip title={createdDate.toUTCString()}>
+              <p className="text-sm sm:text-base text-gray-400">{`· ${getTimeDiff(
+                createdDate
+              )}`}</p>
+            </Tooltip>
+          </div>
         </div>
-        <div className="flex items-center gap-x-4">
+        <div className="flex gap-x-4 items-center">
           {isAuthor && (
-            <>
-              <p className="text-red cursor-pointer" onClick={handleClickDelete}>
-                Delete
-              </p>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-x-4">
               <p className="underline cursor-pointer" onClick={handleClickEdit}>
                 Edit
               </p>
-            </>
+              <p className="text-red cursor-pointer" onClick={handleClickDelete}>
+                Delete
+              </p>
+            </div>
           )}
           {isSave ? (
             <ThreadsSVG
@@ -142,8 +146,8 @@ function ThreadView({ postId }: Props) {
           )}
         </div>
       </section>
-      <h3 className="text-lg font-semibold">{title}</h3>
-      <p>{contents}</p>
+      <h3 className="text-lg font-semibold break-all">{title}</h3>
+      <p className="w-full break-all">{contents}</p>
       <section className="flex flex-col gap-y-2">
         {postImages.map((image) => (
           <img key={image.imageId} src={image.imageUrl} loading="lazy" />
