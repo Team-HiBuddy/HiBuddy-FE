@@ -1,0 +1,27 @@
+{
+  "isSuccess": true,
+  "code": "COMMON200",
+  "message": "성공입니다.",
+  "result": {
+    "script": [
+      {
+        "scriptId": 1,
+        "scriptName": "script1",
+        "difficulty": "easy",
+        "text": "이 몸이 죽고 죽어 일백번 고쳐 죽어\n백골이 진토되어 넋이라도 있고 없고\n임 향한 일편단심이야 가싈 줄이 이시랴"
+      },
+      {
+        "scriptId": 2,
+        "scriptName": "script2",
+        "difficulty": "medium",
+        "text": "이런들 어떠하며 저런들 어떠하리\n만수산 드렁칡이 얽혀진들 그 어떠하리\n우리도 이같이 얽혀 백년까지 누리리라"
+      },
+      {
+        "scriptId": 3,
+        "scriptName": "script3",
+        "difficulty": "hard",
+        "text": "나라의 말이 중국과 달라\n문자와 서로 통하지 아니하므로,\n이런 까닭으로 어리석은 백성이 이르고자 하는 바가 있어도\n마침내 제 뜻을 능히 펴지 못하는 사람이 많으니라.\n내가 이를 위하여 가엾게 여겨\n새로 스물여덟 자를 만드니\n사람마다 하여금 쉽게 익혀 날로 쓰기 편하게 하고자 할 따름이니라."
+      }
+    ]
+  }
+}

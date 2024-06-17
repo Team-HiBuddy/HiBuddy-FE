@@ -4,14 +4,14 @@ import MicrophoneSVG from "@assets/microphone.svg?react";
 import CheckSVG from "@assets/check.svg?react";
 import PauseSVG from "@assets/pause.svg?react";
 import { IconButton } from "@mui/material";
-import useKoreanTestMutation from "@hooks/query/koreanTest/useKoreanTest";
+import useKoreanTest from "@hooks/query/koreanTest/useKoreanTest";
 import BackdropLoader from "./dialog/BackdropLoader";
 import usePageRouter from "@hooks/usePageRouter";
 
 function AudioRecorder() {
   const {
     postResult: { mutate: postRecording, data, isPending, isSuccess },
-  } = useKoreanTestMutation();
+  } = useKoreanTest();
 
   const { goToTestResultPage } = usePageRouter();
 
