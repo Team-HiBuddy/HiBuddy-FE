@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import { postKoreanTestRecording } from "@apis/koreanTest";
-import { PostKoreanTestResult } from "@models/koreanTest";
+import { PostTestRecordingRequest, PostTestRecordingResponse } from "@models/koreanTest";
 
 function useKoreanTestMutation() {
-  const postResult = useMutation<PostKoreanTestResult, Error, Blob>({
+  const postResult = useMutation<PostTestRecordingResponse, Error, PostTestRecordingRequest>({
     mutationFn: postKoreanTestRecording,
   });
 
