@@ -113,7 +113,7 @@ function ThreadView({ postId }: Props) {
           <Avatar src={profileUrl} />
           <div className="flex flex-col sm:flex-row sm:items-center gap-x-2">
             <p className="break-all">{nickname}</p>
-            <Tooltip title={createdDate.toUTCString()}>
+            <Tooltip title={createdDate.toString()}>
               <p className="text-sm sm:text-base text-gray-400">{`· ${getTimeDiff(
                 createdDate
               )}`}</p>

@@ -61,7 +61,7 @@ function CommentItem({ comment }: Props) {
       <div className="flex flex-col gap-y-1 w-full">
         <div className="flex gap-x-2">
           <p>{nickname}</p>
-          <Tooltip title={createdDate.toUTCString()}>
+          <Tooltip title={createdDate.toString()}>
             <p className="text-gray-400">{`· ${getTimeDiff(createdDate)}`}</p>
           </Tooltip>
           {isAuthor && (
