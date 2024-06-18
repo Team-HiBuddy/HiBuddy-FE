@@ -128,7 +128,7 @@ function AudioRecorder() {
     }
 
     if (isSuccess) {
-      goToTestResultPage(Number(data.result.testId));
+      goToTestResultPage(Number(data.result.id), data.result);
     }
   }, [isPending]);
 

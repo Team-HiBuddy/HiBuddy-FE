@@ -15,9 +15,10 @@ export const postKoreanTestRecording = async (data: PostTestRecordingRequest) =>
   const { scriptId, recording } = data;
   const formData = new FormData();
 
-  formData.append("audio", recording, "recording.wav");
+  formData.append("audioFile", recording);
+  formData.append("scriptId", scriptId.toString());
 
-  return http.post<PostTestRecordingResponse>(`/v1/tests/start/${scriptId}`, formData, {
+  return http.post<PostTestRecordingResponse>(`/v1/tests/perform`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
