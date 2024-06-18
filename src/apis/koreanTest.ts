@@ -8,7 +8,7 @@ import {
 } from "@models/koreanTest";
 
 export const getTestScripts = async () => {
-  return http.get<GetTestScriptsResponse>("/v1/tests/script");
+  return http.get<GetTestScriptsResponse>("/v1/tests/scripts");
 };
 
 export const postKoreanTestRecording = async (data: PostTestRecordingRequest) => {
