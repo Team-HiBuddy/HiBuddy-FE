@@ -20,7 +20,7 @@ export const koreanTestHandlers = [
     return HttpResponse.json(TestResult);
   }),
 
-  http.get(`${HIBUDDY_BASE_URL}/v1/tests`, async ({ request }) => {
+  http.get(`${HIBUDDY_BASE_URL}/v1/tests/history`, async ({ request }) => {
     await delay(1000);
 
     const url = new URL(request.url);
@@ -53,7 +53,7 @@ export const koreanTestHandlers = [
     return HttpResponse.json(testScripts);
   }),
 
-  http.get(`${HIBUDDY_BASE_URL}/v1/tests/result/:testId`, async () => {
+  http.get(`${HIBUDDY_BASE_URL}/v1/tests/history/:testId`, async () => {
     await delay(1000);
 
     return HttpResponse.json(TestResult);

@@ -1,9 +1,11 @@
+import useTestResult from "@hooks/query/koreanTest/useTestResult";
 import usePageRouter from "@hooks/usePageRouter";
-import { KoreanTestResult } from "@models/koreanTest";
+// import { KoreanTestResult } from "@models/koreanTest";
 import { Button } from "@mui/material";
 import { BarChart } from "@mui/x-charts";
 import { Gauge } from "@mui/x-charts/Gauge";
-import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const DIFFICULTY_COLORS = {
   easy: " text-green-500",
@@ -11,25 +13,34 @@ const DIFFICULTY_COLORS = {
   hard: " text-red",
 };
 
-interface LocationState {
-  testResult: KoreanTestResult;
-}
+// interface LocationState {
+//   testResult: KoreanTestResult;
+// }
 
 function TestResultPage() {
-  const location = useLocation();
+  // const location = useLocation();
 
-  const { testResult } = location.state as LocationState;
+  const { testId } = useParams();
+
+  // const { testResult } = location.state as LocationState;
+
+  const {
+    data: { result },
+    isError,
+  } = useTestResult(Number(testId));
 
   const { goToKoreanTestPage } = usePageRouter();
 
-  if (!testResult) {
-    alert("The result does not exist.");
+  useEffect(() => {
+    if (isError) {
+      alert("The result does not exist.");
 
-    goToKoreanTestPage();
-  }
+      goToKoreanTestPage();
+    }
+  }, [isError]);
 
   const { scriptName, testDate, recognizedText, pitch, basePitch, difficulty, pronunciationScore } =
-    testResult;
+    result;
 
   const getScoreResultText = (value: number, max: number) => {
     const percentage = (value / max) * 100;
