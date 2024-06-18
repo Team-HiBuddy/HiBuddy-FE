@@ -1,7 +1,7 @@
 import { HIBUDDY_BASE_URL } from "@constants/api";
 import { delay, http, HttpResponse } from "msw";
 import failedResponse from "../data/failedResponse.json";
-import postKoreanTestResponse from "../data/postKoreanTestResponse.json";
+
 import testHistory from "../data/testHistory.json";
 import testScripts from "../data/testScripts.json";
 import TestResult from "../data/testResult.json";
@@ -17,7 +17,7 @@ export const koreanTestHandlers = [
       return HttpResponse.json(failedResponse);
     }
 
-    return HttpResponse.json(postKoreanTestResponse);
+    return HttpResponse.json(TestResult);
   }),
 
   http.get(`${HIBUDDY_BASE_URL}/v1/tests`, async ({ request }) => {

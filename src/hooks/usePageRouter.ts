@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { ROUTER_PATH } from "../routerConfig";
+import { KoreanTestResult } from "@models/koreanTest";
 
 function usePageRouter() {
   const navigate = useNavigate();
@@ -60,8 +61,10 @@ function usePageRouter() {
     navigate(ROUTER_PATH.SEARCHED_THREAD_LIST.replace(":keyword", keyword));
   };
 
-  const goToTestResultPage = (testId: number) => {
-    navigate(ROUTER_PATH.TEST_RESULT.replace(":testId", testId.toString()));
+  const goToTestResultPage = (testId: number, testResult?: KoreanTestResult) => {
+    navigate(ROUTER_PATH.TEST_RESULT.replace(":testId", testId.toString()), {
+      state: { testResult },
+    });
   };
 
   return {

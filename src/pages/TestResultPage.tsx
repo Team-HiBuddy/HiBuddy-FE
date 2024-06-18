@@ -1,13 +1,35 @@
 import usePageRouter from "@hooks/usePageRouter";
+import { KoreanTestResult } from "@models/koreanTest";
 import { Button } from "@mui/material";
 import { BarChart } from "@mui/x-charts";
 import { Gauge } from "@mui/x-charts/Gauge";
+import { useLocation } from "react-router-dom";
 
-const SCRIPT =
-  "나라의 말이 중국과 달라 문자와 서로 통하지 아니하므로, 이런 까닭으로 어리석은 백성이 이르고자 하는 바가 있어도 마침내 제 뜻을 능히 펴지 못하는 사람이 많으니라. 내가 이를 위하여 가엾게 여겨 새로 스물여덟 자를 만드니 사람마다 하여금 쉽게 익혀 날로 쓰기 편하게 하고자 할 따름이니라.";
+const DIFFICULTY_COLORS = {
+  easy: " text-green-500",
+  medium: " text-orange-300",
+  hard: " text-red",
+};
+
+interface LocationState {
+  testResult: KoreanTestResult;
+}
 
 function TestResultPage() {
+  const location = useLocation();
+
+  const { testResult } = location.state as LocationState;
+
   const { goToKoreanTestPage } = usePageRouter();
+
+  if (!testResult) {
+    alert("The result does not exist.");
+
+    goToKoreanTestPage();
+  }
+
+  const { scriptName, testDate, recognizedText, pitch, basePitch, difficulty, pronunciationScore } =
+    testResult;
 
   const getScoreResultText = (value: number, max: number) => {
     const percentage = (value / max) * 100;
@@ -53,10 +75,6 @@ function TestResultPage() {
 
   const valueFormatter = (value: number | null) => `${value}Hz`;
 
-  const score = 82;
-  const pitch = 115;
-  const criteria = 130;
-
   const dataSet = [
     {
       type: "You",
@@ -64,7 +82,7 @@ function TestResultPage() {
     },
     {
       type: "Native",
-      value: criteria,
+      value: basePitch,
     },
   ];
 
@@ -73,9 +91,25 @@ function TestResultPage() {
       <h2 className="font-bold text-2xl text-center">Analysis Result</h2>
 
       <section className="flex flex-col gap-y-4">
+        <h3 className="font-semibold text-xl">Test Info</h3>
+        <div className="flex justify-between border rounded border-inhaSkyBlue p-4 text-lg overflow-y-auto">
+          <div className="flex flex-col font-semibold">
+            <p className="font-semibold">Script name</p>
+            <p className="font-semibold">Test Date</p>
+            <p className="font-semibold">Difficulty</p>
+          </div>
+          <div className="flex flex-col ">
+            <p>{scriptName}</p>
+            <p>{testDate.replace("T", " ")}</p>
+            <p className={DIFFICULTY_COLORS[difficulty]}>{difficulty.toUpperCase()}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-y-4">
         <h3 className="font-semibold text-xl">Recognized Text</h3>
         <div className="border rounded border-inhaSkyBlue p-4 text-lg overflow-y-auto">
-          {SCRIPT}
+          {recognizedText}
         </div>
       </section>
 
@@ -91,7 +125,9 @@ function TestResultPage() {
               layout="horizontal"
             />
           </div>
-          <p className="text-center text-lg font-semibold">{getPitchResultText(pitch, criteria)}</p>
+          <p className="text-center text-lg font-semibold">
+            {getPitchResultText(pitch, basePitch)}
+          </p>
         </div>
       </section>
 
@@ -99,14 +135,20 @@ function TestResultPage() {
         <h3 className="font-semibold text-xl">Pronunciation Score</h3>
         <div className="flex items-center justify-around border rounded border-inhaSkyBlue p-4 h-44">
           <div className="w-3/6 h-40">
-            <Gauge value={score} startAngle={-90} endAngle={90} innerRadius={"50%"} text="" />
+            <Gauge
+              value={pronunciationScore}
+              startAngle={-90}
+              endAngle={90}
+              innerRadius={"50%"}
+              text=""
+            />
           </div>
           <div className="flex flex-col items-center gap-y-2 text-lg font-semibold">
             <div className="flex gap-x-1">
-              <p>{score}</p>
+              <p>{pronunciationScore}</p>
               <p className="text-gray-500">/ 100</p>
             </div>
-            <p className="text-center">{getScoreResultText(score, 100)}</p>
+            <p className="text-center">{getScoreResultText(pronunciationScore, 100)}</p>
           </div>
         </div>
       </section>

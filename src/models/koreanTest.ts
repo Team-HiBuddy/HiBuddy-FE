@@ -19,9 +19,7 @@ export interface PostTestRecordingRequest {
 }
 
 export interface PostTestRecordingResponse extends ResponseBody {
-  result: {
-    testId: string;
-  };
+  result: KoreanTestResult;
 }
 
 export interface TestRecord {
@@ -40,14 +38,15 @@ export interface GetTestHistoryResponse extends ResponseBody {
 }
 
 export interface KoreanTestResult {
-  testId: string;
+  testId: number;
+  scriptId: number;
   scriptName: string;
-  testData: string;
+  testDate: string;
   difficulty: "easy" | "medium" | "hard";
   recognizedText: string;
   pitch: number;
   basePitch: number;
-  pitchLevel: "low" | "good" | "high";
+  pitchLevel: "low" | "medium" | "high";
   pronunciationScore: number;
 }
 
