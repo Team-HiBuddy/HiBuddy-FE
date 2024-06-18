@@ -22,7 +22,11 @@ function TestResultPage() {
 
   const { goToKoreanTestPage } = usePageRouter();
 
-  if (!testResult) return null;
+  if (!testResult) {
+    alert("The result does not exist.");
+
+    goToKoreanTestPage();
+  }
 
   const { scriptName, testDate, recognizedText, pitch, basePitch, difficulty, pronunciationScore } =
     testResult;

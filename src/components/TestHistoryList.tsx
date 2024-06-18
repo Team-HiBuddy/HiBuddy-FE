@@ -1,11 +1,24 @@
 import useTestHistory from "@hooks/query/koreanTest/useTestHistory";
 import TestHistoryItem from "./TestHistoryItem";
 import usePageRouter from "@hooks/usePageRouter";
+import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
+import { useEffect, useRef } from "react";
+import BubbleLoadingSVG from "@assets/bubble-loading.svg?react";
 
 function TestHistoryList() {
   const { goToTestResultPage } = usePageRouter();
 
-  const { data } = useTestHistory();
+  const { data, hasNextPage, fetchNextPage } = useTestHistory();
+
+  const lastItemRef = useRef<HTMLElement>(null);
+
+  const { isIntersecting } = useIntersectionObserver(lastItemRef, { threshold: 0.1 });
+
+  useEffect(() => {
+    if (isIntersecting && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [isIntersecting, hasNextPage, fetchNextPage]);
 
   if (data.length < 1) return null;
 
@@ -30,6 +43,12 @@ function TestHistoryList() {
           </li>
         ))}
       </ul>
+
+      <section ref={lastItemRef}>
+        {hasNextPage ? (
+          <BubbleLoadingSVG className="w-12 h-12 ml-auto mr-auto text-inhaSkyBlue" />
+        ) : null}
+      </section>
     </div>
   );
 }
