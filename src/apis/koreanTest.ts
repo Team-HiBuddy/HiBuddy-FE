@@ -30,9 +30,9 @@ export const getTestHistory = async (page: number) => {
     page: page.toString(),
   });
 
-  return http.get<GetTestHistoryResponse>(`/v1/tests?${params.toString()}`);
+  return http.get<GetTestHistoryResponse>(`/v1/tests/history?${params.toString()}`);
 };
 
 export const getTestResult = async (testId: number) => {
-  return http.get<GetTestResultResponse>(`/v1/tests/result/${testId}`);
+  return http.get<GetTestResultResponse>(`/v1/tests/history/${testId}`);
 };
