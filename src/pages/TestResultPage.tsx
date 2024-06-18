@@ -1,9 +1,9 @@
 import useTestResult from "@hooks/query/koreanTest/useTestResult";
 import usePageRouter from "@hooks/usePageRouter";
-// import { KoreanTestResult } from "@models/koreanTest";
 import { Button } from "@mui/material";
 import { BarChart } from "@mui/x-charts";
 import { Gauge } from "@mui/x-charts/Gauge";
+import { formatDate } from "@utils/date";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
@@ -13,16 +13,8 @@ const DIFFICULTY_COLORS = {
   hard: " text-red",
 };
 
-// interface LocationState {
-//   testResult: KoreanTestResult;
-// }
-
 function TestResultPage() {
-  // const location = useLocation();
-
   const { testId } = useParams();
-
-  // const { testResult } = location.state as LocationState;
 
   const {
     data: { result },
@@ -111,7 +103,7 @@ function TestResultPage() {
           </div>
           <div className="flex flex-col ">
             <p>{scriptName}</p>
-            <p>{testDate.replace("T", " ")}</p>
+            <p>{formatDate(new Date(testDate))}</p>
             <p className={DIFFICULTY_COLORS[difficulty]}>{difficulty.toUpperCase()}</p>
           </div>
         </div>
