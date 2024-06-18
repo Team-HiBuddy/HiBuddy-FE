@@ -47,7 +47,7 @@ export const koreanTestHandlers = [
     return HttpResponse.json(data);
   }),
 
-  http.get(`${HIBUDDY_BASE_URL}/v1/tests/script`, async () => {
+  http.get(`${HIBUDDY_BASE_URL}/v1/tests/scripts`, async () => {
     await delay(500);
 
     return HttpResponse.json(testScripts);
