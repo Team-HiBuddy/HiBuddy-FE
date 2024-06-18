@@ -38,7 +38,8 @@ export interface GetTestHistoryResponse extends ResponseBody {
 }
 
 export interface KoreanTestResult {
-  id: string;
+  testId: number;
+  scriptId: number;
   scriptName: string;
   testDate: string;
   difficulty: "easy" | "medium" | "hard";

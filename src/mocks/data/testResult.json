@@ -3,7 +3,7 @@
   "code": "COMMON200",
   "message": "성공입니다.",
   "result": {
-    "id": 1,
+    "testId": 1,
     "scriptId": 2,
     "scriptName": "script2",
     "testDate": "2024-05-02T14:30",
